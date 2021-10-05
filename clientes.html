@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="device-width, initial-scale=1.0">
+    <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
+      Caldellas David">
+    <title>Carro Limpo</title>
+    <!-- google fonts "lato" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet">
+    <!-- CSS Bootstrap -->
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- css do projeto -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/css_crud_cliente.css">
+    <link rel="stylesheet" href="assets/css/sidebar_menu.css">
+    <!-- JavaScript Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"></script>
+    <!-- JS Validador forms -->
+    <script src="assets/js/validate.js"></script>
+
+    <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  </head>
+  <body id="body-pd">
+
+
+    <!-- header -->
+
+    <header class="header"
+      id="header">
+      <div class="header_toggle "> <i class='bx bx-menu' id="header-toggle"></i> </div>
+       <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
+    </header>
+    <!-- nav menu esquerdo -->
+    <div>
+      <div>
+        <div class="l-navbar" id="nav-bar">
+          <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
+          <nav class="nav sidebar-nav">
+
+            <div>
+              <div class="nav_list"> <a href="./index.html" class="nav_link"> <i class='bx
+                    bi-house-door-fill nav_icon'></i> <span class="nav_name">Principal</span>
+                </a>
+                <a href="#" class="nav_link"> <i class='bx bx-barcode-reader nav_icon'></i>
+                  <span class="nav_name">Faturas</span></a>
+
+                <a href="./clientes.html" class="nav_link active">
+                  <i class='bi bi-people-fill nav_icon'></i>
+                  <span class="nav_name">Clientes</span></a>
+
+                <a href="#" class="nav_link">
+                  <i class='bi bi-stack nav_icon'></i>
+                  <span class="nav_name">Transações</span></a>
+
+                <a href="#" class="nav_link">
+                  <i class='bx bxs-cart nav_icon'></i>
+                  <span class="nav_name">Caixa</span></a>
+
+                <a href="#" class="nav_link">
+                  <i class='bi bi-gear-fill nav_icon'></i>
+                  <span class="nav_name">Administrador</span>
+                </a>
+              </div>
+              <a href="#" class="nav_link"> <i class='bi bi-door-open-fill nav_icon'></i>
+                <span class="nav_name">Sair</span> </a>
+            </nav>
+          </div>
+          <!--Container Main-->
+          <!-- Conteudo -->
+          <main class="ms-sm-auto col-lg-12 px-md-4">
+            <div class="table-responsive">
+              <div class="table-wrapper">
+                <div class="table-title">
+                  <div class="row">
+                    <div class="col-sm-8"><h1 class="h5">Todos os clientes:</h1></div>
+                    <div class="">
+                      <button type="button" class="add-new">
+                        <i class="bi bi-plus-lg"></i>Adicionar Cliente</button>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-hover table-striped">
+                  <thead >
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Telefone</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">CPF/CNPJ</th>
+                      <th scope="col">Placa</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">Modelo</th>
+                      <th scope="col">Cor</th>
+                      <th scope="col">Serviços</th>
+                      <th scope="col">Observações</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Fulano de Tal</td>
+                      <td>(21) 12345678</td>
+                      <td>teste@gmail.com</td>
+                      <td>123.456.789-10</td>
+                      <td>KYH-2658</td>
+                      <td>Honda</td>
+                      <td>Fit</td>
+                      <td>Preto</td>
+                      <td>Limpeza ecológica</td>
+                      <td>Nenhuma</td>
+                      <td>
+                        <a class="add" title="Salvar" data-toggle="tooltip"><i
+                            class="material-icons">&#xE03B;</i></a>
+                        <a class="edit" title="Editar" data-toggle="tooltip"><i
+                            class="material-icons">&#xE254;</i></a>
+                        <a class="delete" title="Apagar" data-toggle="tooltip"><i
+                            class="material-icons">&#xE872;</i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+          <!-- JavaScript do projeto clientes-->
+          <script src="assets/js/crud_cliente.js"></script>
+          <!-- JavaScript do projeto sidebar-->
+          <script src="assets/js/sidebar_menu.js"></script>
+        </div>
+      </div>
+    </body>
+  </html>
