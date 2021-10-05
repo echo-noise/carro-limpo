@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %} Clientes {% endblock %}
+{% block btn_header %}
+    <!-- Botao de cadastro de cliente-->
+    <div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Adicionar
+        Cliente</button>
+      <!-- modal forms cadastro de cliente/veiculo -->
+      <div class="modal fade" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="modal-title" id="exampleModalLabel">Cadastrar Cliente
+              </p>
+            </div>
+            <!-- body model -->
+            <div class="modal-body">
+              <form class="row g-3 ">
+                <!-- nome -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">Nome</span>
+                    <input id="nome" type="text" class="form-control" required>
+                  </div>
+                </div>
+                <!-- telefone -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">Telefone</span>
+                    <input id="telefone" type="number" class="form-control" required>
+                  </div>
+                </div>
+                <!-- email -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">E-mail</span>
+                    <input id="email" type="email" class="form-control" required>
+                  </div>
+                </div>
+                <!-- CPF/CNPJ -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">CPF/CNPJ</span>
+                    <input id="cpf_cnpj" type="number" class="form-control" required>
+                  </div>
+                </div>
+                <!-- Placa -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">Placa</span>
+                    <input id="placa" type="text" class="form-control" required>
+                  </div>
+                </div>
+                <!-- Marca -->
+                <div class="input-group">
+                  <label class="input-group-text" for="inputGroupSelect01">Marca</label>
+                  <select class="form-select" id="marca" required>
+                    <option selected ></option>
+                    <option value="1">FIAT</option>
+                    <option value="2">Volkswagen</option>
+                    <option value="3">GM</option>
+                    <option value="4">Hyundai</option>
+                    <option value="5">Jeep</option>
+                    <option value="6">Renault</option>
+                    <option value="7">Toyota</option>
+                    <option value="8">Ford</option>
+                    <option value="9">Honda</option>
+                    <option value="10">Nissan</option>
+                    <option value="11">Caoa Chery</option>
+                    <option value="12">Peugeot</option>
+                    <option value="12">Mitsubishi</option>
+                    <option value="14">Citroen</option>
+                    <option value="15">BMW</option>
+                    <option value="16">Volvo</option>
+                    <option value="17">Mercedes</option>
+                    <option value="18">Audi</option>
+                    <option value="19">Kia</option>
+                    <option value="20">RAM</option>
+                    <option value="21">Iveco</option>
+                    <option value="22">Land Rover</option>
+                    <option value="23">Porsche</option>
+                    <option value="24">Suzuki</option>
+                    <option value="25">Mini</option>
+                    <option value="26">JAC</option>
+                    <option value="27">Troler</option>
+                    <option value="28">Subaru</option>
+                    <option value="29">Jaguar</option>
+                    <option value="30">Dodge</option>
+                    <option value="31">Foton</option>
+                    <option value="32">Lexus</option>
+                  </select>
+                </div>
+                <!-- Modelo -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">Modelo</span>
+                    <input id="modelo" type="text" class="form-control" required>
+                  </div>
+                </div>
+                <!-- Cor -->
+                <div>
+                  <div class="input-group">
+                    <span class="input-group-text">Cor</span>
+                    <input id="cor" type="text" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                  data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block descricao %}
+  Clientes e veiculos cadastrados:
+{% endblock %}
+{% block conteudo %}
+  <div class="table-responsive">
+    <table class="table table-striped table-sm table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Data</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">CPF/CNPJ</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Modelo</th>
+          <th scope="col">Cor</th>
+          <th scope="col">Serviços</th>
+          <th scope="col">Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>27/09/2021</td>
+          <td>Samara</td>
+          <td>(21) xxxxx-xxxx</td>
+          <td>samara@gmail.com</td>
+          <td>123.456.789-10</td>
+          <td>KYH-2658</td>
+          <td>Honda</td>
+          <td>Fit</td>
+          <td>Preto</td>
+          <td>Lavagem</td>
+          <td>Nenhuma</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>27/09/2021</td>
+          <td>Bruno</td>
+          <td>(21) xxxxx-xxxx</td>
+          <td>bruno@gmail.com</td>
+          <td>123.456.789-10</td>
+          <td>KXH-0000</td>
+          <td>Peugeot</td>
+          <td>208</td>
+          <td>Branco</td>
+          <td>Lavagem / polimento </td>
+          <td>Nenhuma</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

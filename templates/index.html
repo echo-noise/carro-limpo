@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %} Principal {% endblock %}
+
+{% block descricao %}
+  Estatisticas:
+{% endblock %}
+
+{% block conteudo %}
+        <div class="table-responsive">
+          <table class="table table-striped table-sm table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Receita</th>
+                <th scope="col">Despesa</th>
+                <th scope="col">Sangria</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>27/09/2021</td>
+                <td>50</td>
+                <td>R$2.350,20</td>
+                <td>R$200,00</td>
+                <td>R$50,00</td>
+              </tr>
+              <tr>
+                <td>28/09/2021</td>
+                <td>25</td>
+                <td>R$4.252,19</td>
+                <td>R$570,00</td>
+                <td>R$62,00</td>
+              </tr>
+              <tr>
+                <td>29/09/2021</td>
+                <td>67</td>
+                <td>R$1.850,20</td>
+                <td>R$523,00</td>
+                <td>R$32,00</td>
+              </tr>
+              <tr>
+                <td>30/09/2021</td>
+                <td>73</td>
+                <td>R$2.325,20</td>
+                <td>R$52,00</td>
+                <td>R$80,00</td>
+              </tr>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+{% endblock %}
