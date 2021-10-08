@@ -1,0 +1,54 @@
+{% extends "base_table.html" %}
+{% load static %}
+{% block titulo %}Todos os clientes:{% endblock %}
+{% block subdiv %}
+  <div class="">
+    <button type="button" class="add-new">
+      <i class="bi bi-plus-lg"></i>Adicionar Cliente</button>
+  </div>
+{% endblock %}
+{% block tabela %}
+  <table class="table table-bordered table-hover table-striped">
+    <thead >
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">CPF/CNPJ</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Cor</th>
+        <th scope="col">Serviços</th>
+        <th scope="col">Observações</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fulano de Tal</td>
+        <td>(21) 12345678</td>
+        <td>teste@gmail.com</td>
+        <td>123.456.789-10</td>
+        <td>KYH-2658</td>
+        <td>Honda</td>
+        <td>Fit</td>
+        <td>Preto</td>
+        <td>Limpeza ecológica</td>
+        <td>Nenhuma</td>
+        <td>
+          <a class="add" title="Salvar" data-toggle="tooltip"><i
+              class="material-icons">&#xE03B;</i></a>
+          <a class="edit" title="Editar" data-toggle="tooltip"><i
+              class="material-icons">&#xE254;</i></a>
+          <a class="delete" title="Apagar" data-toggle="tooltip"><i
+              class="material-icons">&#xE872;</i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
+{% block scripts %}
+  <!-- JavaScript do projeto clientes-->
+  <script src="{% static "js/crud_cliente.js" %}"></script>
+{% endblock %}
