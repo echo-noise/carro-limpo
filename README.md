@@ -1,5 +1,26 @@
 <img src="https://i.ibb.co/61RWKLS/carolimpo.gif">
 
+
+##
+###  🔷 **Tela de Login** 
+
+<img src="https://i.ibb.co/0s9k483/login-2.gif">
+
+##
+###  🔷 **Tela Principal com as estatisticas** 
+
+<img src="https://i.ibb.co/BVwM48f/principal2.gif">
+
+##
+###  🔷 **Tela para Cadastro de Clientes** 
+
+<img src="https://i.ibb.co/ky2ynxK/Cliente-2.gif">
+
+##
+###  🔷 **Demonstrativo de Responsividade do Sistema** 
+
+<img src="https://i.ibb.co/pw2gXKJ/responsiv3.gif">
+
 <!-- Apresentação -->
 ##
 ###  🔷 **Apresentação do Projeto** 
