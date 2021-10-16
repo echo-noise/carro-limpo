@@ -25,26 +25,28 @@
       </tr>
     </thead>
     <tbody>
+    {% for veiculo in veiculos %}
       <tr>
-        <td>Fulano de Tal</td>
-        <td>(21) 12345678</td>
-        <td>teste@gmail.com</td>
-        <td>123.456.789-10</td>
-        <td>KYH-2658</td>
-        <td>Honda</td>
-        <td>Fit</td>
-        <td>Preto</td>
-        <td>Limpeza ecológica</td>
-        <td>Nenhuma</td>
+        <td>{{ veiculo.proprietario.nome }}</td>
+        <td>{{ veiculo.proprietario.telefone }}</td>
+        <td>{{ veiculo.proprietario.email }} </td>
+        <td>{{ veiculo.proprietario.documento }} </td>
+        <td>{{ veiculo.placa }}</td>
+        <td>{{ veiculo.marca }}</td>
+        <td>{{ veiculo.modelo }}</td>
+        <td>{{ veiculo.cor }}</td>
+        <td> ???? </td>
+        <td> ???? </td>
         <td>
           <a class="add" title="Salvar" data-toggle="tooltip"><i
               class="material-icons">&#xE03B;</i></a>
           <a class="edit" title="Editar" data-toggle="tooltip"><i
               class="material-icons">&#xE254;</i></a>
-          <a class="delete" title="Apagar" data-toggle="tooltip"><i
+          <a class="delete" title="Apagar" data-toggle="tooltip" href="{% url "excluir" id=veiculo.id %}"><i
               class="material-icons">&#xE872;</i></a>
         </td>
       </tr>
+    {% endfor %}
     </tbody>
   </table>
 {% endblock %}
