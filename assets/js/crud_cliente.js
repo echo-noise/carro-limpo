@@ -16,7 +16,7 @@ $(document).ready(function(){
 					
 						'<td><input type="text" scope="col" class="form-control" name="placa" maxlength="7" id="placa">Placa</td>' +
 					
-						'<td><select class="form-control" scope="col"  name="marca" id="marca"><option selected ></option><option value="Fiat">Fiat</option><option value="Volkswagen">Volkswagen</option><option value="GM">GM</option><option value="Hyundai">Hyundai</option><option value="Jeep">Jeep</option><option value="Renault">Renault</option><option value="Toyota">Toyota</option><option value="Ford">Ford</option><option value="Honda">Honda</option><option value="Nissan">Nissan</option><option value="Caoa Chery">Caoa Chery</option><option value="Peugeot">Peugeot</option><option value="Mitsubishi">Mitsubishi</option><option value="Citroen">Citroen</option><option value="BMW">BMW</option><option value="Volvo">Volvo</option><option value="Mercedes">Mercedes</option><option value="Audi">Audi</option><option value="Kia">Kia</option><option value="RAM">RAM</option><option value="Iveco">Iveco</option><option value="Land Rover">Land Rover</option><option value="Porsche">Porsche</option><option value="Suzuki">Suzuki</option><option value="Mini">Mini</option><option value="JAC">JAC</option><option value="Troler">Troler</option><option value="Subaru">Subaru</option><option value="Jaguar">Jaguar</option><option value="Dodge">Dodge</option><option value="Foton">Foton</option><option value="Lexus">Lexus</option></select>Marca</td>' +
+						'<td><select class="form-control" scope="col"  name="marca"><option selected ></option><option value="Fiat">Fiat</option><option value="Volkswagen">Volkswagen</option><option value="GM">GM</option><option value="Hyundai">Hyundai</option><option value="Jeep">Jeep</option><option value="Renault">Renault</option><option value="Toyota">Toyota</option><option value="Ford">Ford</option><option value="Honda">Honda</option><option value="Nissan">Nissan</option><option value="Caoa Chery">Caoa Chery</option><option value="Peugeot">Peugeot</option><option value="Mitsubishi">Mitsubishi</option><option value="Citroen">Citroen</option><option value="BMW">BMW</option><option value="Volvo">Volvo</option><option value="Mercedes">Mercedes</option><option value="Audi">Audi</option><option value="Kia">Kia</option><option value="RAM">RAM</option><option value="Iveco">Iveco</option><option value="Land Rover">Land Rover</option><option value="Porsche">Porsche</option><option value="Suzuki">Suzuki</option><option value="Mini">Mini</option><option value="JAC">JAC</option><option value="Troler">Troler</option><option value="Subaru">Subaru</option><option value="Jaguar">Jaguar</option><option value="Dodge">Dodge</option><option value="Foton">Foton</option><option value="Lexus">Lexus</option></select>Marca</td>' +
             
 						'<td><input type="text"   scope="col" class="form-control" maxlength="10" name="modelo" id="modelo">Modelo</td>' +
 						
@@ -33,69 +33,39 @@ $(document).ready(function(){
 				$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
 						$('[data-toggle="tooltip"]').tooltip();
 				});
-			// Botao adicionar
+			// Botao Adicionar
 			$(document).on("click", ".add", function(){
 				var empty = false;
 				var input = $(this).parents("tr").find('input[type="text"], [type="number"], [type="email"], [name="servicos"], [name="marca"], [id="cor"]');
-					input.each(function(){
-				    	if(!$(this).val()){
-				    		$(this).addClass("error");
-				    		empty = true;
-				    	} else{
-				    		$(this).removeClass("error");
-				    	}
-				    });
+						input.each(function(){
+					if(!$(this).val()){
+						$(this).addClass("error");
+						empty = true;
+					} else{
+										$(this).removeClass("error");
+								}
+				});
 				$(this).parents("tr").find(".error").first().focus();
-				// Ajax
 				if(!empty){
-					let cookie = document.cookie
-					let csrfToken = cookie.substring(cookie.indexOf('=') + 0)
-					console.log($("#marca").val());
-					$.ajax({
-						url: "insert",
-						type: 'POST',
-						headers: { 'X-CSRFToken': csrfToken },
-						data: { nome: $("#nome").val(),
-							    telefone: $("#telefone").val(),
-							    email: $("#email").val(), 
-							    documento: $("#cpf_cnpj").val(),
-								placa: $("#placa").val(), 
-						        modelo: $("#modelo").val(), 
-								marca: $("#marca").val(),
-								cor: $("#cor").val() 
-							}
-					    })
-					    .done(function(response) {
-					    	if(response['error']) {
-					    		alert("ERRO AO CADASTRAR");
-					    	} else {
-					    		input.each(function(){
-					    	    $(this).parent("td").html($(this).val());
-					            });			
-					    		$(this).parents("tr").find(".add, .edit").toggle();
-					    		$(".add-new").removeAttr("disabled");
-
-								$("#clientes").reload(true);
-					    	}
-					    })
-					    .fail(function(fail) {
-					    	alert("ERRO AO CADASTRAR");
-					    })
-				}
-			});
-			// Botao editar
+					input.each(function(){
+						$(this).parent("td").html($(this).val());
+					});			
+					$(this).parents("tr").find(".add, .edit").toggle();
+					$(".add-new").removeAttr("disabled");
+				}		
+				});
+			// Botao Editar
 			$(document).on("click", ".edit", function(){		
 						$(this).parents("tr").find("td:not(:last-child)").each(function(){
-					        $(this).html('<input type="text" class="crud form-control" value="' + $(this).text() + '">');
+					$(this).html('<input type="text" class="crud form-control" value="' + $(this).text() + '">');
 					
 				});		
 				$(this).parents("tr").find(".add, .edit").toggle();
 				$(".add-new").attr("disabled", "disabled");
 				});
-			// Botao deletar
+			// Botao Deletar
 			$(document).on("click", ".delete", function(){
 						$(this).parents("tr").remove();
 				$(".add-new").removeAttr("disabled");
 				});
 		});
-
