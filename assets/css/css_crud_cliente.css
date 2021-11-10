@@ -1,37 +1,42 @@
 .table-wrapper {
-  width: 1200px;
+  width: 100%;
   float: left;
   margin: 30px auto;
-  background: #fff;
-  padding: 20px;	
+  background: hsla(0, 0%, 100%, 0.7);
+  border-top: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 10px;
   box-shadow: 0px 7px 9px 1px rgb(53 53 53 / 5%);
-  
 }
+
 .table-title {
   padding-bottom: 10px;
-  margin: 0 0 10px;
+  margin: -6em;
+  margin-left: 0em;
+  position: absolute;
 }
+
 .table-title h2 {
   margin: 6px 0 0;
   font-size: 22px;
 }
 .table-title .add-new {
-  height: 35px;
-  width: 160px;
-  font-size: 15px;
-  background-color:rgb(0, 119, 255);
-  color: rgb(255, 255, 255);
+  font-size: 14px;
   min-width: 100px;
-  border-radius: 5px;
-  line-height: 13px;
-  border-color: #bdbdbd;
-  border-width: 0px;
 }
 .table-title .add-new i {
   margin-right: 6px;
 }
 
-table.table tr th, table.table tr td {
+.exportar-pdf {
+  font-size: 14px;
+  min-width: 100px;
+}
+
+table.table tr th,
+table.table tr td {
   border-color: #bdbdbd;
 }
 table.table th i {
@@ -47,7 +52,7 @@ table.table td a {
   display: inline-block;
   margin: 0 5px;
   min-width: 24px;
-}    
+}
 table.table td a.add {
   color: #0093ce;
 }
@@ -65,7 +70,7 @@ table.table td a.add i {
   margin-right: -1px;
   position: relative;
   top: 3px;
-}    
+}
 table.table .form-control {
   height: 32px;
   line-height: 32px;
@@ -79,3 +84,44 @@ table.table td .add {
   display: none;
 }
 
+@media screen and (max-width: 1050px) {
+  .table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    float: left;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 7px 9px 1px rgb(53 53 53 / 5%);
+  }
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .table-title {
+    width: 269px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .exportar-pdf {
+    font-size: 10px;
+  }
+
+  .table-title .add-new {
+    font-size: 10px;
+  }
+
+  .table-title {
+    width: 214px;
+    margin-left: 0em;
+    margin: -68px 0 0 0;
+  }
+}

@@ -1,0 +1,18 @@
+﻿.tooltip {
+  font-size: 13px;
+  font-weight: normal;
+  margin-top: 2px;
+  position: relative;
+  width: 111px;
+}
+
+.tooltip:hover {
+  cursor: help;
+}
+
+.tooltip-spacing {
+  height: 20px;
+  margin: 8px;
+  position: relative;
+  width: 20px;
+}
