@@ -3,7 +3,7 @@
 {% block titulo %}Todos os clientes:{% endblock %}
 {% block subdiv %}
   <div class="">
-    <button type="button" class="add-new">
+    <button type="button" class="add-new" href="{% url "inserir" %}">
       <i class="bi bi-plus-lg"></i>Adicionar Cliente</button>
   </div>
 {% endblock %}
@@ -24,17 +24,17 @@
         <th scope="col">Ações</th>
       </tr>
     </thead>
-    <tbody>
-    {% for veiculo in veiculos %}
+    <tbody id="clientes">
+    {% for cliente in clientes %}
       <tr>
-        <td>{{ veiculo.proprietario.nome }}</td>
-        <td>{{ veiculo.proprietario.telefone }}</td>
-        <td>{{ veiculo.proprietario.email }} </td>
-        <td>{{ veiculo.proprietario.documento }} </td>
-        <td>{{ veiculo.placa }}</td>
-        <td>{{ veiculo.marca }}</td>
-        <td>{{ veiculo.modelo }}</td>
-        <td>{{ veiculo.cor }}</td>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.email }} </td>
+        <td>{{ cliente.documento }} </td>
+        <td>{{ cliente.placa }}</td>
+        <td>{{ cliente.marca }}</td>
+        <td>{{ cliente.modelo }}</td>
+        <td>{{ cliente.cor }}</td>
         <td> ???? </td>
         <td> ???? </td>
         <td>
@@ -42,7 +42,7 @@
               class="material-icons">&#xE03B;</i></a>
           <a class="edit" title="Editar" data-toggle="tooltip"><i
               class="material-icons">&#xE254;</i></a>
-          <a class="delete" title="Apagar" data-toggle="tooltip" href="{% url "excluir" id=veiculo.id %}"><i
+          <a class="delete" title="Apagar" data-toggle="tooltip" href="{% url "excluir" id=cliente.id %}"><i
               class="material-icons">&#xE872;</i></a>
         </td>
       </tr>
