@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height,
+      initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
+      Caldellas David">
+  <title>Carro Limpo</title>
+
+  <!-- CSS Bootstrap-->
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+  <!-- CSS Projeto -->
+  <!-- <link rel="stylesheet" href="assets/css/css_crud_cliente.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/estatisticas.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/login_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
+  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tooltip.css">
+
+  <!-- JavaScript Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- JavaScript do projeto clientes-->
+  <script src="assets/js/crud_cliente.js"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="assets/js/sidebar_menu.js"></script>
+  <!-- Javascript do projeto search -->
+  <script src="assets/js/search.js"></script>
+
+
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
+  </header>
+  <!-- nav menu esquerdo -->
+  <div>
+    <div>
+      <div class="l-navbar" id="nav-bar">
+        <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
+        <nav class="nav sidebar-nav">
+
+          <div>
+            <div class="nav_list">
+
+              <a href="./index.html" class="nav_link">
+                <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
+                <span class="nav_name">Principal</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bx bx-barcode-reader nav_icon' title="Faturas" data-toggle="tooltip"></i>
+                <span class="nav_name">Faturas</span>
+              </a>
+
+              <a href="./clientes.html" class="nav_link">
+                <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
+                <span class="nav_name">Clientes</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-stack nav_icon' title="Transações" data-toggle="tooltip"></i>
+                <span class="nav_name">Transações</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
+                <span class="nav_name">Caixa</span>
+              </a>
+
+              <a href="./administrador.html" class="nav_link active">
+                <i class='bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+                <span class="admin nav_name">Administrador</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
+                <span class="nav_name">Sair</span>
+              </a>
+
+            </div>
+        </nav>
+      </div>
+    </div>
+    <!--Container Main-->
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+
+
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            </div>
+          </nav>
+
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+              1
+
+
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+</body>
+<footer id="footer" class="border-top">
+  <div class="align-items-center animate__animated animate__fadeIn">
+    <span>
+      <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
+      </a>Sistema administrativo para lava rápido - Carro Limpo / 2021
+    </span>
+    <div>
+      <span class="desc_footer">Todos os direitos reservados</span>
+    </div>
+</footer>
+
+</div>
+</div>
+
+</html>

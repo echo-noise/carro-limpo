@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height,
+      initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
+      Caldellas David">
+  <title>Carro Limpo</title>
+
+  <!-- CSS Bootstrap-->
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+  <!-- CSS Projeto -->
+  <link rel="stylesheet" href="assets/css/css_crud_cliente.css">
+  <!-- <link rel="stylesheet" href="assets/css/estatisticas.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/login_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
+  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tooltip.css">
+
+  <!-- JavaScript Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- JavaScript do projeto clientes-->
+  <script src="assets/js/crud_cliente.js"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="assets/js/sidebar_menu.js"></script>
+  <!-- Javascript do projeto search -->
+  <script src="assets/js/search.js"></script>
+
+
+
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
+  </header>
+  <!-- nav menu esquerdo -->
+  <div>
+    <div>
+      <div class="l-navbar" id="nav-bar">
+        <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
+        <nav class="nav sidebar-nav">
+
+          <div>
+            <div class="nav_list">
+
+              <a href="./index.html" class="nav_link">
+                <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
+                <span class="nav_name">Principal</span>
+              </a>
+
+              <a href="./faturas.html" class="nav_link">
+                <i class='bx bx-barcode-reader nav_icon' title="Faturas" data-toggle="tooltip"></i>
+                <span class="nav_name">Faturas</span>
+              </a>
+
+              <a href="./clientes.html" class="nav_link active">
+                <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
+                <span class="nav_name">Clientes</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-stack nav_icon' title="Transações" data-toggle="tooltip"></i>
+                <span class="nav_name">Transações</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
+                <span class="nav_name">Caixa</span>
+              </a>
+
+              <a href="./administrador.html" class="nav_link">
+                <i class='bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+                <span class="admin nav_name">Administrador</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
+                <span class="nav_name">Sair</span>
+              </a>
+
+            </div>
+        </nav>
+      </div>
+    </div>
+    <!--Container Main-->
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="table-wrapper">
+          <div class="animate__animated animate__fadeIn">
+            <div class="table-title">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h1 class="h5">Todos os clientes:</h1>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary btn-sm add-new">
+                    <i class="bi bi-plus-lg"></i>Adicionar Cliente</button>
+                  <button id="pdf" class="btn btn-secondary btn-sm exportar-pdf">
+                    <i class="bi bi-file-pdf-fill"></i> Exportar PDF</button>
+                </div>
+
+              </div>
+            </div>
+
+            <table id="crud tab_customers" class="crud exportar animate__animated animate__fadeInDown  table table-bordered table-hover table-striped">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Telefone</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">CPF/CNPJ</th>
+                  <th scope="col">Placa</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Modelo</th>
+                  <th scope="col">Cor</th>
+                  <th scope="col">Serviços</th>
+                  <th scope="col">Observações</th>
+                  <th class="acoes" scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr>
+                  <td>Fulano de Tal</td>
+                  <td>(21) 12345678</td>
+                  <td>teste@gmail.com</td>
+                  <td>123.456.789-10</td>
+                  <td>KYH-2658</td>
+                  <td>Honda</td>
+                  <td>Fit</td>
+                  <td>Preto</td>
+                  <td>Limpeza ecológica</td>
+                  <td>Nenhuma</td>
+                  <td>
+                    <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                    <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Exportar pdf -->
+            <script src="assets/js/export_pdf.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+          </div>
+        </div>
+    </main>
+  </div>
+</body>
+<footer id="footer" class="border-top">
+  <div class="align-items-center  animate__animated animate__fadeIn">
+    <span>
+      <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
+      </a>Sistema administrativo para lava rápido - Carro Limpo / 2021
+    </span>
+    <div>
+      <span class="desc_footer">Todos os direitos reservados</span>
+    </div>
+</footer>
+</div>
+</div>
+
+</html>

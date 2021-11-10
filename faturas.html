@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height,
+      initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
+      Caldellas David">
+  <title>Carro Limpo</title>
+
+  <!-- CSS Bootstrap-->
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+  <!-- CSS Projeto -->
+  <link rel="stylesheet" href="assets/css/css_crud_cliente.css">
+  <!-- <link rel="stylesheet" href="assets/css/estatisticas.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/login_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
+  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tooltip.css">
+
+  <!-- JavaScript Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!-- JavaScript do projeto clientes-->
+  <script src="assets/js/crud_cliente.js"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="assets/js/sidebar_menu.js"></script>
+  <!-- Javascript do projeto search -->
+  <script src="assets/js/search.js"></script>
+
+
+
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
+  </header>
+  <!-- nav menu esquerdo -->
+  <div>
+    <div>
+      <div class="l-navbar" id="nav-bar">
+        <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
+        <nav class="nav sidebar-nav">
+
+          <div>
+            <div class="nav_list">
+
+              <a href="./index.html" class="nav_link">
+                <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
+                <span class="nav_name">Principal</span>
+              </a>
+
+              <a href="./faturas.html" class="nav_link active">
+                <i class='bx bx-barcode-reader nav_icon' title="Faturas" data-toggle="tooltip"></i>
+                <span class="nav_name">Faturas</span>
+              </a>
+
+              <a href="./clientes.html" class="nav_link">
+                <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
+                <span class="nav_name">Clientes</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-stack nav_icon' title="Transações" data-toggle="tooltip"></i>
+                <span class="nav_name">Transações</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
+                <span class="nav_name">Caixa</span>
+              </a>
+
+              <a href="./administrador.html" class="nav_link">
+                <i class='bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+                <span class="admin nav_name">Administrador</span>
+              </a>
+
+              <a href="#" class="nav_link">
+                <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
+                <span class="nav_name">Sair</span>
+              </a>
+
+            </div>
+        </nav>
+      </div>
+    </div>
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel"><h1>Fatura #0000</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- fatura -->
+            <div class="row">
+              <div class="col-sm-7">
+                <strong>Email:</strong> vendas@estabelecimento.com<br>
+                <strong>Telefone:</strong> +55 (00) 00000-0000<br><br>
+              </div>
+
+              <div class="col-sm-5">
+                <h5>Endereço:</h5>
+                <p>Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+
+              </div><br>
+            </div>
+
+            <hr>
+
+
+            <div class="row">
+              <div class="col-sm-7">
+                <h5>Dados do Cliente:</h5>
+                <h6>Nome do Cliente</h6>
+                <p>Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+                <br><br>
+              </div>
+
+              <div class="col-sm-5">
+                <h5>Contato do Cliente:</h5>
+                Telefone: (00) 00000-0000
+                <br> Email: exemplo@email.com
+                <br><br>
+              </div>
+            </div>
+
+            <hr>
+
+
+            <div class="row">
+              <div class="col-lg-6 col-md-8 col-sm-6">
+                <strong>FATURA REFERENTE AOS SERVIÇOS:</strong>
+              </div>
+            </div>
+
+            <hr>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <thead class="thead">
+                      <tr>
+                        <th scope="col">Nº</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF/CNPJ</th>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Vencimento</th>
+
+                        
+                      </tr>
+                    </thead>
+
+                    <tbody class="tbody">
+                      <tr>
+                        <td>001</td>
+                        <td><code>Aguardando pagamento<code></td>
+                          <td>Nome do Cliente</td>
+                          <td>000.000.000-00</td>
+                          <td>KYH-2658</td>
+                          <td><code>09/12/2021<code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+
+            <div>
+              <h4 align="right">Total: R$ 00,00</h4>
+            </div>
+
+            
+            <br><br>
+            <hr>
+
+            <strong>FORMA DE PAGAMENTO:</strong>
+
+            <hr>
+            <div class="row">
+              <div class="col-sm-7">
+                <h5>Cartão/Dinheiro/Pix:</h5>
+                <p>Dinheiro</p>
+              </div>
+
+              <div class="col-sm-5">
+                <h5>Pix:</h5>
+                <p align="left">
+                  <span><b>CNPJ:</b> 00.000.000/0000-00 </span><br>
+                </p>
+              </div>
+            </div>
+
+ 
+            <!-- final fatura -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Imprimir</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="table-wrapper">
+          <div class="animate__animated animate__fadeIn">
+            <div class="table-title">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h1 class="h5">Faturas:</h1>
+                </div>
+                <div>
+                  <button id="pdf" class="btn btn-secondary btn-sm exportar-pdf">
+                    <i class="bi bi-file-pdf-fill"></i> Exportar PDF</button>
+                </div>
+              </div>
+            </div>
+
+            <table id="tab_customers" class="crud exportar animate__animated animate__fadeInDown  table table-bordered table-hover table-striped">
+              <thead class="thead">
+                <tr>
+                  <th scope="col">Fatura</th>
+                  <th scope="col">Nº</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">CPF/CNPJ</th>
+                  <th scope="col">Placa</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Modelo</th>
+                  <th scope="col">Serviços</th>
+                  <th scope="col">Vencimento</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr>
+                  <td> <i type="button" class="bi bi-receipt-cutoff desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i></td>
+                  <td>001</td>
+                  <td class="status-aguardando-pagamento">Aguardando pagamento</td>
+                  <td>Nome do Cliente</td>
+                  <td>000.000.000-00</td>
+                  <td>KYH-2658</td>
+                  <td>Honda</td>
+                  <td>Fit</td>
+                  <td>Limpeza ecológica</td>
+                  <td><code>09/12/2021<code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Exportar pdf -->
+            <script src="assets/js/export_pdf.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+          </div>
+        </div>
+    </main>
+  </div>
+</body>
+<footer id="footer" class="border-top">
+  <div class="align-items-center  animate__animated animate__fadeIn">
+    <span>
+      <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
+      </a>Sistema administrativo para lava rápido - Carro Limpo / 2021
+    </span>
+    <div>
+      <span class="desc_footer">Todos os direitos reservados</span>
+    </div>
+</footer>
+</div>
+</div>
+
+</html>
