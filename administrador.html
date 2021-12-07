@@ -28,6 +28,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+  <!-- JavaScript do tooltip -->
+  <script src="assets/js/tooltip.js"></script>
   <!-- JavaScript do projeto clientes-->
   <script src="assets/js/crud_cliente.js"></script>
   <!-- JavaScript do projeto sidebar-->
@@ -45,6 +47,16 @@
 
   <header class="header" id="header">
     <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+
+    <div class="search-bar mt-7">
+      <form>
+        <div class="input-field"> <input class="form-control search" /> <button class="btn-search"><i class="icone-search fa fa-search"></i></button> </div>
+      </form>
+    </div>
+
+
+
+
     <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
   </header>
   <!-- nav menu esquerdo -->
@@ -62,22 +74,12 @@
                 <span class="nav_name">Principal</span>
               </a>
 
-              <a href="./faturas.html" class="nav_link">
-                <i class='bx bx-barcode-reader nav_icon' title="Faturas" data-toggle="tooltip"></i>
-                <span class="nav_name">Faturas</span>
-              </a>
-
               <a href="./clientes.html" class="nav_link">
                 <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
                 <span class="nav_name">Clientes</span>
               </a>
 
-              <a href="#" class="nav_link">
-                <i class='bi bi-stack nav_icon' title="Transações" data-toggle="tooltip"></i>
-                <span class="nav_name">Transações</span>
-              </a>
-
-              <a href="#" class="nav_link">
+              <a href="./caixa.html" class="nav_link">
                 <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
                 <span class="nav_name">Caixa</span>
               </a>
@@ -87,7 +89,7 @@
                 <span class="admin nav_name">Administrador</span>
               </a>
 
-              <a href="#" class="nav_link">
+              <a href="./login.html" class="nav_link">
                 <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
                 <span class="nav_name">Sair</span>
               </a>
@@ -96,7 +98,111 @@
         </nav>
       </div>
     </div>
+
+    <!-- modal Suporte -->
+    <div class="modal fade " id="suporteModal" tabindex="-1" aria-labelledby="suporteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="suporteModalLabel">Suporte</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="mailto:suporte-carrolimpo@gmail.com" method="GET">
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2">
+                  <b class="active">Selecione o tipo de suporte desejado.</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o tipo de suporte</option>
+                    <option>Cliente</option>
+                    <option>Caixa</option>
+                    <option>Fatura</option>
+                    <option>serviço</option>
+                    <option>Administração</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <b class="active">Descreva com detalhes o ocorrido.</b>
+                </div>
+                <div class="p-1 mb-3">
+                  <textarea class="form-control" required></textarea>
+                </div>
+                <div class="border-box p-3 mb-1">
+                  <b>Aguarde nosso retorno em no máximo 24h úteis.</b>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" value="Send" class="btn btn-primary" data-bs-dismiss="modal">Enviar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Suporte -->
+
     <!--Container Main-->
+
+    <!-- modal Termos -->
+    <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="termosModalLabel">Termos de uso</h5>
+          </div>
+          <div class="modal-body">
+            <div class="active mb-3"><b>Regras:</b></div>
+            <div class="border-box p-3 mb-2">
+              <ul>
+                <li>O uso do software Carro Limpo é destinado somente para fins de estudo.</li>
+                <li>Não autorizamos o uso desse software para fins comerciais. Proibimos totalmente qualquer tipo de conduta relacionada.</li>
+              </ul>
+            </div>
+            <div class="active mb-3"><b>Autores:</b></div>
+            <div class="termosmodal border-box p-3 mb-2">
+              <div>
+                <div><b> Thiago Rocha Gomes </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/trgomes92/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521979569389"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=trgomes92@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/trgomes92"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <b> Samara Caldellas David </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/samara-david/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5524998444394"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=sam.caldellas@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/echo-noise"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
+                <br>
+                <div>
+                  <b> Bruno Gomes De Sousa </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/bruf1/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521968294095"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=brunogomestw@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/bgomestw"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Concordo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Conteudo -->
     <main class="ms-sm-auto col-lg-12">
       <div class="table-responsive animate__animated animate__fadeInDown">
@@ -104,37 +210,38 @@
 
 
           <div class="row flex-lg-nowrap">
-            <div class="col-12 col-lg-auto mb-3 perfil">
-              <div class="card p-3">
+            <div class="col-12 col-lg-auto mb-3 ">
+              <div class="border-box p-2">
                 <div class="e-navlist e-navlist--active-bg">
                   <ul class="nav">
-                    <li class="nav-item"><a class="perfil nav-link px-2" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Teste</span></a></li>
-                    <li class="nav-item"><a class="perfil nav-link px-2" href="./negocio.html"><i class="fa fa-fw fa-th mr-1"></i><span>Negócio</span></a></li>
-                    <li class="nav-item"><a class="nav-link px-2 active" href="./administrador.html"><i class="fa fa-fw fa-cog mr-1"></i><span>Configuração</span></a></li>
+                    <li class="nav-item"><a class="link nav-link px-2" href="./servicos.html"><i class="icone fas fa-car-crash"></i><span> Serviços</span></a></li>
+                    <li class="nav-item"><a class="nav-link px-2 active" href="./administrador.html"><i class="fas fa-user-cog mr-1"></i><span> Configuração</span></a></li>
                   </ul>
                 </div>
               </div>
-              <div class="card card-perfil p-3 mb-3">
+              <div class="border-box card-perfil p-3 mb-3">
                 <div class="text-center text-sm-right">
-                  <span class="font-admin-color badge badge-secondary">seu nome</span>
+                  <span class="mb-2 font-admin-color badge badge-secondary">seu nome</span>
                   <div class="text-muted"><small>Entrou 00 Nov 2021</small></div>
                 </div>
               </div>
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <h6 class="card-title font-weight-bold">Suporte ao Cliente</h6>
-                    <p class="card-text">Entre em contato conosco.</p>
-                    <button type="button" class="btn btn-primary">Suporte</button>
-                  </div>
+              <div class="text-center border-box mb-3">
+                <div class="card-body">
+                  <h6 class="card-title font-weight-bold">Suporte ao Cliente</h6>
+                  <p class="card-text">Entre em contato conosco.</p>
+                  <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=suporte_carrolimpo@gmail.com&su=&body=&bcc=">
+                    <button type="button" class="btn btn-primary data-bs-toggle=">Suporte</button></a>
+                  <!-- <button type="button" class="btn btn-primary data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#suporteModal" data-bs-whatever="@mdo">Suporte</button> -->
                 </div>
-                <div class="col-12 col-md-12 mb-3">
-                  <div class="card mb-3">
-                    <div class="card-body">
-                      <div class="px-xl-3">
-                          <span>Versão 0.0.1</span>
-                      </div>
+              </div>
+              <div class="col-12 col-md-12 mb-3">
+                <div class="text-center border-box mb-3">
+                  <div class="card-body">
+                    <div class="px-xl-3">
+                      <span>Versão 0.0.1</span>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
 
@@ -147,13 +254,13 @@
                         <div class="row">
                           <div class=" col-sm-auto mb-3">
                             <div class="mx-auto " style="width: 140px;">
-                              <div id="profile-container" class=" justify-content-center align-items-center rounded">
+                              <div id="profile-container" class=" justify-content-center align-items-center rounded" data-toggle="tooltip" title="Editar a foto do perfil">
                                 <image id="profileImage" src="assets/img/perfil.svg" alt="perfil">
                               </div>
                               <i class="fa fa-fw fa-camera"></i>
-                              <span>Editar Foto</span>
+                              <span>Editar a foto</span>
                               <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
- 
+
 
 
                             </div>
@@ -168,96 +275,213 @@
 
                           </div>
                         </div>
-                        <ul class="nav nav-tabs">
-                          <li class="nav-item">
-                            <a href="#" class="nav-link  active" href="#">Perfil</a>
-                          </li>
-                        </ul>
-                        <div class="tab-content pt-4">
+                        <!-- tab menu 1 Perfil / Estabelecimento -->
+                        <!-- tab menu 1 Perfil -->
 
-                          <div class="tab-pane active">
-                            <form class="form" novalidate="">
-                              <div class="row">
-                                <div class="col mb-2">
+
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <!-- menu Perfil / Estabelecimento  -->
+                            <ul class="nav nav-pills" id="myTab" role="tablist">
+                              <li class="nav-item" role="presentation">
+                                <button class="link nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Dados Cadastrais</button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <button class="nav-link link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Estabelecimento</button>
+                              </li>
+                            </ul>
+
+                            <!-- Menu Perfil content -->
+                            <div class="tab-content pt-4" id="myTabContent">
+                              <!-- Dados Cadastrais -->
+                              <div class="tab-pane animate__animated animate__fadeIn active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <form class="form" novalidate="">
                                   <div class="row">
-                                    <div class="mb-3"><b>Editar o Perfil</b></div>
                                     <div class="col mb-2">
-                                      
-                                      <div class="form-group">
+                                      <div class="row">
+                                        <div class="titulo-tab mb-3"><b>Perfil</b></div>
+                                        <div class="col mb-2">
 
-                                        <label>Seu nome</label>
-                                        <input class="form-control" type="text" name="name" placeholder="Nome" value="">
+                                          <div class="form-group">
+
+                                            <label>Seu nome</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Nome" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col col mb-2">
+                                          <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input class="form-control" type="number" name="telefone" placeholder="(00) 0000-0000" value="(21) 12345-6789">
+                                          </div>
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="col col mb-2">
-                                      <div class="form-group">
-                                        <label>Telefone</label>
-                                        <input class="form-control"  type="number" name="telefone" placeholder="(00) 0000-0000" value="(21) 12345-6789">
+                                      <div class="row">
+                                        <div class="col mb-3">
+                                          <div class="form-group">
+                                            <label>E-mail</label>
+                                            <input class="form-control" type="email" placeholder="usuario@exemplo.com">
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="row">
                                     <div class="col mb-3">
-                                      <div class="form-group">
-                                        <label>E-mail</label>
-                                        <input class="form-control" type="email" placeholder="usuario@exemplo.com">
+                                      <div class="mb-3 active">
+                                        <b>Conta</b>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Senha Atual</label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Nova Senha</label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Confirmar <span class="d-none d-xl-inline">Senha</span></label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col mb-3">
-                                  <div class="mb-3"><b>Editar a Senha</b></div>
+                                  <hr class="hr1">
                                   <div class="row">
-                                    <div class="col">
-                                      <div class="form-group">
-                                        <label>Senha Atual</label>
-                                        <input class="form-control" type="password" placeholder="••••••">
-                                      </div>
+                                    <div class="col d-flex justify-content-end">
+                                      <button class="btn btn-primary" type="submit">Salvar</button>
                                     </div>
                                   </div>
-                                  <div class="row">
-                                    <div class="col">
-                                      <div class="form-group">
-                                        <label>Nova Senha</label>
-                                        <input class="form-control" type="password" placeholder="••••••">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col">
-                                      <div class="form-group">
-                                        <label>Confirmar <span class="d-none d-xl-inline">Senha</span></label>
-                                        <input class="form-control" type="password" placeholder="••••••">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                </form>
                               </div>
-                              <div class="row">
-                                <div class="col d-flex justify-content-end">
-                                  <button class="btn btn-primary" type="submit">Salvar</button>
-                                </div>
+                              <!-- Fim Dados Cadastrais -->
+
+                              <!-- Estabelecimento-->
+                              <div class="tab-pane animate__animated animate__fadeIn" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <form class="form" novalidate="">
+                                  <div class="row">
+                                    <div class="col mb-2">
+                                      <!-- nome / cnpj -->
+                                      <div class="row">
+                                        <!-- Titulo -->
+                                        <div class="titulo-tab">
+                                          <b>Informações do negócio</b>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Razão Social</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Razão Social do Negócio" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>CNPJ</label>
+                                            <input class="form-control" type="text" name="CNPJ" placeholder="00.000.000/0000-00" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- telefone / email -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input class="form-control" type="text" name="telefone" placeholder="(00) 00000-0000" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- cep / endereço -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>CEP</label>
+                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Endereço</label>
+                                            <input class="form-control" type="text" name="endereco" placeholder="Endereço" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- numero / complemento -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Número</label>
+                                            <input class="form-control" type="text" name="numero" placeholder="00" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Complemento</label>
+                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- Bairro / Cidade / UF -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Bairro</label>
+                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Cidade</label>
+                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>UF</label>
+                                            <input class="form-control" type="text" name="estado" placeholder="UF" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <hr class="hr1">
+                                      <div class="col d-flex justify-content-end">
+                                        <button class="save btn btn-primary" type="submit">Salvar</button>
+                                      </div>
+                                    </div>
+                                </form>
                               </div>
-                            </form>
+                              <!-- fim Estabelecimento -->
+                            </div>
                           </div>
                         </div>
                       </div>
+
+
                     </div>
+
                   </div>
                 </div>
-
-
               </div>
 
             </div>
           </div>
-        </div>
-
-      </div>
-  </div>
-  </main>
+    </main>
   </div>
 
 
@@ -266,10 +490,10 @@
   <div class="align-items-center animate__animated animate__fadeIn">
     <span>
       <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
-      </a>Sistema administrativo para lava rápido - Carro Limpo / 2021
+      </a> Sistema administrativo para lava rápido - Carro Limpo | 2021
     </span>
     <div>
-      <span class="desc_footer">Todos os direitos reservados</span>
+      <span type="button" class="desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#termosModal" data-bs-whatever="@mdo">Termo de uso</span>
     </div>
 </footer>
 <script>

@@ -21,21 +21,27 @@
   <link rel="stylesheet" href="assets/css/sidebar_menu.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tooltip.css">
+  <link rel="stylesheet" href="assets/css/dataTables.css">
+
+
+
+
 
   <!-- JavaScript Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
+  <!-- JavaScript do tooltip -->
+  <script src="assets/js/tooltip.js"></script>
   <!-- JavaScript do projeto clientes-->
   <script src="assets/js/crud_cliente.js"></script>
   <!-- JavaScript do projeto sidebar-->
   <script src="assets/js/sidebar_menu.js"></script>
   <!-- Javascript do projeto search -->
   <script src="assets/js/search.js"></script>
-
-
+  <!-- Javascript do projeto tabela -->
+  <script type="text/javascript" src="assets/js/tabela.js"></script>
 
   <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
 </head>
@@ -46,6 +52,11 @@
 
   <header class="header" id="header">
     <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <div class="search-bar mt-7">
+      <form>
+        <div class="input-field"> <input class="form-control search" /> <button class="btn-search"><i class="icone-search fa fa-search"></i></button> </div>
+      </form>
+    </div>
     <!--<div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
   </header>
   <!-- nav menu esquerdo -->
@@ -63,36 +74,25 @@
                 <span class="nav_name">Principal</span>
               </a>
 
-              <a href="./faturas.html" class="nav_link active">
-                <i class='bx bx-barcode-reader nav_icon' title="Faturas" data-toggle="tooltip"></i>
-                <span class="nav_name">Faturas</span>
-              </a>
-
               <a href="./clientes.html" class="nav_link">
                 <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
                 <span class="nav_name">Clientes</span>
               </a>
 
-              <a href="#" class="nav_link">
-                <i class='bi bi-stack nav_icon' title="Transações" data-toggle="tooltip"></i>
-                <span class="nav_name">Transações</span>
-              </a>
-
-              <a href="#" class="nav_link">
+              <a href="caixa.html" class="nav_link active">
                 <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
                 <span class="nav_name">Caixa</span>
               </a>
 
               <a href="./administrador.html" class="nav_link">
-                <i class='bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+                <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
                 <span class="admin nav_name">Administrador</span>
               </a>
 
-              <a href="#" class="nav_link">
+              <a href="./login.html" class="nav_link">
                 <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
                 <span class="nav_name">Sair</span>
               </a>
-
             </div>
         </nav>
       </div>
@@ -100,197 +100,337 @@
     <!--Container Main-->
 
     <!-- modal Termos -->
-    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel"><h1>Fatura #0000</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="termosModalLabel">Termos de uso</h5>
           </div>
           <div class="modal-body">
-            <!-- fatura -->
-            <div class="row">
-              <div class="col-sm-7">
-                <strong>Email:</strong> vendas@estabelecimento.com<br>
-                <strong>Telefone:</strong> +55 (00) 00000-0000<br><br>
-              </div>
-
-              <div class="col-sm-5">
-                <h5>Endereço:</h5>
-                <p>Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
-
-              </div><br>
+            <div class="active mb-3"><b>Regras:</b></div>
+            <div class="border-box p-3 mb-2">
+              <ul>
+                <li>O uso do software Carro Limpo é destinado somente para fins de estudo.</li>
+                <li>Não autorizamos o uso desse software para fins comerciais. Proibimos totalmente qualquer tipo de conduta relacionada.</li>
+              </ul>
             </div>
-
-            <hr>
-
-
-            <div class="row">
-              <div class="col-sm-7">
-                <h5>Dados do Cliente:</h5>
-                <h6>Nome do Cliente</h6>
-                <p>Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
-                <br><br>
-              </div>
-
-              <div class="col-sm-5">
-                <h5>Contato do Cliente:</h5>
-                Telefone: (00) 00000-0000
-                <br> Email: exemplo@email.com
-                <br><br>
-              </div>
-            </div>
-
-            <hr>
-
-
-            <div class="row">
-              <div class="col-lg-6 col-md-8 col-sm-6">
-                <strong>FATURA REFERENTE AOS SERVIÇOS:</strong>
-              </div>
-            </div>
-
-            <hr>
-
-
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="table-responsive">
-                  <table class="table table-striped table-bordered">
-                    <thead class="thead">
-                      <tr>
-                        <th scope="col">Nº</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">CPF/CNPJ</th>
-                        <th scope="col">Placa</th>
-                        <th scope="col">Vencimento</th>
-
-                        
-                      </tr>
-                    </thead>
-
-                    <tbody class="tbody">
-                      <tr>
-                        <td>001</td>
-                        <td><code>Aguardando pagamento<code></td>
-                          <td>Nome do Cliente</td>
-                          <td>000.000.000-00</td>
-                          <td>KYH-2658</td>
-                          <td><code>09/12/2021<code></td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <div class="active mb-3"><b>Autores:</b></div>
+            <div class="termosmodal border-box p-3 mb-2">
+              <div>
+                <div><b> Thiago Rocha Gomes </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/trgomes92/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521979569389"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=trgomes92@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/trgomes92"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
                 </div>
+                <br>
+                <div>
+                  <b> Samara Caldellas David </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/samara-david/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5524998444394"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=sam.caldellas@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/echo-noise"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
+                <br>
+                <div>
+                  <b> Bruno Gomes De Sousa </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/bruf1/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521968294095"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=brunogomestw@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/bgomestw"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
               </div>
             </div>
-
-            <hr>
-
-
-            <div>
-              <h4 align="right">Total: R$ 00,00</h4>
-            </div>
-
-            
-            <br><br>
-            <hr>
-
-            <strong>FORMA DE PAGAMENTO:</strong>
-
-            <hr>
-            <div class="row">
-              <div class="col-sm-7">
-                <h5>Cartão/Dinheiro/Pix:</h5>
-                <p>Dinheiro</p>
-              </div>
-
-              <div class="col-sm-5">
-                <h5>Pix:</h5>
-                <p align="left">
-                  <span><b>CNPJ:</b> 00.000.000/0000-00 </span><br>
-                </p>
-              </div>
-            </div>
-
- 
-            <!-- final fatura -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Imprimir</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Concordo</button>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Modal Fatura -->
+    <div class=" modal fade" id="faturaModal" tabindex="-1" aria-labelledby="faturaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="page">
+            <div class="modal-header">
+              <h2 class="modal-title" id="faturaModalLabel">
+                <span style="float:left;">Fatura: 001</span>
+              </h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- fatura -->
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do estabelecimento:</h5>
+                  <strong>Nome:</strong> Nome do estabelecimento
+                  <br><strong> CNPJ:</strong> 000.000.000-00
+                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+
+                </div>
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> (00) 00000-0000
+                  <br><strong>Email:</strong> exemplo@email.com
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do Cliente:</h5>
+                  <strong>Nome:</strong> Nome do Cliente
+                  <br><strong> CPF/CNPJ:</strong> 000.000.000-00
+                  <br><strong> Placa:</strong> KYG-0000
+                  <br><strong> Marca:</strong> Honda
+                  <br><strong> Modelo:</strong> Fit
+                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+
+                </div>
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> (00) 00000-0000
+                  <br><strong>Email:</strong> exemplo@email.com
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-3 col-lg-6 col-md-8 col-sm-6">
+                  <h5>Descrição:</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 mb-3">
+                  <div class="table-responsive">
+                    <table id="crud tab_customers" class="crud exportar table table-bordered table-hover table-striped">
+                      <thead class="thead">
+                        <tr>
+                          <th scope="col">Serviço</th>
+                          <th scope="col">status</th>
+                          <th scope="col">Valor</th>
+                          <th scope="col">Vencimento</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody">
+                        <tr>
+                          <td>Limpeza ecológica</td>
+                          <td id="status"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                          <td id="valor">R$60,00</td>
+                          <td>09/12/2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div>
+                <p>
+                <h5>Forma de Pagamento:</h5>
+                <span>Dinheiro</span>
+                <span style="float:right;"><b style="font-size: 24px;">Total: R$ 60,00</b></span>
+                </p>
+                <div class="row">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="button-print-or-save-document btn btn-primary">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- final fatura -->
+
+    <!-- Modal Nova Fatura -->
+    <div class="modal fade " id="nova-fatura-Modal" tabindex="-1" aria-labelledby="nova-fatura-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nova-fatura-ModalLabel">Nova Fatura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2 active">
+                  <b>Selecione um cliente e o serviço desejado.</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o cliente</option>
+                    <option>Nome do Cliente</option>
+                  </select>
+                </div>
+                <div class="p-1 mb-3">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o serviço</option>
+                    <option>Limpeza ecológica</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Gerar Fatura</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Nova Fatura -->
+
 
     <!-- Conteudo -->
     <main class="ms-sm-auto col-lg-12">
       <div class="table-responsive animate__animated animate__fadeInDown">
-        <div class="table-wrapper">
-          <div class="animate__animated animate__fadeIn">
-            <div class="table-title">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h1 class="h5">Faturas:</h1>
+        <div class="animate__fadeInDown content">
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 perfil">
+              <div class="border-box p-1 mb-3">
+                <div class="e-navlist e-navlist--active-bg">
+                  <ul class="nav">
+                    <li class="nav-item"><a class="link nav-link px-2" href="./caixa.html"><i class=" bi bi-cart-fill nav_icon"></i><span> Caixa</span></a></li>
+                    <li class="nav-item"><a class="nav-link px-2 active" href="./faturas.html"><i class="bi bi-receipt-cutoff nav_icon mr-1"></i><span> Faturas</span></a></li>
+                  </ul>
                 </div>
-                <div>
-                  <button id="pdf" class="btn btn-secondary btn-sm exportar-pdf">
-                    <i class="bi bi-file-pdf-fill"></i> Exportar PDF</button>
+              </div>
+              <div class="faturas">
+                <div class="w-100 border-btn p-2 mb-3 separar">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button type="button" class="btn btn-primary btn-sm data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#nova-fatura-Modal" data-bs-whatever="@mdo"">
+                    <i type="button" class="icone add-fatura-icone"></i> Fatura</button>
+                  </div>
+                </div>
+                <div class="w-100 border-btn p-2 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button id="pdf" class=" btn btn-secondary btn-sm ">
+                      <i class="icone bi bi-file-pdf-fill"></i> PDF</button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <table id="tab_customers" class="crud exportar animate__animated animate__fadeInDown  table table-bordered table-hover table-striped">
-              <thead class="thead">
-                <tr>
-                  <th scope="col">Fatura</th>
-                  <th scope="col">Nº</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">CPF/CNPJ</th>
-                  <th scope="col">Placa</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Modelo</th>
-                  <th scope="col">Serviços</th>
-                  <th scope="col">Vencimento</th>
-                </tr>
-              </thead>
-              <tbody class="tbody">
-                <tr>
-                  <td> <i type="button" class="bi bi-receipt-cutoff desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"></i></td>
-                  <td>001</td>
-                  <td class="status-aguardando-pagamento">Aguardando pagamento</td>
-                  <td>Nome do Cliente</td>
-                  <td>000.000.000-00</td>
-                  <td>KYH-2658</td>
-                  <td>Honda</td>
-                  <td>Fit</td>
-                  <td>Limpeza ecológica</td>
-                  <td><code>09/12/2021<code></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="border-box">
+                    <div class="card-body">
+                      <div>
+                        <div class="row">
 
-            <!-- Exportar pdf -->
-            <script src="assets/js/export_pdf.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
 
+                          <table id="tabfatura" class="border-box p-2 table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped  table-responsive dataTable no-footer">
+
+                            <thead class="thead">
+                              <tr>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Nº</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Placa</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Valor</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbody">
+                              <tr>
+                                <td id="td-header" data-label="FATURA">
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
+                                </td>
+                                <td data-label="Nº"> 001</td>
+                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                                <td data-label="NOME"> Nome do Cliente</td>
+                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
+                                <td data-label="PLACA"> KYH-2658</td>
+                                <td data-label="MARCA"> Honda</td>
+                                <td data-label="MODELO"> Fit</td>
+                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
+                                <td data-label="VENCIMENTO"> 09/12/2021</td>
+                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
+                              </tr>
+                              <tr>
+                                <td id="td-header" data-label="FATURA">
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-bs-toggle="modal" data-toggle="tooltip" title="Gerar Fatura" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
+                                </td>
+                                <td data-label="Nº"> 001</td>
+                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                                <td data-label="NOME"> Nome do Cliente</td>
+                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
+                                <td data-label="PLACA"> KYH-2658</td>
+                                <td data-label="MARCA"> Honda</td>
+                                <td data-label="MODELO"> Fit</td>
+                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
+                                <td data-label="VENCIMENTO"> 09/12/2021</td>
+                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
+                              </tr>
+
+
+                            </tbody>
+
+                          </table>
+
+
+                        </div>
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabfatura').DataTable();
+                          });
+                        </script>
+
+
+                        <!-- Exportar pdf -->
+                        <script src="assets/js/export_pdf.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+
+                        <!-- Javascript Imprimir div-->
+                        <script src="assets/js/fatura/imprimir.js"></script>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-    </main>
+      </div>
   </div>
+  </div>
+  </main>
+  </div>
+  <!-- Javascript do projeto caixa -->
+  <script src='/assets/js/caixa/chart.js'></script>
+  <script src="/assets/js/caixa/app.js"></script>
 </body>
 <footer id="footer" class="border-top">
-  <div class="align-items-center  animate__animated animate__fadeIn">
+  <div class="align-items-center animate__animated animate__fadeIn">
     <span>
       <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
-      </a>Sistema administrativo para lava rápido - Carro Limpo / 2021
+      </a> Sistema administrativo para lava rápido - Carro Limpo | 2021
     </span>
     <div>
-      <span class="desc_footer">Todos os direitos reservados</span>
+      <span type="button" class="desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#termosModal" data-bs-whatever="@mdo">Termo de uso</span>
     </div>
 </footer>
 </div>

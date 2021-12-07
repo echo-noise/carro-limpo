@@ -23,8 +23,6 @@
   <link rel="stylesheet" href="assets/css/tooltip.css">
   <link rel="stylesheet" href="assets/css/dataTables.css">
 
-
-
   <!-- JavaScript Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -33,7 +31,7 @@
   <!-- JavaScript do tooltip -->
   <script src="assets/js/tooltip.js"></script>
   <!-- JavaScript do projeto clientes-->
-  <script src="assets/js/crud_cliente.js"></script>
+  <script src="assets/js/crud_servico.js"></script>
   <!-- JavaScript do projeto sidebar-->
   <script src="assets/js/sidebar_menu.js"></script>
   <!-- Javascript do projeto search -->
@@ -42,7 +40,7 @@
   <script type="text/javascript" src="assets/js/tabela.js"></script>
 
 
-  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/icons/favicon.ico?v=2" type="assets/icons/favicon.ico">
 </head>
 
 <body id="body-pd" class="body-pd2">
@@ -73,17 +71,17 @@
                 <span class="nav_name">Principal</span>
               </a>
 
-              <a href="./clientes.html" class="nav_link active">
+              <a href="./clientes.html" class="nav_link">
                 <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
                 <span class="nav_name">Clientes</span>
               </a>
 
-              <a href="caixa.html" class="nav_link">
+              <a href="./caixa.html" class="nav_link">
                 <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
                 <span class="nav_name">Caixa</span>
               </a>
 
-              <a href="./administrador.html" class="nav_link">
+              <a href="./administrador.html" class="nav_link active">
                 <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
                 <span class="admin nav_name">Administrador</span>
               </a>
@@ -92,6 +90,7 @@
                 <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
                 <span class="nav_name">Sair</span>
               </a>
+
             </div>
         </nav>
       </div>
@@ -155,123 +154,106 @@
         </div>
       </div>
     </div>
-
     <!-- Conteudo -->
     <main class="ms-sm-auto col-lg-12">
       <div class="table-responsive animate__animated animate__fadeInDown">
         <div class="animate__fadeInDown content">
 
 
-          <div class="row flex-lg-nowrap">
-            <div class="col-12 col-lg-auto mb-3 perfil">
 
-              <div class="clientes">
-                <div class=" separar w-100 border-btn p-2 mb-3">
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3">
+              <div class="border-box p-2">
+                <div class="e-navlist e-navlist--active-bg">
+                  <ul class="nav">
+
+                    <li class="nav-item"><a class="perfil nav-link px-2 active" href="./servicos.html"><i class="icone fas fa-car-crash"></i><span> Serviços</span></a></li>
+                    <li class="nav-item"><a class="link nav-link px-2" href="./administrador.html"><i class="fas fa-user-cog mr-1"></i><span> Configuração</span></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="servicos">
+                <div class="separar w-100 border-btn p-2 mt-3 mb-3">
                   <div class="e-navlist e-navlist--active-bg">
-                    <button type="button" class="btn btn-primary btn-sm add-new">
-                      <i class="icone fas fa-user"></i> Novo Cliente</button>
+                    <button type="button" class="btn btn-primary btn-sm add-new-servico">
+                      <i class="icone fas fa-car-crash"></i> Novo Serviço</button>
                   </div>
                 </div>
-                <div class="w-100 border-btn p-2 mb-3">
+                <div class="w-100 border-btn p-2 mb-3 mt-3">
                   <div class="e-navlist e-navlist--active-bg">
-                    <button id="pdf" class="  btn btn-secondary btn-sm ">
+                    <button id="pdf" class=" btn btn-secondary btn-sm ">
                       <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
                   </div>
                 </div>
-
               </div>
+
             </div>
-
-
-
-
+            <!-- conteudo -->
             <div class="col">
               <div class="row">
                 <div class="col mb-3">
-                  <div class="border-box p-3">
-
+                  <div class="card">
                     <div class="card-body">
                       <div>
-                        <div class="p-2 row">
-                          <table id="tabcliente" class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
-                            <thead class="thead">
-                              <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">CPF/CNPJ</th>
-                                <th scope="col">Placa</th>
-                                <th scope="col">Marca</th>
-                                <th scope="col">Modelo</th>
-                                <th scope="col">Cor</th>
-                                <th class="acoes" scope="col">Ações</th>
-                              </tr>
-                            </thead>
-                            <tbody class="tbody">
-                              <tr>
-                                <td id="td-header" data-label="NOME">Fulano de Tal</td>
-                                <td data-label="TELEFONE">(21) 12345678</td>
-                                <td data-label="E-MAIL">teste@gmail.com</td>
-                                <td data-label="CPF/CNPJ">123.456.789-10</td>
-                                <td data-label="PLACA">KYH-2658</td>
-                                <td data-label="MARCA">Honda</td>
-                                <td data-label="MODELO">Fit</td>
-                                <td data-label="COR">Preto</td>
-                                <td data-label="AÇOES">
-                                  <div class="acoes-align">
-                                    <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td id="td-header" data-label="NOME">Fulano de Tal</td>
-                                <td data-label="TELEFONE">(21) 12345678</td>
-                                <td data-label="E-MAIL">teste@gmail.com</td>
-                                <td data-label="CPF/CNPJ">123.456.789-10</td>
-                                <td data-label="PLACA">KYH-2658</td>
-                                <td data-label="MARCA">Honda</td>
-                                <td data-label="MODELO">Fit</td>
-                                <td data-label="COR">Preto</td>
-                                <td data-label="AÇOES">
-                                  <div class="acoes-align">
-                                    <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                  </div>
-                                </td>
-                              </tr>
-                              </tfoot>
-                            </tbody>
-                          </table>
+
+                        <!--  -->
+                        <table id="tabservicos" class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
+                          <thead class="thead">
+                            <tr>
+                              <th scope="col">Serviço</th>
+                              <th scope="col">Valor</th>
+                              <th class="acoes" scope="col">Ações</th>
+                            </tr>
+                          </thead>
+                          <tbody class="tbody">
+                            <tr>
+                              <td id="td-header" data-label="SERVIÇO">Lavagem</td>
+                              <td class="valor" data-label="VALOR">R$ 40,00</td>
+                              <td data-label="AÇOES">
+                                <div class="acoes-align">
+                                  <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                  <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                  <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
 
 
-                          <script>
-                            $(document).ready(function () {
-                              $('#tabcliente').DataTable();
-                            });
-                          </script>
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabservicos').DataTable();
+                          });
+                        </script>
 
-                          <!-- Exportar pdf -->
-                          <script src="assets/js/export_pdf.js"></script>
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                        <!-- Exportar pdf -->
+                        <script src="assets/js/export_pdf.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                        <!--  -->
 
-                        </div>
                       </div>
                     </div>
                   </div>
+
+
                 </div>
+
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </main>
   </div>
+
+
 </body>
-<footer id="footer" class="border-top">
+<footer id="footer" class="mt-5 border-top">
   <div class="align-items-center animate__animated animate__fadeIn">
     <span>
       <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
