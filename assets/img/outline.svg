@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="316.301" cy="195.697" r="108.302" id="gradient-1" spreadMethod="pad" gradientTransform="matrix(1, 0, 0, 1, -0.328969, 0.192153)">
+      <stop offset="0" style="stop-color: rgba(255, 190, 110, 1)"/>
+      <stop offset="1" style="stop-color: rgba(255, 144, 8, 1)"/>
+    </radialGradient>
+  </defs>
+  <title>ionicons-v5-n</title>
+  <path d="M 383.671 224.192 L 383.671 408.192 C 383.671 430.284 365.763 448.192 343.671 448.192 L 103.671 448.192 C 81.58 448.192 63.671 430.284 63.671 408.192 L 63.671 168.192 C 63.671 146.101 81.58 128.192 103.671 128.192 L 271.151 128.192" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-width: 24px; stroke: rgb(255, 185, 73);"/>
+  <path d="M 459.611 53.442 C 453.447 46.669 442.875 46.414 436.391 52.882 L 424.021 65.192 C 420.9 68.316 420.9 73.379 424.021 76.502 L 435.361 87.822 C 438.488 90.964 443.574 90.964 446.701 87.822 L 458.761 75.822 C 464.861 69.732 465.431 59.812 459.611 53.442 Z" style="stroke: rgb(255, 187, 78); stroke-opacity: 0; stroke-width: 0px; fill: rgb(255, 191, 73);"/>
+  <path d="M 399.011 90.192 L 218.491 270.392 C 217.397 271.483 216.601 272.836 216.181 274.322 L 207.831 299.192 C 206.976 302.078 209.565 304.808 212.492 304.106 C 212.559 304.09 212.625 304.072 212.691 304.052 L 237.541 295.702 C 239.028 295.282 240.381 294.487 241.471 293.392 L 421.671 112.852 C 425.141 109.346 425.141 103.699 421.671 100.192 L 411.721 90.192 C 408.209 86.69 402.524 86.69 399.011 90.192 Z" style="stroke-width: 0px; stroke-opacity: 0; stroke: url(#gradient-1); paint-order: stroke; fill: rgb(255, 185, 73);"/>
+</svg>
