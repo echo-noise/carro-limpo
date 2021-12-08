@@ -13,9 +13,6 @@
 
 .table-title {
   padding-bottom: 10px;
-  margin: -6em;
-  margin-left: 0em;
-  position: absolute;
 }
 
 .table-title h2 {
@@ -33,11 +30,60 @@
 .exportar-pdf {
   font-size: 14px;
   min-width: 100px;
+  text-align: center;
+  bottom: 13%;
+  color: #fff;
+  border: none;
+  padding: 12px 29px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.btn {
+  padding-top: 9px;
+  width: 100%;
+  min-width: 142px;
+  height: 38px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  transition: 1s;
+  opacity: 0.8;
+}
+
+.btn:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.border-btn-pdf{
+ width:226px;
+ flex-direction: column;
+ padding: 5px;
+ border-radius: 5px;
+ border: 1px solid #e3e3e3;
+}
+
+.btn-pdf {
+  padding-top: 9px;
+  width: 208.69px;
+  min-width: 142px;
+  height: 38px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
 }
 
 table.table tr th,
 table.table tr td {
-  border-color: #bdbdbd;
+  border-color: #00000024;
 }
 table.table th i {
   font-size: 13px;
@@ -45,7 +91,7 @@ table.table th i {
   cursor: pointer;
 }
 table.table th:last-child {
-  width: 100px;
+  width: auto;
 }
 table.table td a {
   cursor: pointer;
@@ -71,6 +117,13 @@ table.table td a.add i {
   position: relative;
   top: 3px;
 }
+
+.form-control-crud {
+  height: 32px;
+  line-height: 32px;
+  width: 100%;
+}
+
 table.table .form-control {
   height: 32px;
   line-height: 32px;
@@ -84,6 +137,41 @@ table.table td .add {
   display: none;
 }
 
+@media screen and (max-width: 340px) {
+  .exportar-pdf {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .table-title .add-new {
+    font-size: 10px;
+  }
+
+  .table-title {
+    width: 214px;
+    margin-left: 0em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
+  .table-title {
+    width: 269px;
+  }
+  .btn {
+    width: 100%;
+  }
+
+.border-btn-pdf{
+  width:100%;
+ }
+ 
+ .btn-pdf {
+   width: 100%
+ }
+
+}
 @media screen and (max-width: 1050px) {
   .table-wrapper {
     overflow-x: auto;
@@ -100,28 +188,32 @@ table.table td .add {
   th,
   thead,
   tr {
-    font-size: 9px;
+    font-size: 12px;
   }
-}
 
-@media screen and (max-width: 526px) {
-  .table-title {
-    width: 269px;
+  .dataTables_wrapper .dataTables_info {
+    font-size: 11px;
   }
-}
 
-@media screen and (max-width: 350px) {
+  .dataTables_paginate {
+    font-size: 11px;
+  }
+
+  .dataTables_filter {
+    font-size: 11px;
+  }
+
+  .dataTables_length {
+    font-size: 11px;
+  }
+
   .exportar-pdf {
     font-size: 10px;
   }
+}
 
-  .table-title .add-new {
-    font-size: 10px;
-  }
-
-  .table-title {
-    width: 214px;
-    margin-left: 0em;
-    margin: -68px 0 0 0;
+@media screen and (max-width: 1330px) {
+  .form-control-crud {
+    width: 50%;
   }
 }

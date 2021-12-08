@@ -1,4 +1,6 @@
-
+.text-center {
+  text-align: inherit !important;
+}
 
 .profile-pic {
   color: transparent;
@@ -27,8 +29,6 @@ input {
   width: circleSize;
 }
 
-
-
 .font-admin-color {
   padding: 10px 10px 10px 10px;
   color: #ffffffee;
@@ -37,13 +37,7 @@ input {
   text-transform: uppercase;
 }
 
-.perfil  {
-  color: #000000ee;
-}
-
-
-
-label  {
+label {
   color: #000000ee;
 }
 
@@ -58,77 +52,92 @@ label  {
   border-color: #dee2e6 #dee2e6 #fff;
 }
 
-.card-perfil{
-  margin-top:15px;
-  
+.card-perfil {
+  margin-top: 15px;
+  flex-direction: row;
 }
-.nav-tabs .nav-link.active{
-  color:rgb(3, 109, 196);
-}
-
-#imageUpload
-{
-    display: none;
+.nav-tabs .nav-link.active {
+  color: rgb(3, 109, 196);
 }
 
-#profileImage
-{
-    cursor: pointer; 
-    border: 1px solid rgba(0, 0, 0, 0.13);
-    padding:5px;
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 10%;
+#imageUpload {
+  display: none;
+}
 
+#profileImage {
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  padding: 5px;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 10%;
 }
 
 #profile-container {
-    width: 140px;
-    height: 140px;
-    overflow: hidden;
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
 }
 
 #profile-container img {
-    width: 140px;
-    height: 140px;
+  width: 140px;
+  height: 140px;
 }
 
 .save {
   float: right;
 }
 
-.titulo-tab{
-    padding: 6px 0px 6px 6px;
-    margin: 0px 0px 15px 0px;
-    font-family: Nunito;
+.titulo-tab {
+  padding: 3px 0px 6px 12px;
+  margin: 0px 0px 15px 0px;
+  font-family: Nunito;
 }
 
 @media screen and (max-width: 700px) {
-  .perfil{
-    width:100%;
+  .perfil {
+    width: 100%;
     min-width: 300px;
   }
   .mx-auto {
     text-align: center;
   }
 
-  .nav{
-    width: 200px;
-    
+  .nav {
+    width: 100%;
   }
-  
 }
 
 @media screen and (max-width: 500px) {
+  .usuarioinfo {
+    flex: none;
+    float: left;
+  }
 
-.usuarioinfo{
-  flex:none;
-  float: left;
- 
-}
   
-.mx-auto {
-  text-align: center;
+  .mx-auto {
+    text-align: center;
+  }
 }
+
+@media screen and (max-width: 575px) {
+  .text-center {
+    text-align: center !important;
+  }
+
+  .nav-pills {
+    justify-content: center;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .card-perfil {
+    flex-direction: column;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
 }
