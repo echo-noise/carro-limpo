@@ -54,7 +54,7 @@
 ##
 ###  🔹 **Responsividade** 
 
-> Nosso Sistema Web Responsivo, nada mais é do que aquele que tem a capacidade de ajustar instantaneamente seu layout e suas funcionalidades ao dispositivo pelo qual está sendo acessado. Assim, suas páginas se adaptam em qualquer formato de tela sem que aconteça aquela “desconfiguração”. Ou seja, o usuário não terá qualquer prejuízo na leitura das informações.
+> O nosso Sistema Web Responsivo, possui a capacidade de ajustar-se instantaneamente o layout e suas funcionalidades ao dispositivo pelo qual está sendo acessado. Assim, suas páginas se adaptam em qualquer formato de tela sem que aconteça aquela “desconfiguração”. Ou seja, o usuário não terá qualquer prejuízo na leitura das informações.
 
 <!-- Acessibilidade -->
 ##
@@ -78,9 +78,13 @@ Uma das mais importantes características da qual nos fizeram optar por um siste
 
 
  <!-- Informações de Contato -->
-
+##
 ###   🔹 Autores do Projeto 
-###### Você pode nos achar na web!
+<img src="https://github.com/trgomes92/host/blob/main/contato2.fw.png">
+
+##
+###   🔹 Contato 
+
 
 <div>
 <div><h6> Thiago Rocha Gomes </h6>
