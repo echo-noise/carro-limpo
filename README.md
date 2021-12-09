@@ -5,7 +5,7 @@
 ##
 ###  🔷 **Login e Recuperação da Senha** 
 > Verificação de inserção dos dados do usuário / Autenticação / Recuperação da senha através do email.
-<img src="https://github.com/trgomes92/host/blob/main/login%20grande.gif">
+<img src="https://github.com/trgomes92/host/blob/main/login%20novo.gif">
 
 
 ##
@@ -21,7 +21,7 @@
 ##
 ###  🔷 **Painel Administrativo** 
 >  Atualizações cadastrais / Gerenciamento do Perfil e Estabelecimento / Cadastro e Gerenciamento dos Serviços.
-<img src="https://github.com/trgomes92/host/blob/main/Configura%C3%A7%C3%A3o.gif">
+<img src="https://github.com/trgomes92/host/blob/main/administrador.gif">
 
 ##
 ###  🔷 **Cadastro de Serviços** 
@@ -31,7 +31,7 @@
 ##
 ###  🔷 **Cadastro de Clientes** 
 > Cadastro / Edição / Exclusão. 
-<img src="https://github.com/trgomes92/host/blob/main/Tela%20Clientes.gif">
+<img src="https://github.com/trgomes92/host/blob/main/cliente.gif">
 
 ##
 ###  🔷 **Download do PDF** 
@@ -42,7 +42,7 @@
 ##
 ###  🔷 **Demonstrativo de Responsividade do Sistema** 
 > O sistema é responsivo para todos os dispositivos, ou seja, é possivel acessá-lo através de dispositivos mobile, televisores e computadores. 
-<img src="https://github.com/trgomes92/host/blob/main/resp%207.gif">
+<img src="https://github.com/trgomes92/host/blob/main/responsividade.gif">
 
 <!-- Apresentação -->
 ##
