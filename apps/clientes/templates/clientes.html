@@ -1,56 +1,140 @@
-{% extends "base_table.html" %}
+{% extends "base_head.html" %}
 {% load static %}
-{% block titulo %}Todos os clientes:{% endblock %}
-{% block subdiv %}
-  <div class="">
-    <button type="button" class="add-new" href="{% url "inserir" %}">
-      <i class="bi bi-plus-lg"></i>Adicionar Cliente</button>
-  </div>
+
+{% block page_css %}  
+  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
+  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
+  {% include "includes/datatables_media.html" %}
 {% endblock %}
-{% block tabela %}
-  <table class="table table-bordered table-hover table-striped">
-    <thead >
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Telefone</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">CPF/CNPJ</th>
-        <th scope="col">Placa</th>
-        <th scope="col">Marca</th>
-        <th scope="col">Modelo</th>
-        <th scope="col">Cor</th>
-        <th scope="col">Serviços</th>
-        <th scope="col">Observações</th>
-        <th scope="col">Ações</th>
-      </tr>
-    </thead>
-    <tbody id="clientes">
-    {% for cliente in clientes %}
-      <tr>
-        <td>{{ cliente.nome }}</td>
-        <td>{{ cliente.telefone }}</td>
-        <td>{{ cliente.email }} </td>
-        <td>{{ cliente.documento }} </td>
-        <td>{{ cliente.placa }}</td>
-        <td>{{ cliente.marca }}</td>
-        <td>{{ cliente.modelo }}</td>
-        <td>{{ cliente.cor }}</td>
-        <td> ???? </td>
-        <td> ???? </td>
-        <td>
-          <a class="add" title="Salvar" data-toggle="tooltip"><i
-              class="material-icons">&#xE03B;</i></a>
-          <a class="edit" title="Editar" data-toggle="tooltip"><i
-              class="material-icons">&#xE254;</i></a>
-          <a class="delete" title="Apagar" data-toggle="tooltip" href="{% url "excluir" id=cliente.id %}"><i
-              class="material-icons">&#xE872;</i></a>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
-{% block scripts %}
+
+{% block page_js %}
+  <!-- JavaScript do tooltip -->
+  <script src="{% static "js/tooltip.js" %}"></script>
   <!-- JavaScript do projeto clientes-->
   <script src="{% static "js/crud_cliente.js" %}"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="{% static "js/sidebar_menu.js" %}"></script>
+  <!-- Javascript do projeto search -->
+  <script src="{% static "js/search.js" %}"></script>
+  <!-- Javascript do projeto tabela -->
+  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+  {% include "includes/header.html" %}
+  
+  <div>
+    <!-- nav menu esquerdo -->
+    {% include "includes/nav.html" %}
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 perfil">
+
+              <div class="clientes">
+                <div class=" separar w-100 border-btn p-2 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button type="button" class="btn btn-primary btn-sm add-new">
+                      <i class="icone fas fa-user"></i> Novo Cliente</button>
+                  </div>
+                </div>
+                <div class="w-100 border-btn p-2 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button id="pdf" class="  btn btn-secondary btn-sm ">
+                      <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="border-box p-3">
+
+                    <div class="card-body">
+                      <div>
+                        <div class="p-2 row">
+                          <table id="tabcliente" class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
+                            <thead class="thead">
+                              <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Placa</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Cor</th>
+                                <th class="acoes" scope="col">Ações</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbody">
+                              {% for cliente in clientes %}
+                              <tr>
+                                <td id="td-header" data-label="NOME">{{ cliente.nome }}</td>
+                                <td data-label="TELEFONE">{{ cliente.telefone }}</td>
+                                <td data-label="E-MAIL">{{ cliente.email }}</td>
+                                <td data-label="CPF/CNPJ">{{ cliente.documento }}</td>
+                                <td data-label="PLACA">{{ cliente.placa }}</td>
+                                <td data-label="MARCA">{{ cliente.marca }}</td>
+                                <td data-label="MODELO">{{ cliente.modelo }}</td>
+                                <td data-label="COR">{{ cliente.cor }}</td>
+                                <td data-label="AÇOES">
+                                  <div class="acoes-align">
+                                    <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons" >&#xE03B;</i></a>
+                                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                    <a class="delete" title="Apagar" data-toggle="tooltip" href="{{ cliente.id }}"><i class="material-icons">&#xE872;</i></a>
+                                  </div>
+                                </td>
+                              </tr>
+                              {% endfor %}
+                              </tfoot>
+                            </tbody>
+                          </table>
+
+
+                          <script>
+                            $(document).ready(function () {
+                              $('#tabcliente').DataTable();
+                            });
+                          </script>
+
+                          <!-- Exportar pdf -->
+                          <script src="{% static "js/export_pdf.js" %}"></script>
+                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+{% include "includes/footer.html" %}
+</div>
 {% endblock %}

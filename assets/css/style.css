@@ -1,12 +1,12 @@
-body {
-  align-items: center;
-  background: #f5f7fa;
-  font-size: 0.875rem;
-  font-family: lato, sans-serif;
+.termosmodal {
+  text-align: center;
+}
+
+.border-box {
   position: relative;
-  background-image: url("../img/bg.png");
-  background-repeat: repeat-x;
-  width: 100%;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 8px;
 }
 
 .thead {
@@ -15,14 +15,80 @@ body {
   text-transform: uppercase;
   font-weight: 400px;
   border-top-width: 1px;
-  background: #0e426d;
+  background: #1c6aadf5;
   color: rgb(255, 255, 255);
   font-size: 12px;
+}
+
+.search-bar {
+  width: 100%;
+}
+.input-field {
+  display: flex;
+  /* width: 100%; */
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.search {
+  height: 50px;
+  width: 100%;
+  background-color: #004b6e6e;
+  border: 1px solid #005dbb;
+  border-radius: 5px;
+  color: #fff;
+  position: relative;
+  transition: 1.7s;
+  opacity: 0.6;
+}
+
+.search:focus, .search:hover{
+  background-color: #004b6e75;
+  color: #fff;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.placeholder-search {
+  color: beige;
+}
+
+.btn-search {
+  align-items: center;
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  margin-right: 7px;
+  border-radius: 5px;
+  background: #51afff;
+  color: #fff;
+  border: none;
+  transition: 1.0s;
+  display: flex;
+  opacity: 1;
+  align-content: center;
+  justify-content: center;
+}
+.btn-search:hover,  .btn-search:focus {
+  color: #8fc1ff; 
+  background-color: #005ba5;
+  opacity: 1;
+}
+
+.icone-search{
+  font-size: 1.1rem;
+}
+
+.icone{
+  margin-right: 7px;
+  font-size: 1rem;
 }
 
 .tbody {
   border-top-width: 1px;
   font-size: 13px;
+  text-align: center;
 }
 
 .feather {
@@ -86,23 +152,26 @@ body {
 .crud {
   text-transform: uppercase;
   text-align: center;
-  margin: 80px 0px 0px 0px;
+  /* margin: 0px 0px 0px 0px; */
 }
 
-.fatura .vencimento {
-  text-align: center;
-  color: rgb(255, 0, 0);
+.badge-soft-warning {
+  background-color: rgb(248, 202, 85);
+  color: #000000;
 }
 
-.status-aguardando-pagamento {
-  color: rgb(205, 50, 50);
-}
-.status-paga {
-  color: yellowgreen;
+.badge-soft-primary {
+  background-color: rgb(51 255 0 / 52%);
+  color: #000000;
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) > * {
-  --bs-table-accent-bg: #f5f7fab3;
+.badge {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.link {
+  color: black;
 }
 
 .form-select {
@@ -123,7 +192,7 @@ body {
   border-top: 1px solid #dee2e6;
   border-left: 1px solid #dee2e6;
   border-right: 1px solid #dee2e6;
-  font-size: 11px;
+  font-size: 12px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 7px 9px 1px rgb(53 53 53 / 5%);
@@ -158,36 +227,225 @@ body {
   box-shadow: 0px 7px 9px 1px rgb(53 53 53 / 5%);
 }
 
-@media screen and (max-width: 350px) {
-.crud {
-  margin: 60px 0px 0px 0px;
+.menu-content-responsivo {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  /* border: 1px solid #e3e3e3; */
+}
+
+@media print {
+ 
+  body, html {
+    width: 100%;
+    height: auto;
+}
+
+hr{
+  border-bottom: 1px solid #3f3f3f;
+}
+
+.modal-content {
+  border: 1px solid rgba(0, 0, 0, 0); 
+}
+
+ .page {
+    width: 100%;
+    position: fixed;
+    height:auto;
+    overflow:auto;
+    page-break-after: always;
+    z-index: 100000;
+
+  }
+   
+ .button-print-or-save-document, nav, header, .content, form, footer, .card, .btn-close  {
+  display: none !important;
+  }
+}
+
+.col-lg-auto {
+  flex: 0 0 auto;
+  min-width: 250.7px;
+}
+
+
+@media (max-width: 991px) {
+  
+  
+  .col-lg-auto {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .clientes, .faturas, .servicos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .limpar-atribuir {
+    border-radius: 5px;
+    /* border: 1px solid #e3e3e3; */
+    width: 100%;
+    /* margin-right: 15px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .abrir-fechar-caixa {
+    border-radius: 5px;
+    /* border: 1px solid #e3e3e3; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .menu-content-responsivo {
+    display: flex;
+    flex-direction: column;
+    border: 0px solid #e3e3e3;
+    /* border-radius: 5px; */
+    align-items: center;
+  }
+
+.separar {
+  margin-right: 15px;
 }
 }
 
+@media screen and  (max-width: 767px){
+  .search {
+    height: auto;
+  }
+  .btn-search{
+    padding-left: 5px;
+    height: 27px;
+    width: 50px;
+    margin-top: 1px;
+    margin-right: 5px;
+    }
+
+    .icone-search{
+      font-size: 0.9rem;
+    }
+
+  
+}
+
+@media screen and (max-width: 600px) {
+  #footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+  }
+
+  .search {
+    height: auto;
+  }
+
+  .menu-content-responsivo {
+    display: flex;
+    flex-direction: column;
+    border: 0px solid #e3e3e3;
+  }
+
+  .clientes, .faturas, .servicos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .separar {
+    margin-right: 0px;
+  }
+
+  .limpar-atribuir {
+    border: 0px solid #e3e3e3;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;  
+    align-items: stretch;
+  }
+
+  .abrir-fechar-caixa {
+    border: 0px solid #e3e3e3;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.border-btn {
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #e3e3e3;
+}
+
+@media screen and (max-height:560px) {
+
+  .btn-search{
+    padding-left: 5px;
+    height: 27px;
+    width: 50px;
+    margin-top: 1px;
+    margin-right: 5px;
+    }
+
+    .icone-search{
+      font-size: 0.9rem;
+    }
+
+    .search {
+      height: auto;
+    }
+  /* ------*/
+  
+}
+
 @media screen and (max-width: 535px) {
-  tbody, td, tfoot, th, thead, tr {
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr,
+  .badge {
+    font-size: 10px;
+  }
+
+  .search {
+    height: auto;
+  }
+
+  #footer {
+    text-align: center;
+    padding: 20px;
     font-size: 9px;
   }
 }
 
-@media screen and (max-width: 667px) {
-  #footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 10px;
+i {
+  margin-right: 2px;
+}
+
+
+
+@media screen and (max-width: 350px) {
+  .crud {
+    margin: 60px 0px 0px 0px;
   }
 }
 
-@media screen and (min-width: 768px) {
-  #footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-  }
-}
-
-@media screen and (min-width: 1266px) {
-  #footer {
-    font-size: 14px;
-  }
-}

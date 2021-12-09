@@ -1,38 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base_head.html" %}
+{% load static %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, height=device-height,
-      initial-scale=1.0, user-scalable=yes">
-  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
-      Caldellas David">
-  <link rel="icon" href="assets/icons/favicon.ico?v=2" type="assets/icons/favicon.ico">
-  <title>Carro Limpo</title>
+{% block page_css %}
+  <link rel="stylesheet" href="{% static "css/login_page.css" %}">
+  <link rel="stylesheet" href="{% static "css/recovery_page.css" %}">
+{% endblock %}
 
-  <!-- CSS Bootstrap-->
-  <link rel="stylesheet" href="assets/css/bootstrap.css">
-
-  <!-- CSS Projeto -->
-  <!-- <link rel="stylesheet" href="assets/css/css_crud_cliente.css"> -->
-  <!-- <link rel="stylesheet" href="assets/css/estatisticas.css"> -->
-  <link rel="stylesheet" href="assets/css/login_page.css">
-  <link rel="stylesheet" href="assets/css/recovery_page.css">
-  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
-  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <!-- <link rel="stylesheet" href="assets/css/tooltip.css"> -->
-
-  <!-- JavaScript Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-</head>
-
-<body>
-
+{% block body %}
     <!-- modal Termos -->
     <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -96,7 +70,7 @@
       <form class="needs-validation" novalidate>
         <img class="logo" src="assets/img/carrolimpo_versao_compacta.png">
         <p class="h4">Esqueceu a Senha?</p>
-        <p class="h6">Você pode resetar o a sua senha aqui.</p>
+        <p class="h6">Você pode resetar a sua senha aqui.</p>
 
         <div class="form-floating">
           <input type="text" data-toggle="tooltip" title="Email" class="form
@@ -111,7 +85,7 @@
         </div>
         <button id="recuperar_senha" class="w-100 btn btn-lg btn-primary" type="submit">Recuperar
           Senha</button>
-        <a href="./login.html"><button class="w-100 btn btn-lg btn-primary" type="button">Entrar</button></a>
+        <a href="{% url 'login' %}"><button class="w-100 btn btn-lg btn-primary" type="button">Entrar</button></a>
       </form>
       <footer id="footer" class="mt-5 border-top">
         <div class="align-items-center animate__animated animate__fadeIn">
@@ -126,7 +100,5 @@
     </div>
   </main>
   <!-- JS Projeto -->
-  <script src="assets/js/validador.js"></script>
-</body>
-
-</html>
+  <script src="{% static "js/validador.js" %}"></script>
+{% endblock %}

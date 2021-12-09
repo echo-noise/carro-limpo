@@ -1,0 +1,42 @@
+{% load static %}
+
+<!-- urls -->
+{% url "home" as home_url %}
+{% url "clientes" as clientes_url %}
+
+<div>
+  <div class="l-navbar" id="nav-bar">
+    <p><img class="nav_logo" src="{% static "img/carrolimpo_versao_compacta.png" %}"></p>
+    <nav class="nav sidebar-nav">
+
+      <div>
+        <div class="nav_list">
+
+          <a href="{% url 'home' %}" class="nav_link {% if request.path == home_url %} active {% endif %}">
+            <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
+            <span class="nav_name">Principal</span>
+          </a>
+
+          <a href="{% url 'clientes' %}" class="nav_link {% if request.path == clientes_url %} active {% endif %}">
+            <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
+            <span class="nav_name">Clientes</span>
+          </a>
+
+          <a href="caixa.html" class="nav_link ">
+            <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
+            <span class="nav_name">Caixa</span>
+          </a>
+
+          <a href="./administrador.html" class="nav_link">
+            <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+            <span class="admin nav_name">Administrador</span>
+          </a>
+
+          <a href="{% url 'logout' %}" class="nav_link">
+            <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
+            <span class="nav_name">Sair</span>
+          </a>
+        </div>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+{% extends "base_head.html" %}
+{% load static %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static "css/login_page.css" %}">
+  <link rel="stylesheet" href="{% static "css/recovery_page.css" %}">
+{% endblock %}
+
+{% block body %}
+<body>
+   <!-- modal Termos -->
+   {% include "includes/modal_termos.html" %}
+  <main class="formulario">
+    <div class="content_rec">
+      <form class="needs-validation" novalidate method="post">
+        <img class="logo" src="{% static "img/carrolimpo_versao_compacta.png" %}">
+        <h1 class="h6 mb-3 fw-normal">Por favor insira o seu usuário e senha.</h1>
+
+        {% csrf_token %}
+
+
+        <div class="form-floating">
+          <input type="text" name="username" class="form-control" id="usuario" placeholder="Usuário" autocomplete="off" required>
+          <div class="invalid-feedback">
+            Preencha este campo!
+          </div>
+          <div class="valid-feedback">
+            Campo preenchido!
+          </div>
+          <label for="floatingInput">Usuário</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" name="password" class="form-control" id="senha" placeholder="Senha" autocomplete="off" required>
+          <div class="invalid-feedback">
+            Preencha este campo!
+          </div>
+          <div class="valid-feedback">
+            Campo preenchido!
+          </div>
+          {% if form.errors %}
+            <div style="color: red;">
+              Login incorreto.
+            </div>
+          {% endif %}
+          <label for="floatingPassword">Senha</label>
+        </div>
+          <button class="login-button w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+        <div class="mt-1 lembrar mb-1 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="lembrar-senha" checked>
+          <label class="lembrar form-check-label">Lembrar
+          </label>
+
+        </div>
+        <div class="recuperar mt-1 mb-1">
+          <a href="./recuperar_senha.html" class="recuperar">Esqueci a senha</a>
+        </div>
+      </form>
+      <footer id="footer" class="mt-5 border-top">
+        <div class="align-items-center animate__animated animate__fadeIn">
+          <span>
+            <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
+            </a> Sistema administrativo para lava rápido - Carro Limpo | 2021
+          </span>
+          <div>
+            <span type="button" class="desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#termosModal" data-bs-whatever="@mdo">Termo de uso</span>
+          </div>
+      </footer>
+      <p class="mt-1 mb-1 text-muted">Usuário: carro_limpo / Senha: admin0000</p>
+    </div>
+
+    </div>
+  </main>
+  <!-- JS Projeto -->
+  <script src="{% static "js/validador.js" %}"></script>
+</body>
+{% endblock %}
