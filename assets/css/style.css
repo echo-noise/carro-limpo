@@ -9,6 +9,17 @@
   padding: 8px;
 }
 
+.termosmodal {
+  text-align: center;
+}
+
+.border-box {
+  position: relative;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  padding: 8px;
+}
+
 .thead {
   text-align: center;
   font-family: Nunito;
