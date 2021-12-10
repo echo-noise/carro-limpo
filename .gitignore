@@ -1,0 +1,4 @@
+.vscode/
+ignored/
+venv/
+__pycache__/
