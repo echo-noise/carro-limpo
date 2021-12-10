@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from os import getenv
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = getenv("IS_DEBUG", False)
 
 ALLOWED_HOSTS = [
-    getenv("APP_HOSTS")
+    getenv("APP_HOST")
 ]
 
 
@@ -84,8 +81,12 @@ WSGI_APPLICATION = 'carro_limpo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'carrolimpo_db',
+        'USER': '251877',
+        'PASSWORD': getenv("DB_PASS"),
+        'HOST': 'mysql-carrolimpo.alwaysdata.net',
+        'PORT': '3306'
     }
 }
 
@@ -126,6 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/assets/'
 STATICFILES_DIRS = [ BASE_DIR / "assets"]
 
