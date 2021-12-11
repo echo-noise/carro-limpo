@@ -3,24 +3,46 @@
 <a href="http://carrolimpo.epizy.com/index.html"><img src="https://i.ibb.co/ygxHVtM/DEMO2.png"></a>
 
 ##
-###  🔷 **Tela de Login** 
+###  🔷 **Login e Recuperação da Senha** 
+> Verificação de inserção dos dados do usuário / Autenticação / Recuperação da senha através do email.
+<img src="https://github.com/trgomes92/host/blob/main/login%20novo.gif">
 
-<img src="https://i.ibb.co/0s9k483/login-2.gif">
-
-##
-###  🔷 **Tela Principal com as estatisticas** 
-
-<img src="https://i.ibb.co/BVwM48f/principal2.gif">
 
 ##
-###  🔷 **Tela para Cadastro de Clientes** 
+###  🔷 **Sistema de Caixa** 
+>  Caixa / FLuxo de Caixa / Abertura do Caixa / Fechamento do Caixa / Atribuição de Receitas e Gastos / Remover Atribuições.
+<img src="https://github.com/trgomes92/host/blob/main/caixa.gif">
 
-<img src="https://i.ibb.co/ky2ynxK/Cliente-2.gif">
+##
+###  🔷 **Gerar Faturas e Impressão de Faturas** 
+> A geração da fatura é feita através da seleção de um cliente já cadastrado e vinculá-lo ao serviço realizado.
+<img src="https://github.com/trgomes92/host/blob/main/faturas.gif">
+
+##
+###  🔷 **Painel Administrativo** 
+>  Atualizações cadastrais / Gerenciamento do Perfil e Estabelecimento / Cadastro e Gerenciamento dos Serviços.
+<img src="https://github.com/trgomes92/host/blob/main/administrador.gif">
+
+##
+###  🔷 **Cadastro de Serviços** 
+> Cadastro / Edição / Exclusão. 
+<img src="https://github.com/trgomes92/host/blob/main/servi%C3%A7os.gif">
+
+##
+###  🔷 **Cadastro de Clientes** 
+> Cadastro / Edição / Exclusão. 
+<img src="https://github.com/trgomes92/host/blob/main/cliente.gif">
+
+##
+###  🔷 **Download do PDF** 
+> Com apenas um clique é possível gerar e baixar o PDF da tabela correspondente. 
+<img src="https://github.com/trgomes92/host/blob/main/PDF.gif">
+
 
 ##
 ###  🔷 **Demonstrativo de Responsividade do Sistema** 
-
-<img src="https://i.ibb.co/pw2gXKJ/responsiv3.gif">
+> O sistema é responsivo para todos os dispositivos, ou seja, é possivel acessá-lo através de dispositivos mobile, televisores e computadores. 
+<img src="https://github.com/trgomes92/host/blob/main/responsividade.gif">
 
 <!-- Apresentação -->
 ##
@@ -32,7 +54,8 @@
 ##
 ###  🔹 **Responsividade** 
 
-> Nosso Sistema Web Responsivo, nada mais é do que aquele que tem a capacidade de ajustar instantaneamente seu layout e suas funcionalidades ao dispositivo pelo qual está sendo acessado. Assim, suas páginas se adaptam em qualquer formato de tela sem que aconteça aquela “desconfiguração”. Ou seja, o usuário não terá qualquer prejuízo na leitura das informações.
+> O nosso Sistema Web Responsivo, possui a capacidade de ajustar-se instantaneamente o layout e suas funcionalidades ao dispositivo pelo qual está sendo acessado. Assim, suas páginas se adaptam em qualquer formato de tela sem que aconteça aquela “desconfiguração”. Ou seja, o usuário não terá qualquer prejuízo na leitura das informações.
+
 
 <!-- Acessibilidade -->
 ##
@@ -54,11 +77,14 @@ Uma das mais importantes características da qual nos fizeram optar por um siste
 <img src="http://img.shields.io/badge/-Github-000000?style=flat&logo=github&logoColor=FFFFFF">
 <img src="http://img.shields.io/badge/-VS%20Code-007ACC?style=flat&logo=visual%20studio%20code&logoColor=white">
 
+ <!-- Informações dos Autores -->
+##
+###   🔹 Autores do Projeto 
+<img src = "https://github.com/trgomes92/host/blob/main/contato2.fw.png">
 
  <!-- Informações de Contato -->
-
-###   🔹 Autores do Projeto 
-###### Você pode nos achar na web!
+##
+###   🔹 Contato
 
 <div>
 <div><h6> Thiago Rocha Gomes </h6>
