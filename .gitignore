@@ -2,3 +2,5 @@
 ignored/
 venv/
 __pycache__/
+migrations/
+.env
