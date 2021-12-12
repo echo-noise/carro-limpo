@@ -101,7 +101,7 @@
                                   <div class="acoes-align">
                                     <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons" >&#xE03B;</i></a>
                                     <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Apagar" data-toggle="tooltip" href="{{ cliente.id }}"><i class="material-icons">&#xE872;</i></a>
+                                    <a class="delete" title="Apagar" data-toggle="tooltip" href="{% url 'excluir' id=cliente.id %}"><i class="material-icons">&#xE872;</i></a>
                                   </div>
                                 </td>
                               </tr>

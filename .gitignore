@@ -2,6 +2,5 @@ venv/
 .vscode/
 __pycache__/
 migrations/
-off_html/
+ignored/
 .env
-old

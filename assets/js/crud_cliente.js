@@ -15,7 +15,7 @@ $(document).ready(function(){
 					
 						'<td><input type="text" scope="col" class="form-control-crud" name="placa" maxlength="7" id="placa">Placa</td>' +
 					
-						'<td><select class="form-control-crud" scope="col"  name="marca"><option selected ></option><option value="Fiat">Fiat</option><option value="Volkswagen">Volkswagen</option><option value="GM">GM</option><option value="Hyundai">Hyundai</option><option value="Jeep">Jeep</option><option value="Renault">Renault</option><option value="Toyota">Toyota</option><option value="Ford">Ford</option><option value="Honda">Honda</option><option value="Nissan">Nissan</option><option value="Caoa Chery">Caoa Chery</option><option value="Peugeot">Peugeot</option><option value="Mitsubishi">Mitsubishi</option><option value="Citroen">Citroen</option><option value="BMW">BMW</option><option value="Volvo">Volvo</option><option value="Mercedes">Mercedes</option><option value="Audi">Audi</option><option value="Kia">Kia</option><option value="RAM">RAM</option><option value="Iveco">Iveco</option><option value="Land Rover">Land Rover</option><option value="Porsche">Porsche</option><option value="Suzuki">Suzuki</option><option value="Mini">Mini</option><option value="JAC">JAC</option><option value="Troler">Troler</option><option value="Subaru">Subaru</option><option value="Jaguar">Jaguar</option><option value="Dodge">Dodge</option><option value="Foton">Foton</option><option value="Lexus">Lexus</option></select>Marca</td>' +
+						'<td><select class="form-control-crud" scope="col"  name="marca" id="marca"><option selected ></option><option value="Fiat">Fiat</option><option value="Volkswagen">Volkswagen</option><option value="GM">GM</option><option value="Hyundai">Hyundai</option><option value="Jeep">Jeep</option><option value="Renault">Renault</option><option value="Toyota">Toyota</option><option value="Ford">Ford</option><option value="Honda">Honda</option><option value="Nissan">Nissan</option><option value="Caoa Chery">Caoa Chery</option><option value="Peugeot">Peugeot</option><option value="Mitsubishi">Mitsubishi</option><option value="Citroen">Citroen</option><option value="BMW">BMW</option><option value="Volvo">Volvo</option><option value="Mercedes">Mercedes</option><option value="Audi">Audi</option><option value="Kia">Kia</option><option value="RAM">RAM</option><option value="Iveco">Iveco</option><option value="Land Rover">Land Rover</option><option value="Porsche">Porsche</option><option value="Suzuki">Suzuki</option><option value="Mini">Mini</option><option value="JAC">JAC</option><option value="Troler">Troler</option><option value="Subaru">Subaru</option><option value="Jaguar">Jaguar</option><option value="Dodge">Dodge</option><option value="Foton">Foton</option><option value="Lexus">Lexus</option></select>Marca</td>' +
             
 						'<td><input type="text"   scope="col" class="form-control-crud" maxlength="10" name="modelo" id="modelo">Modelo</td>' +
 						
@@ -39,17 +39,35 @@ $(document).ready(function(){
 					if(!$(this).val()){
 						$(this).addClass("error");
 						empty = true;
-					} else{
-										$(this).removeClass("error");
-								}
+					} else {
+						$(this).removeClass("error");
+					}
 				});
 				$(this).parents("tr").find(".error").first().focus();
 				if(!empty){
-					input.each(function(){
-						$(this).parent("td").html($(this).val());
-					});			
-					$(this).parents("tr").find(".add, .edit").toggle();
-					$(".add-new").removeAttr("disabled");
+					$.ajax({
+						type: 'POST',
+						url: "insert",
+						dataType: 'json',
+						data: { 
+							"nome": $("#nome").val(),
+							"documento": $("#cpf_cnpj").val(),
+							"telefone": $("#telefone").val(),
+							"email": $("#email").val(),
+							"cor": $("#cor").val(),
+							"modelo": $("#modelo").val(),
+							"marca": $("#marca").val(),
+							"placa": $("#placa").val()
+						},
+						success: function (response) {
+					        input.each(function(){
+					        	$(this).parent("td").html($(this).val());
+					        });			
+					        $(this).parents("tr").find(".add, .edit").toggle();
+					        $(".add-new").removeAttr("disabled");
+						},
+						error: function(response) { alert("erro"); } 
+					});
 				}		
 				});
 			// Botao Editar

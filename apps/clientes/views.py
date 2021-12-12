@@ -19,27 +19,27 @@ def excluir(request, id):
 @csrf_exempt
 def inserir(request):
     if request.method == 'POST':
-        documento = request.POST.get("documento")
-        nome = request.POST.get("nome")
-        telefone = request.POST.get("telefone")
-        email = request.POST.get("email")
-        placa = request.POST.get("placa")
-        cor = request.POST.get("cor")
-        marca = request.POST.get("marca")
-        modelo = request.POST.get("modelo")
+        _documento = request.POST.get("documento")
+        _nome = request.POST.get("nome")
+        _telefone = request.POST.get("telefone")
+        _email = request.POST.get("email")
+        _placa = request.POST.get("placa")
+        _cor = request.POST.get("cor")
+        _marca = request.POST.get("marca")
+        _modelo = request.POST.get("modelo")
 
         try:
-            cliente = Cliente(documento = documento,
-                              nome = nome,
-                              telefone = telefone,
-                              email = email,
-                              placa = placa,
-                              cor = cor,
-                              marca = marca,
-                              modelo = modelo
+            cliente = Cliente(documento = _documento,
+                              nome = _nome,
+                              telefone = _telefone,
+                              email = _email,
+                              placa = _placa,
+                              cor = _cor,
+                              marca = _marca,
+                              modelo = _modelo
             )
             cliente.save()
-            return JsonResponse({"error": False})
+            return JsonResponse({"error": False}, status=200)
 
         except:
-            return JsonResponse({"error": True})
+            return JsonResponse({"error": True}, status=400)
