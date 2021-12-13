@@ -3,7 +3,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("", ClienteListView.as_view(), name="clientes"),
+    path("list", listar, name="clientes"),
     path("insert", inserir, name="inserir"),
-    path("excluir/<int:id>", excluir, name="excluir"),
+    path("delete/<int:id>", excluir, name="excluir"),
+    path("update/<int:id>", atualizar, name="atualizar"),
 ]

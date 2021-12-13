@@ -4,3 +4,5 @@ __pycache__/
 migrations/
 ignored/
 .env
+run
+db.*
