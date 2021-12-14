@@ -71,7 +71,7 @@ Uma das mais importantes características da qual nos fizeram optar por um siste
 ##
  ###  🔹 **Tecnologias Utilizadas** 
 
-<img src = "https://github.com/trgomes92/host/blob/main/TECNOLOGIAS.fw.png">
+<img src = "https://github.com/trgomes92/host/blob/main/tecnologias_github.png">
 
 <!-- Informações dos Autores -->
 ##
