@@ -3,6 +3,10 @@
 <!-- urls -->
 {% url "home" as home_url %}
 {% url "clientes" as clientes_url %}
+{% url "config" as config_url %}
+{% url "caixa" as caixa_url %}
+{% url "servicos" as servicos_url %}
+{% url "faturas" as faturas_url %}
 
 <div>
   <div class="l-navbar" id="nav-bar">
@@ -22,12 +26,12 @@
             <span class="nav_name">Clientes</span>
           </a>
 
-          <a href="caixa.html" class="nav_link ">
+          <a href="{% url 'caixa' %}" class="nav_link {% if request.path == caixa_url or request.path == faturas_url%} active {% endif %}">
             <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
             <span class="nav_name">Caixa</span>
           </a>
 
-          <a href="./administrador.html" class="nav_link">
+          <a href="{% url 'config' %}" class="nav_link {% if request.path == config_url or request.path == servicos_url %} active {% endif %}">
             <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
             <span class="admin nav_name">Administrador</span>
           </a>

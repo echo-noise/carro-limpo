@@ -1,0 +1,301 @@
+{% extends "base_head.html" %}
+{% load static %}
+
+{% block title %} | Faturas {% endblock %}
+{% block page_css %}  
+  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
+  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
+  {% include "includes/datatables_media.html" %}
+{% endblock %}
+
+{% block page_js %}
+  <!-- JavaScript do tooltip -->
+  <script src="{% static "js/tooltip.js" %}"></script>
+  <!-- JavaScript do projeto clientes-->
+  <script src="{% static "js/crud_servico.js" %}"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="{% static "js/sidebar_menu.js" %}"></script>
+  <!-- Javascript do projeto search -->
+  <script src="{% static "js/search.js" %}"></script>
+  <!-- Javascript do projeto tabela -->
+  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+  {% include "includes/header.html" %} 
+  <!-- nav menu esquerdo -->
+  <div>
+    {% include "includes/nav.html" %} 
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Modal Fatura -->
+    <div class=" modal fade" id="faturaModal" tabindex="-1" aria-labelledby="faturaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="page">
+            <div class="modal-header">
+              <h2 class="modal-title" id="faturaModalLabel">
+                <span style="float:left;">Fatura: 001</span>
+              </h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- fatura -->
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do estabelecimento:</h5>
+                  <strong>Nome:</strong> Nome do estabelecimento
+                  <br><strong> CNPJ:</strong> 000.000.000-00
+                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+
+                </div>
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> (00) 00000-0000
+                  <br><strong>Email:</strong> exemplo@email.com
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do Cliente:</h5>
+                  <strong>Nome:</strong> Nome do Cliente
+                  <br><strong> CPF/CNPJ:</strong> 000.000.000-00
+                  <br><strong> Placa:</strong> KYG-0000
+                  <br><strong> Marca:</strong> Honda
+                  <br><strong> Modelo:</strong> Fit
+                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+
+                </div>
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> (00) 00000-0000
+                  <br><strong>Email:</strong> exemplo@email.com
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-3 col-lg-6 col-md-8 col-sm-6">
+                  <h5>Descrição:</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 mb-3">
+                  <div class="table-responsive">
+                    <table id="crud tab_customers" class="crud exportar table table-bordered table-hover table-striped">
+                      <thead class="thead">
+                        <tr>
+                          <th scope="col">Serviço</th>
+                          <th scope="col">status</th>
+                          <th scope="col">Valor</th>
+                          <th scope="col">Vencimento</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody">
+                        <tr>
+                          <td>Limpeza ecológica</td>
+                          <td id="status"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                          <td id="valor">R$60,00</td>
+                          <td>09/12/2021</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div>
+                <p>
+                <h5>Forma de Pagamento:</h5>
+                <span>Dinheiro</span>
+                <span style="float:right;"><b style="font-size: 24px;">Total: R$ 60,00</b></span>
+                </p>
+                <div class="row">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="button-print-or-save-document btn btn-primary">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- final fatura -->
+
+    <!-- Modal Nova Fatura -->
+    <div class="modal fade " id="nova-fatura-Modal" tabindex="-1" aria-labelledby="nova-fatura-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nova-fatura-ModalLabel">Nova Fatura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2 active">
+                  <b>Selecione um cliente e o serviço desejado.</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o cliente</option>
+                    <option>Nome do Cliente</option>
+                  </select>
+                </div>
+                <div class="p-1 mb-3">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o serviço</option>
+                    <option>Limpeza ecológica</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Gerar Fatura</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Nova Fatura -->
+
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 perfil">
+              {% include "includes/nav_faturas.html" %}
+
+              <div class="faturas">
+                <div class="w-100 border-btn p-2 mb-3 separar">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button type="button" class="btn btn-primary btn-sm data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#nova-fatura-Modal" data-bs-whatever="@mdo">
+                    <i type="button" class="icone add-fatura-icone"></i> Fatura</button>
+                  </div>
+                </div>
+                <div class="w-100 border-btn p-2 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button id="pdf" class=" btn btn-secondary btn-sm ">
+                      <i class="icone bi bi-file-pdf-fill"></i> PDF</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="border-box">
+                    <div class="card-body">
+                      <div>
+                        <div class="row">
+
+
+                          <table id="tabfatura" class="border-box p-2 table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped  table-responsive dataTable no-footer">
+
+                            <thead class="thead">
+                              <tr>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Nº</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Placa</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Valor</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbody">
+                              <tr>
+                                <td id="td-header" data-label="FATURA">
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
+                                </td>
+                                <td data-label="Nº"> 001</td>
+                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                                <td data-label="NOME"> Nome do Cliente</td>
+                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
+                                <td data-label="PLACA"> KYH-2658</td>
+                                <td data-label="MARCA"> Honda</td>
+                                <td data-label="MODELO"> Fit</td>
+                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
+                                <td data-label="VENCIMENTO"> 09/12/2021</td>
+                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
+                              </tr>
+                              <tr>
+                                <td id="td-header" data-label="FATURA">
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-bs-toggle="modal" data-toggle="tooltip" title="Gerar Fatura" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
+                                </td>
+                                <td data-label="Nº"> 001</td>
+                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                                <td data-label="NOME"> Nome do Cliente</td>
+                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
+                                <td data-label="PLACA"> KYH-2658</td>
+                                <td data-label="MARCA"> Honda</td>
+                                <td data-label="MODELO"> Fit</td>
+                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
+                                <td data-label="VENCIMENTO"> 09/12/2021</td>
+                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
+                              </tr>
+
+
+                            </tbody>
+
+                          </table>
+
+
+                        </div>
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabfatura').DataTable();
+                          });
+                        </script>
+
+
+                        <!-- Exportar pdf -->
+                        <script src="{% static "js/export_pdf.js" %}"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+
+                        <!-- Javascript Imprimir div-->
+                        <script src="{% static "js/fatura/imprimir.js" %}" ></script>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  </main>
+  </div>
+  <!-- Javascript do projeto caixa -->
+  <script src="{% static "js/caixa/chart.js" %}"></script>
+  <script src="{% static "js/caixa/app.js" %}"></script>
+</body>
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock %}

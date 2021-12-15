@@ -1,0 +1,145 @@
+{% extends "base_head.html" %}
+{% load static %}
+
+{% block title %} | Serviços {% endblock %}
+{% block page_css %}  
+  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
+  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
+  {% include "includes/datatables_media.html" %}
+{% endblock %}
+{% block page_js %}
+  <!-- JavaScript do tooltip -->
+  <script src="{% static "js/tooltip.js" %}"></script>
+  <!-- JavaScript do projeto clientes-->
+  <script src="{% static "js/crud_servico.js" %}"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="{% static "js/sidebar_menu.js" %}"></script>
+  <!-- Javascript do projeto search -->
+  <script src="{% static "js/search.js" %}"></script>
+  <!-- Javascript do projeto tabela -->
+  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  {% include "includes/header.html" %}
+
+  <div>
+    <!-- nav menu esquerdo -->
+    {% include "includes/nav.html" %}
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3">
+              {% include "includes/nav_admin.html" %}
+              <div class="servicos">
+                <div class="separar w-100 border-btn p-2 mt-3 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button type="button" class="btn btn-primary btn-sm add-new-servico">
+                      <i class="icone fas fa-car-crash"></i> Novo Serviço</button>
+                  </div>
+                </div>
+                <div class="w-100 border-btn p-2 mb-3 mt-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button id="pdf" class=" btn btn-secondary btn-sm ">
+                      <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- conteudo -->
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div>
+
+                        <!--  -->
+                        <table id="tabservicos" class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
+                          <thead class="thead">
+                            <tr>
+                              <th scope="col">Serviço</th>
+                              <th scope="col">Valor</th>
+                              <th class="acoes" scope="col">Ações</th>
+                            </tr>
+                          </thead>
+                          <tbody class="tbody">
+                            <tr style="display:none;">
+                              <td></td>
+                              <td></td>
+                              <td data-label="AÇOES">
+                                <div class="acoes-align">
+                                  <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                  <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                  <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                </div>
+                              </td>
+                            </tr>
+                            {% for servico in servicos %}
+                            <tr data-id={{ servico.id }}>
+                              <td id="td-header" data-label="NOME">{{ servico.nome }}</td>
+                              <td class="valor" data-label="VALOR">{{ servico.valor }}</td>
+                              <td data-label="AÇOES">
+                                <div class="acoes-align">
+                                  <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                  <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                  <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabservicos').DataTable();
+                          });
+                        </script>
+
+                        <!-- Exportar pdf -->
+                        <script src="{% static "js/export_pdf.js" %}"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                        <!--  -->
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+</body>
+{% include "includes/footer.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,357 @@
+{% extends "base_head.html" %}
+{% load static %}
+{% block title %} | Caixa {% endblock %}
+{% block page_css %}  
+  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
+  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataRangeTables.css" %}">
+  <link rel="stylesheet" href="{% static "css/caixa.css" %}">
+  {% include "includes/datatables_media.html" %}
+{% endblock %}
+{% block page_js %}
+  <!-- JavaScript do tooltip -->
+  <script src="{% static "js/tooltip.js" %}"></script>
+  <!-- JavaScript do projeto clientes-->
+  <script src="{% static "js/crud_servico.js" %}"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="{% static "js/sidebar_menu.js" %}"></script>
+  <!-- Javascript do projeto search -->
+  <script src="{% static "js/search.js" %}"></script>
+  <!-- Javascript do projeto tabela -->
+  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/tabela-listar-data.js" %}"></script>
+{% endblock %}
+{% block body %}
+<body id="body-pd" class="body-pd2">
+
+  {% include "includes/header.html" %}
+  <!-- nav menu esquerdo -->
+  <div>
+    {% include "includes/nav.html" %}
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Modal Abrir o Caixa -->
+    <div class="modal fade " id="Abrir-Caixa-Modal" tabindex="-1" aria-labelledby="Abrir-caixa-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Abrir-caixa-ModalLabel"><i class="fas fa-cash-register"></i> Abrir o Caixa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2 active">
+                  <b>Saldo Inicial</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <input class="form-control" type="number" placeholder="Ex: R$200,00" requeired>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Abrir o Caixa</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Abrir o Caixa -->
+
+    <!-- Modal Fechar o Caixa -->
+    <div class="modal fade " id="Fechar-Caixa-Modal" tabindex="-1" aria-labelledby="Fechar-Caixa-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Fechar-Caixa-ModalLabel"><i class="fas fa-cash-register"></i> Fechar o Caixa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="card mb-1 p-2">
+                <div class="mb-2 active">
+                  <b>Informe o saldo final do caixa fisicamente</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <input type="number" class="form-control" placeholder="Ex: R$200,00" required>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Valor total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalcaixa link p-2"></div>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Receita Total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalreceitacaixa  p-2"></div>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Gasto total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalgastocaixa  p-2"></div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Fechar o Caixa</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Fechar o Caixa -->
+
+
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3">
+              {% include "includes/nav_faturas.html" %}
+              <div class="menu-content-responsivo">
+                <div class="limpar-atribuir">
+                  <div class="border-btn separar w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico"><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
+                    </div>
+                  </div>
+                  <div class="border-btn w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar"><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="abrir-fechar-caixa">
+                  <div class="border-btn separar w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
+                    </div>
+                  </div>
+                  <div class="border-btn w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="card p-3">
+                    <!-- Tab Menu -->
+                    <nav>
+                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Caixa</button>
+                        <button class="nav-link" id="nav-fluxo-tab" data-bs-toggle="tab" data-bs-target="#nav-fluxo" type="button" role="tab" aria-controls="nav-fluxo" aria-selected="false">Fluxo de Caixa</button>
+                      </div>
+                    </nav>
+                    <!-- Tab Content Caixa -->
+                    <div class="tab-content" id="nav-tabContent">
+                      <div class="tab-pane animate__animated animate__fadeIn active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="card-body">
+                          <div>
+                            <div class="row">
+
+
+                              <div class="link text-center text-sm-left mb-2 mb-sm-0">
+                                <!-- caixa -->
+                                <div class="atributos__grid budget__container">
+                                  <div class="border-box container clearfix">
+                                    <div class="income">
+                                      <!-- <i class="fas fa-money-check-alt mb-3"  style="color: green; font-size: 1.8em"></i> -->
+                                      <img class="caixa_estatisticas_icons" src="assets/img/money_up.svg">
+                                      <h2 class="atribuicao_icome__title">Receitas</h2>
+                                      <div class="income__list">
+                                        <!-- Lista de receitas -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="top">
+                                    <div class="top__design">
+                                      <div class="top__design--element"></div>
+                                    </div>
+
+                                    <div class=" top__main">
+                                      <div class=" budget">
+                                        <!-- <i class="fas fa-cash-register mb-3"  style="color: #0d6efd; font-size: 3.6em"></i> -->
+                                        <img class="caixa_balance_estatisticas_icons" src="assets/img/balance.svg">
+                                        <div class="budget__title">
+                                          <span class="budget__title--month">%Month%</span>
+                                        </div>
+
+                                        <div class="budget__value" data-toggle="tooltip" title="Saldo Total">0</div>
+                                      </div>
+                                    </div>
+                                    <div class="border-box chart mb-2" data-toggle="tooltip" title="Gráfico"></div>
+
+                                    <div class="top__data">
+                                      <div class="budget__data">
+                                        <div class="budget__income clearfix">                                          
+                                          <div class="budget__income--text">
+                                            <i class="fas fa-arrow-circle-up"  style="color: green; font-size: 1.2em"></i> Receita</div>
+                                          <div class="">
+                                            <div class="icome__title budget__income--value">0</div>
+                                            <div class="budget__income--percentage">&nbsp;</div>
+                                          </div>
+                                        </div>
+
+                                        <div class="budget__expenses clearfix">                             
+                                          <div class="budget__expenses--text">
+                                            <i class="fas fa-arrow-circle-down"  style="color: red; font-size: 1.2em"></i> Gasto</div>
+                                          <div class=" gasto_e_percentual clearfix">
+                                            <div class="expenses__title budget__expenses--value">R$ 0</div>
+                                            <div class="budget__expenses--percentage" data-toggle="tooltip" title="Percentual">0%</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="add mb-3">
+
+                                      <div class="parent add__container" requeired>
+                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto">
+                                          <option value="inc">Receita</option>
+                                          <option value="exp">Gasto</option>
+                                        </select>
+                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição">
+                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="border-box container clearfix">
+                                    <div class="expenses">     
+                                      <img class="caixa_estatisticas_icons" src="assets/img/money_down.svg">                                          
+                                      <h2 class="atribuicao_expenses__title">Gastos</h2>
+                                      <div class="expenses__list">
+                                        <!-- lista de gastos -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane link animate__animated animate__fadeIn" id="nav-fluxo" role="tabpanel" aria-labelledby="nav-fluxo-tab">
+
+                        <div class="col">
+                          <div class="row">
+                            <div class="col mb-3">
+                              <div class=" p-3">
+
+                                <!-- Fluxo de Caixa -->
+
+                                <!-- <table border="0" cellspacing="5" cellpadding="5">
+                                  <tbody>
+                                    <tr>
+                                      <td>Data minima:</td>
+                                      <td><input class="form-control min" type="text" name="min"></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Data maxima:</td>
+                                      <td><input class="form-control max" type="text" name="max"></td>
+                                    </tr>
+                                  </tbody>
+                                </table> -->
+
+                                <table id="tabfluxo" class="border-box p-2 exportar form-data display nowrap crud table   animate__animated animate__fadeIn table-bordered table-hover table-striped  table-responsive  dataTable no-footer">
+
+                                  <thead class="thead">
+                                    <tr>
+                                      <th scope="col">Data</th>
+                                      <th scope="col">Receita</th>
+                                      <th scope="col">Gasto</th>
+                                      <th scope="col">Saldo</th>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody class="tbody">
+                                    <tr>
+                                      <td id="td-header" data-label="DATA">01/01/2021</td>
+                                      <td data-label="RECEITA">R$ 2.500,00</td>
+                                      <td data-label="GASTO">R$ 210,00</td>
+                                      <td data-label="SALDO">R$ 2.290,00</td>
+                                    </tr>
+                                    <tr>
+                                      <td id="td-header" data-label="DATA">01/02/2021</td>
+                                      <td data-label="RECEITA">R$ 2.500,00</td>
+                                      <td data-label="GASTO">R$ 210,00</td>
+                                      <td data-label="SALDO">R$ 2.290,00</td>
+                                    </tr>
+                                    <tr>
+                                      <td id="td-header" data-label="DATA">01/03/2021</td>
+                                      <td data-label="RECEITA">R$ 2.500,00</td>
+                                      <td data-label="GASTO">R$ 210,00</td>
+                                      <td data-label="SALDO">R$ 2.290,00</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div class="border-btn-pdf  mt-3 p-2">
+                                  <button id="pdf" class="btn-pdf btn btn-secondary">
+                                    <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabfluxo').DataTable();
+                          });
+                        </script>
+
+                        <!-- Exportar pdf -->
+                        <script src="{% static "js/export_pdf.js" %}"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+                        <!-- fim Fluxo de Caixa  -->
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- Javascript do fluxo de caixa -->
+  <script src="{% static "js/moment.js" %}"></script>
+  <script src="{% static "js/tabela-data.js" %}"></script>
+
+
+
+  <!-- Javascript do projeto caixa -->
+  <script src="{% static "js/caixa/chart.js" %}"></script>
+  <script src="{% static "js/caixa/app.js" %}"></script>
+
+
+</body>
+{% include "includes/footer.html" %}
+</div>
+{% endblock %}

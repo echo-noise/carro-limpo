@@ -1,0 +1,10 @@
+{% url "servicos" as servicos_url %}
+{% url "config" as config_url %}
+<div class="border-box p-2">
+  <div class="e-navlist e-navlist--active-bg">
+    <ul class="nav">
+      <li class="nav-item"><a class="nav-link px-2 {% if request.path == servicos_url %} active {% else %} link {% endif %}" href="{% url 'servicos' %}"><i class="icone fas fa-car-crash"></i><span> Serviços</span></a></li>
+      <li class="nav-item"><a class="nav-link px-2 {% if request.path == config_url %} active {% else %} link {% endif %}" href="{% url 'config' %}"><i class="fas fa-user-cog mr-1"></i><span> Configuração</span></a></li>
+    </ul>
+  </div>
+</div>

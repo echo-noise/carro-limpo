@@ -8,63 +8,7 @@
 
 {% block body %}
     <!-- modal Termos -->
-    <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="termosModalLabel">Termos de uso</h5>
-          </div>
-          <div class="modal-body">
-            <div class="active mb-3"><b>Regras:</b></div>
-            <div class="border-box p-3 mb-2">
-              <ul>
-                <li>O uso do software Carro Limpo é destinado somente para fins de estudo.</li>
-                <li>Não autorizamos o uso desse software para fins comerciais. Proibimos totalmente qualquer tipo de conduta relacionada.</li>
-              </ul>
-            </div>
-            <div class="active mb-3"><b>Autores:</b></div>
-            <div class="termosmodal border-box p-3 mb-2">
-              <div>
-                <div><b> Thiago Rocha Gomes </b>
-                  <div>
-                    <a target="_blank" href="https://www.linkedin.com/in/trgomes92/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
-                    <a target="_blank" href="https://wa.me/+5521979569389"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
-                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=trgomes92@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
-                    <a target="_blank" href="https://github.com/trgomes92"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
-                  </div>
-                </div>
-                <br>
-                <div>
-                  <b> Samara Caldellas David </b>
-                  <div>
-                    <a target="_blank" href="https://www.linkedin.com/in/samara-david/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
-                    <a target="_blank" href="https://wa.me/+5524998444394"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
-                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=sam.caldellas@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
-                    <a target="_blank" href="https://github.com/echo-noise"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
-                  </div>
-                </div>
-
-                <br>
-                <div>
-                  <b> Bruno Gomes De Sousa </b>
-                  <div>
-                    <a target="_blank" href="https://www.linkedin.com/in/bruf1/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
-                    <a target="_blank" href="https://wa.me/+5521968294095"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
-                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=brunogomestw@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
-                    <a target="_blank" href="https://github.com/bgomestw"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Concordo</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
+    {% include "includes/tos.html" %}
   <main class="formulario">
     <div class="content_rec">
       <form class="needs-validation" novalidate>

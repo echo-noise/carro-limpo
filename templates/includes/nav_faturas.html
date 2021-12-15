@@ -1,0 +1,10 @@
+{% url "faturas" as faturas_url %}
+{% url "caixa" as caixa_url %}
+<div class="border-box p-1 mb-3">
+  <div class="e-navlist e-navlist--active-bg">
+    <ul class="nav">
+      <li class="nav-item"><a class="nav-link px-2 {% if request.path == caixa_url %} active {% else %} link {% endif %}" href="{% url "caixa" %}"><i class=" bi bi-cart-fill nav_icon"></i><span> Caixa</span></a></li>
+      <li class="nav-item"><a class="nav-link px-2 {% if request.path == faturas_url %} active {% else %} link {% endif %}" href="{% url "faturas" %}"><i class="bi bi-receipt-cutoff nav_icon mr-1"></i><span> Faturas</span></a></li>
+    </ul>
+  </div>
+</div>

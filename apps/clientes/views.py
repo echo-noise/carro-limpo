@@ -1,8 +1,6 @@
 from django.http.response import JsonResponse
-from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-import json
 
 from .models import Cliente
 #class ClienteListView(ListView):

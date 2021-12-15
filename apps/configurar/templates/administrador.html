@@ -1,0 +1,366 @@
+{% extends "base_head.html" %}
+{% load static %}
+{% block title %} | Administrador {% endblock %}
+
+{% block page_css %}
+  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
+  <link rel="stylesheet" href="{% static "css/perfil.css" %}">
+{% endblock %}
+
+{% block body %} 
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  {% include "includes/header.html" %}
+  <!-- nav menu esquerdo -->
+  <div>
+    
+    {% include "includes/nav.html" %}
+
+    <!-- modal Suporte -->
+    <div class="modal fade " id="suporteModal" tabindex="-1" aria-labelledby="suporteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="suporteModalLabel">Suporte</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="mailto:suporte-carrolimpo@gmail.com" method="GET">
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2">
+                  <b class="active">Selecione o tipo de suporte desejado.</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <select id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o tipo de suporte</option>
+                    <option>Cliente</option>
+                    <option>Caixa</option>
+                    <option>Fatura</option>
+                    <option>serviço</option>
+                    <option>Administração</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <b class="active">Descreva com detalhes o ocorrido.</b>
+                </div>
+                <div class="p-1 mb-3">
+                  <textarea class="form-control" required></textarea>
+                </div>
+                <div class="border-box p-3 mb-1">
+                  <b>Aguarde nosso retorno em no máximo 24h úteis.</b>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" value="Send" class="btn btn-primary" data-bs-dismiss="modal">Enviar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Suporte -->
+
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 ">
+              {% include "includes/nav_admin.html" %}
+
+              <div class="border-box card-perfil p-3 mb-3">
+                <div class="text-center text-sm-right">
+                  <span class="mb-2 font-admin-color badge badge-secondary">seu nome</span>
+                  <div class="text-muted"><small>Entrou 00 Nov 2021</small></div>
+                </div>
+              </div>
+              <div class="text-center border-box mb-3">
+                <div class="card-body">
+                  <h6 class="card-title font-weight-bold">Suporte ao Cliente</h6>
+                  <p class="card-text">Entre em contato conosco.</p>
+                  <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=suporte_carrolimpo@gmail.com&su=&body=&bcc=">
+                    <button type="button" class="btn btn-primary data-bs-toggle=">Suporte</button></a>
+                  <!-- <button type="button" class="btn btn-primary data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#suporteModal" data-bs-whatever="@mdo">Suporte</button> -->
+                </div>
+              </div>
+              <div class="col-12 col-md-12 mb-3">
+                <div class="text-center border-box mb-3">
+                  <div class="card-body">
+                    <div class="px-xl-3">
+                      <span>Versão 0.0.1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div>
+                        <div class="row">
+                          <div class=" col-sm-auto mb-3">
+                            <div class="mx-auto " style="width: 140px;">
+                              <!-- foto de perfil -->
+                              <div id="profile-container" class=" justify-content-center align-items-center rounded" data-toggle="tooltip" title="Editar a foto do perfil">
+                                <image id="profileImage" src="{% static "img/perfil.svg" %}" alt="perfil">
+                              </div>
+                              <i class="fa fa-fw fa-camera"></i>
+                              <span>Editar a foto</span>
+                              <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+
+
+
+                            </div>
+                          </div>
+                          <div class="usuarioinfo col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                            <div class="text-center text-sm-left mb-2 mb-sm-0">
+                              <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Seu Nome</h4>
+                              <p class="mb-0">usuario@exemplo.com</p>
+                              <div class="text-muted"><small>Visto pela última vez a 2 horas.</small></div>
+
+                            </div>
+
+                          </div>
+                        </div>
+                        <!-- tab menu 1 Perfil / Estabelecimento -->
+                        <!-- tab menu 1 Perfil -->
+
+
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <!-- menu Perfil / Estabelecimento  -->
+                            <ul class="nav nav-pills" id="myTab" role="tablist">
+                              <li class="nav-item" role="presentation">
+                                <button class="link nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Dados Cadastrais</button>
+                              </li>
+                              <li class="nav-item" role="presentation">
+                                <button class="nav-link link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Estabelecimento</button>
+                              </li>
+                            </ul>
+
+                            <!-- Menu Perfil content -->
+                            <div class="tab-content pt-4" id="myTabContent">
+                              <!-- Dados Cadastrais -->
+                              <div class="tab-pane animate__animated animate__fadeIn active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <form class="form" novalidate="">
+                                  <div class="row">
+                                    <div class="col mb-2">
+                                      <div class="row">
+                                        <div class="titulo-tab mb-3"><b>Perfil</b></div>
+                                        <div class="col mb-2">
+
+                                          <div class="form-group">
+
+                                            <label>Seu nome</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Nome" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col col mb-2">
+                                          <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input class="form-control" type="number" name="telefone" placeholder="(00) 0000-0000" value="(21) 12345-6789">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col mb-3">
+                                          <div class="form-group">
+                                            <label>E-mail</label>
+                                            <input class="form-control" type="email" placeholder="usuario@exemplo.com">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col mb-3">
+                                      <div class="mb-3 active">
+                                        <b>Conta</b>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Senha Atual</label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Nova Senha</label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                            <label>Confirmar <span class="d-none d-xl-inline">Senha</span></label>
+                                            <input class="form-control" type="password" placeholder="••••••">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <hr class="hr1">
+                                  <div class="row">
+                                    <div class="col d-flex justify-content-end">
+                                      <button class="btn btn-primary" type="submit">Salvar</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <!-- Fim Dados Cadastrais -->
+
+                              <!-- Estabelecimento-->
+                              <div class="tab-pane animate__animated animate__fadeIn" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <form class="form" novalidate="">
+                                  <div class="row">
+                                    <div class="col mb-2">
+                                      <!-- nome / cnpj -->
+                                      <div class="row">
+                                        <!-- Titulo -->
+                                        <div class="titulo-tab">
+                                          <b>Informações do negócio</b>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Razão Social</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Razão Social do Negócio" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>CNPJ</label>
+                                            <input class="form-control" type="text" name="CNPJ" placeholder="00.000.000/0000-00" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- telefone / email -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input class="form-control" type="text" name="telefone" placeholder="(00) 00000-0000" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- cep / endereço -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>CEP</label>
+                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Endereço</label>
+                                            <input class="form-control" type="text" name="endereco" placeholder="Endereço" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- numero / complemento -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Número</label>
+                                            <input class="form-control" type="text" name="numero" placeholder="00" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Complemento</label>
+                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- Bairro / Cidade / UF -->
+                                      <div class="row">
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Bairro</label>
+                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>Cidade</label>
+                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="">
+                                          </div>
+                                        </div>
+                                        <div class="col mb-2">
+                                          <div class="form-group">
+                                            <label>UF</label>
+                                            <input class="form-control" type="text" name="estado" placeholder="UF" value="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <hr class="hr1">
+                                      <div class="col d-flex justify-content-end">
+                                        <button class="save btn btn-primary" type="submit">Salvar</button>
+                                      </div>
+                                    </div>
+                                </form>
+                              </div>
+                              <!-- fim Estabelecimento -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </main>
+  </div>
+
+
+</body>
+{% include "includes/footer.html" %}
+<script>
+  $("#profileImage").click(function (e) {
+    $("#imageUpload").click();
+  });
+
+  function fasterPreview(uploader) {
+    if (uploader.files && uploader.files[0]) {
+      $('#profileImage').attr('src',
+        window.URL.createObjectURL(uploader.files[0]));
+    }
+  }
+
+  $("#imageUpload").change(function () {
+    fasterPreview(this);
+  });
+</script>
+</div>
+{% endblock %}
