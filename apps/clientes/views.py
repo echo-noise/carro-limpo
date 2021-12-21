@@ -1,4 +1,3 @@
-from django.contrib.auth import login
 from django.http.response import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -10,7 +9,7 @@ from .forms import ClienteForm
 @login_required
 def listar(request):
     template = "clientes.html"
-    clientes = Cliente.objects.all()
+    clientes = Cliente.objects.filter(user = request.user)
     return render(request, template, {"clientes": clientes})
 
 @login_required

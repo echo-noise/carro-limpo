@@ -11,7 +11,7 @@ from .forms import ServicoForm
 @login_required
 def listar(request):
     template = "servicos.html"
-    servicos = Servico.objects.all()
+    servicos = Servico.objects.filter(user = request.user)
     return render(request, template, {"servicos": servicos})
 
 @login_required
