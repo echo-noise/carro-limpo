@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.estatisticas',
     'apps.clientes',
-    'apps.configurar',
+    'apps.perfil',
     'apps.faturas',
     'apps.caixa',
     'apps.servicos',

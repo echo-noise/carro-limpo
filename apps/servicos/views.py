@@ -1,16 +1,20 @@
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 from .models import Servico
 
 # Create your views here.
+@login_required
 def listar(request):
     template = "servicos.html"
     servicos = Servico.objects.all()
     return render(request, template, {"servicos": servicos})
 
+@login_required
 @csrf_exempt
 def inserir(request):
     if request.method == 'POST':
@@ -33,6 +37,7 @@ def inserir(request):
         except:
             return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
+@login_required
 @csrf_exempt
 def excluir(request, id):
     if request.method == 'POST':
@@ -49,6 +54,7 @@ def excluir(request, id):
                 response = {"error": True, "message": "Deletar: erro"}
                 return JsonResponse(response, status=400, safe=False)
 
+@login_required
 @csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":

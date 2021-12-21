@@ -1,6 +1,8 @@
+from django.contrib.auth import login
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 from .models import Cliente
 #class ClienteListView(ListView):
@@ -8,11 +10,13 @@ from .models import Cliente
 #    model = Cliente
 #    context_object_name = "clientes"
 
+@login_required
 def listar(request):
     template = "clientes.html"
     clientes = Cliente.objects.all()
     return render(request, template, {"clientes": clientes})
 
+@login_required
 @csrf_exempt
 def inserir(request):
     if request.method == 'POST':
@@ -53,6 +57,7 @@ def inserir(request):
         except:
             return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
+@login_required
 @csrf_exempt
 def excluir(request, id):
     if request.method == 'POST':
@@ -69,6 +74,7 @@ def excluir(request, id):
                 response = {"error": True, "message": "Deletar: erro"}
                 return JsonResponse(response, status=400, safe=False)
 
+@login_required
 @csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":

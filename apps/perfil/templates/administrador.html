@@ -79,8 +79,8 @@
 
               <div class="border-box card-perfil p-3 mb-3">
                 <div class="text-center text-sm-right">
-                  <span class="mb-2 font-admin-color badge badge-secondary">seu nome</span>
-                  <div class="text-muted"><small>Entrou 00 Nov 2021</small></div>
+                  <span class="mb-2 font-admin-color badge badge-secondary">{{ user.first_name }}</span>
+                  <div class="text-muted"><small>Entrou {{ user.date_joined }}</small></div>
                 </div>
               </div>
               <div class="text-center border-box mb-3">
@@ -114,11 +114,15 @@
                             <div class="mx-auto " style="width: 140px;">
                               <!-- foto de perfil -->
                               <div id="profile-container" class=" justify-content-center align-items-center rounded" data-toggle="tooltip" title="Editar a foto do perfil">
+                                {% if perfil.imagem %}
+                                <image id="profileImage" src="{{ perfil.imagem.url }}" alt="perfil">
+                                {% else %}
                                 <image id="profileImage" src="{% static "img/perfil.svg" %}" alt="perfil">
+                                {% endif %}
                               </div>
                               <i class="fa fa-fw fa-camera"></i>
                               <span>Editar a foto</span>
-                              <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+                              <input id="imageUpload" type="file" accept="image/*" name="imagem" placeholder="Photo" required="" capture>
 
 
 
@@ -126,9 +130,9 @@
                           </div>
                           <div class="usuarioinfo col d-flex flex-column flex-sm-row justify-content-between mb-3">
                             <div class="text-center text-sm-left mb-2 mb-sm-0">
-                              <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Seu Nome</h4>
-                              <p class="mb-0">usuario@exemplo.com</p>
-                              <div class="text-muted"><small>Visto pela última vez a 2 horas.</small></div>
+                              <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ user.first_name }}</h4>
+                              <p class="mb-0">{{ user.email }}</p>
+                              <div class="text-muted"><small>Último login: {{ user.last_login }}.</small></div>
 
                             </div>
 
@@ -155,7 +159,9 @@
                             <div class="tab-content pt-4" id="myTabContent">
                               <!-- Dados Cadastrais -->
                               <div class="tab-pane animate__animated animate__fadeIn active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <form class="form" novalidate="">
+                                <form class="form" novalidate="" method="post" action="{% url "salvar_perfil" %}">
+                                  {{ form.errors }} 
+                                  {% csrf_token %}
                                   <div class="row">
                                     <div class="col mb-2">
                                       <div class="row">
@@ -165,13 +171,13 @@
                                           <div class="form-group">
 
                                             <label>Seu nome</label>
-                                            <input class="form-control" type="text" name="name" placeholder="Nome" value="">
+                                            <input class="form-control" type="text" name="user_name" placeholder="Nome" value="{{ user.first_name }}" required>
                                           </div>
                                         </div>
                                         <div class="col col mb-2">
                                           <div class="form-group">
                                             <label>Telefone</label>
-                                            <input class="form-control" type="number" name="telefone" placeholder="(00) 0000-0000" value="(21) 12345-6789">
+                                            <input class="form-control" name="user_fone" type="number" name="telefone" placeholder="(00) 0000-0000" value="{{ perfil.telefone_usuario }}">
                                           </div>
                                         </div>
                                       </div>
@@ -179,12 +185,13 @@
                                         <div class="col mb-3">
                                           <div class="form-group">
                                             <label>E-mail</label>
-                                            <input class="form-control" type="email" placeholder="usuario@exemplo.com">
+                                            <input class="form-control" name="user_email" type="email" placeholder="usuario@exemplo.com" value="{{ user.email }}" required>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
+                                  <!-- form senha -->
                                   <div class="row">
                                     <div class="col mb-3">
                                       <div class="mb-3 active">
@@ -194,7 +201,7 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Senha Atual</label>
-                                            <input class="form-control" type="password" placeholder="••••••">
+                                            <input class="form-control" name="password" type="password" placeholder="••••••" required>
                                           </div>
                                         </div>
                                       </div>
@@ -202,7 +209,7 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Nova Senha</label>
-                                            <input class="form-control" type="password" placeholder="••••••">
+                                            <input class="form-control" name="new_password" type="password" placeholder="••••••">
                                           </div>
                                         </div>
                                       </div>
@@ -210,7 +217,7 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Confirmar <span class="d-none d-xl-inline">Senha</span></label>
-                                            <input class="form-control" type="password" placeholder="••••••">
+                                            <input class="form-control" name="confirm_password" type="password" placeholder="••••••">
                                           </div>
                                         </div>
                                       </div>
@@ -228,7 +235,8 @@
 
                               <!-- Estabelecimento-->
                               <div class="tab-pane animate__animated animate__fadeIn" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <form class="form" novalidate="">
+                                <form class="form" novalidate="" method="post" action="{% url "salvar_estabelecimento" %}">
+                                  {% csrf_token %}
                                   <div class="row">
                                     <div class="col mb-2">
                                       <!-- nome / cnpj -->
@@ -240,13 +248,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Razão Social</label>
-                                            <input class="form-control" type="text" name="name" placeholder="Razão Social do Negócio" value="">
+                                            <input class="form-control" type="text" name="name" placeholder="Razão Social do Negócio" value="{{ perfil.razao_social }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>CNPJ</label>
-                                            <input class="form-control" type="text" name="CNPJ" placeholder="00.000.000/0000-00" value="">
+                                            <input class="form-control" type="text" name="cnpj" placeholder="00.000.000/0000-00" value="{{ perfil.cnpj }}">
                                           </div>
                                         </div>
                                       </div>
@@ -255,13 +263,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Telefone</label>
-                                            <input class="form-control" type="text" name="telefone" placeholder="(00) 00000-0000" value="">
+                                            <input class="form-control" type="text" name="telefone" placeholder="" value="{{ perfil.telefone }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Email</label>
-                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="">
+                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="{{ perfil.email_negocio }}">
                                           </div>
                                         </div>
                                       </div>
@@ -270,13 +278,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>CEP</label>
-                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="">
+                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="{{ perfil.cep }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Endereço</label>
-                                            <input class="form-control" type="text" name="endereco" placeholder="Endereço" value="">
+                                            <input class="form-control" type="text" name="endereco" placeholder="Endereço" value="{{ perfil.endereco }}">
                                           </div>
                                         </div>
                                       </div>
@@ -285,13 +293,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Número</label>
-                                            <input class="form-control" type="text" name="numero" placeholder="00" value="">
+                                            <input class="form-control" type="text" name="numero" placeholder="00" value="{{ perfil.numero }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Complemento</label>
-                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="">
+                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="{{ perfil.complemento }}">
                                           </div>
                                         </div>
                                       </div>
@@ -300,19 +308,19 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Bairro</label>
-                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="">
+                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="{{ perfil.bairro }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Cidade</label>
-                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="">
+                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="{{ perfil.cidade }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>UF</label>
-                                            <input class="form-control" type="text" name="estado" placeholder="UF" value="">
+                                            <input class="form-control" type="text" name="estado" placeholder="UF" value="{{ perfil.uf }}">
                                           </div>
                                         </div>
                                       </div>
@@ -360,6 +368,28 @@
 
   $("#imageUpload").change(function () {
     fasterPreview(this);
+    var file = this.files[0];
+    formdata = new FormData();
+
+    formdata.append("imagem", this.files[0]);
+    for (var [key, value] of formdata.entries()) { 
+      console.log(key, value);
+    }
+
+    $.ajax({
+      url: "{% url 'salvar_imagem' %}",
+      type: "POST",
+      data: formdata,
+      processData: false,
+      contentType: false,
+      cache: false,
+      success: function(){},
+      error: function(response) {
+        alert("Erro ao processar imagem");
+        console.log(response['message']);
+      }
+    });
+
   });
 </script>
 </div>
