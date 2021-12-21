@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Cliente(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=50, default=None)
     telefone = models.CharField(max_length=15, default=None)
     email = models.EmailField(max_length=100, default = None)
@@ -11,4 +13,4 @@ class Cliente(models.Model):
     cor = models.CharField(max_length=100, default=None)
 
     def __str__(self):
-        return self.nome
+        return "{nome} {placa}".format(nome=self.nome, placa=self.placa)

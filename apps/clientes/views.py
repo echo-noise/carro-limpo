@@ -1,14 +1,11 @@
 from django.contrib.auth import login
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from .models import Cliente
-#class ClienteListView(ListView):
-#    template_name = "clientes.html"
-#    model = Cliente
-#    context_object_name = "clientes"
+from .forms import ClienteForm
 
 @login_required
 def listar(request):
@@ -20,41 +17,19 @@ def listar(request):
 @csrf_exempt
 def inserir(request):
     if request.method == 'POST':
-        _documento = request.POST.get("documento")
-        _nome = request.POST.get("nome")
-        _telefone = request.POST.get("telefone")
-        _email = request.POST.get("email")
-        _placa = request.POST.get("placa")
-        _cor = request.POST.get("cor")
-        _marca = request.POST.get("marca")
-        _modelo = request.POST.get("modelo")
-
-        try:
-            cliente = Cliente(documento = _documento,
-                              nome = _nome,
-                              telefone = _telefone,
-                              email = _email,
-                              placa = _placa,
-                              cor = _cor,
-                              marca = _marca,
-                              modelo = _modelo
-            )
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            cliente = form.save(commit=False)
+            cliente.user = request.user
             cliente.save()
+
             response = { 
                 "id": cliente.id,
-                "nome": cliente.nome,
-                "documento": cliente.documento,
-                "telefone": cliente.telefone,
-                "email": cliente.email,
-                "placa": cliente.placa,
-                "cor": cliente.cor,
-                "marca": cliente.marca,
-                "modelo": cliente.modelo,
                 "error": False,
                 "message": "Adicionar: sucesso"
             }
             return JsonResponse(response, status=200, safe=False)
-        except:
+        else:
             return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
 @login_required
@@ -66,7 +41,7 @@ def excluir(request, id):
             return JsonResponse(response, status=200, safe=False)
         else:
             try:
-                cliente = Cliente.objects.get(pk=id)
+                cliente = get_object_or_404(Cliente, pk=id) 
                 cliente.delete()
                 response = {"error": False, "message": "Deletar: sucesso"}
                 return JsonResponse(response, status=200, safe=False)
@@ -78,29 +53,14 @@ def excluir(request, id):
 @csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":
-        _documento = request.POST.get("documento")
-        _nome = request.POST.get("nome")
-        _telefone = request.POST.get("telefone")
-        _email = request.POST.get("email")
-        _placa = request.POST.get("placa")
-        _cor = request.POST.get("cor")
-        _marca = request.POST.get("marca")
-        _modelo = request.POST.get("modelo")
-        try:
-            cliente = Cliente.objects.get(pk=id)
-            cliente.nome = _nome 
-            cliente.telefone = _telefone
-            cliente.email = _email
-            cliente.documento = _documento
-            cliente.placa = _placa
-            cliente.marca = _marca
-            cliente.modelo = _modelo
-            cliente.cor = _cor
-            
-            cliente.save()
+        cliente = get_object_or_404(Cliente, pk=id)
+        form = ClienteForm(request.POST, instance=cliente)
+
+        if form.is_valid():
+            form.save()
             response = {"error": False, "message": "Atualizar: sucesso"}
             
             return JsonResponse(response, status=200, safe=False)
-        except:
+        else:
             response = {"error": True, "message": "Atualizar: erro"}
             return JsonResponse(response, status=400, safe=False) 

@@ -1,5 +1,9 @@
 $(document).ready(function(){
-	var actions = $("table td:last-child").html();
+	var actions =  '<div class="acoes-align">' 
+	+ '<a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons" >&#xE03B;</i></a>'
+	+ '<a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'
+	+ '<a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>'
+    + '</div>'
 	// Tabela com adicionar, editar e remover ao formulario
     $(".add-new").click(function(){
 		$(this).attr("disabled", "disabled");
@@ -19,7 +23,7 @@ $(document).ready(function(){
 			// '<td><input type="text" scope="col" class="form-control-crud" name"observacoes" maxlength="10" id="observacoes">Observações</td>' +
 
 
-			'<td>' + actions + '</td>' +
+			'<td data-label="AÇOES">' + actions + '</td>' +
         '</tr>';
 				$("table").append(row);		
 				$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
@@ -44,23 +48,26 @@ $(document).ready(function(){
 	     				if($("tr#edit").attr("data-id") == -1) { var _url = "insert";  } 
 						else { var _url = "update/" + item_id; }
 
+						var formData = 	{
+							"nome": $("td[data-label='NOME']").children().first().val(),
+							"telefone": $("td[data-label='TELEFONE']").children().first().val(),
+							"email": $("td[data-label='E-MAIL']").children().first().val(),
+							"documento": $("td[data-label='CPF/CNPJ']").children().first().val(),
+							"placa": $("td[data-label='PLACA']").children().first().val(), 
+							"marca": $("td[data-label='MARCA']").children().first().val(),
+							"modelo": $("td[data-label='MODELO']").children().first().val(),
+							"cor": $("td[data-label='COR']").children().first().val(),
+						};
+
 				        $.ajax({
 				        	type: 'POST',
 				        	url: _url,
 				        	dataType: 'json',
-				        	data: { 
-				        		"nome": $("td[data-label='NOME']").children('input').eq(0).val(),
-				        		"documento": $("td[data-label='CPF/CNPJ']").children('input').eq(0).val(),
-				        		"telefone": $("td[data-label='TELEFONE']").children('input').eq(0).val(),
-				        		"email": $("td[data-label='E-MAIL']").children('input').eq(0).val(),
-				        		"cor": $("td[data-label='COR']").children('input').eq(0).val(),
-				        		"modelo": $("td[data-label='MODELO']").children('input').eq(0).val(),
-				        		"marca": $("td[data-label='MARCA']").children('input').eq(0).val(),
-				        		"placa": $("td[data-label='PLACA']").children('input').eq(0).val()
-				        	},
+				        	data: formData,
 				        	success: function (response) {
 				        		if(!response['error']) {
 				        		    console.log(response['message']);
+				        		    console.log(response['user']);
 				                    input.each(function(){
 				                    	$(this).parent("td").html($(this).val());
 				                    });			

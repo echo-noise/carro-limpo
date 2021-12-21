@@ -3,6 +3,7 @@ venv/
 __pycache__/
 migrations/
 ignored/
+uploads/
 .env
 run
 db.*

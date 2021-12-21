@@ -1,5 +1,9 @@
 $(document).ready(function(){
-	var actions = $("table td:last-child").html();
+	var actions =  '<div class="acoes-align">' 
+	+ '<a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons" >&#xE03B;</i></a>'
+	+ '<a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'
+	+ '<a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>'
+    + '</div>'
 	// Tabela com adicionar, editar e remover ao formulario
     $(".add-new-servico").click(function(){
 		$(this).attr("disabled", "disabled");
@@ -7,7 +11,7 @@ $(document).ready(function(){
         var row = '<tr data-id=-1 id="edit" >' +
             '<td data-label="NOME"><input type="text" scope="col" class="form-control-crud" name="servico" id="servico" maxlength="20" >Serviço</td>' +
 			'<td data-label="VALOR"><input type="number" lang="pt" step="0.01" scope="col" class="form-control-crud"  name="valor" id="valor" maxlength="14">Valor</td>' +
-			'<td>' + actions + '</td>' +
+			'<td data-label="AÇOES">' + actions + '</td>' +
             '</tr>';
 				$("table").append(row);		
 				$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
@@ -37,8 +41,8 @@ $(document).ready(function(){
 			        	url: _url,
 			        	dataType: 'json',
 			        	data: { 
-			        		"nome": $("td[data-label='NOME']").children('input').eq(0).val(),
-			        		"valor": $("td[data-label='VALOR']").children('input').eq(0).val(),
+			        		"nome": $("td[data-label='NOME']").children().first().val(),
+			        		"valor": $("td[data-label='VALOR']").children().first().val(),
 			        	},
 			        	success: function (response) {
 			        		if(!response['error']) {

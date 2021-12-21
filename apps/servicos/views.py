@@ -1,11 +1,11 @@
 from django.contrib.auth import login
-from django.shortcuts import render
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from .models import Servico
+from .forms import ServicoForm
 
 # Create your views here.
 @login_required
@@ -18,14 +18,13 @@ def listar(request):
 @csrf_exempt
 def inserir(request):
     if request.method == 'POST':
-        _nome = request.POST.get("nome")
-        _valor = request.POST.get("valor")
+        form = ServicoForm(request.POST)
 
-        try:
-            servico = Servico(nome = _nome,
-                              valor = _valor
-                              )
+        if form.is_valid():
+            servico = form.save(commit=False)
+            servico.user = request.user
             servico.save()
+
             response = { 
                 "id": servico.id,
                 "nome": servico.nome,
@@ -34,8 +33,8 @@ def inserir(request):
                 "message": "Adicionar: sucesso"
             }
             return JsonResponse(response, status=200, safe=False)
-        except:
-            return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
+
+        return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
 @login_required
 @csrf_exempt
@@ -44,31 +43,28 @@ def excluir(request, id):
         if id == -1:
             response = {"error": False, "message": "Deletar: vazio"}
             return JsonResponse(response, status=200, safe=False)
-        else:
-            try:
-                servico = Servico.objects.get(pk=id)
-                servico.delete()
-                response = {"error": False, "message": "Deletar: sucesso"}
-                return JsonResponse(response, status=200, safe=False)
-            except:
-                response = {"error": True, "message": "Deletar: erro"}
-                return JsonResponse(response, status=400, safe=False)
+
+        try:
+            servico = get_object_or_404(Servico, pk=id) 
+            servico.delete()
+            response = {"error": False, "message": "Deletar: sucesso"}
+            return JsonResponse(response, status=200, safe=False)
+        except:
+            response = {"error": True, "message": "Deletar: erro"}
+            return JsonResponse(response, status=400, safe=False)
 
 @login_required
 @csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":
-        _nome = request.POST.get("nome")
-        _valor = request.POST.get("valor")
-        try:
-            servico = Servico.objects.get(pk=id)
-            servico.nome = _nome 
-            servico.valor = _valor
+        servico = get_object_or_404(Servico, pk=id)
+        form = ServicoForm(request.POST, instance=servico)
 
-            servico.save()
+        if form.is_valid():
+            form.save()
             response = {"error": False, "message": "Atualizar: sucesso"}
             
             return JsonResponse(response, status=200, safe=False)
-        except:
-            response = {"error": True, "message": "Atualizar: erro"}
-            return JsonResponse(response, status=400, safe=False) 
+
+        response = {"error": True, "message": "Atualizar: erro"}
+        return JsonResponse(response, status=400, safe=False) 

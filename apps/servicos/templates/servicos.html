@@ -82,17 +82,6 @@
                             </tr>
                           </thead>
                           <tbody class="tbody">
-                            <tr style="display:none;">
-                              <td></td>
-                              <td></td>
-                              <td data-label="AÇOES">
-                                <div class="acoes-align">
-                                  <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                  <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                  <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                </div>
-                              </td>
-                            </tr>
                             {% for servico in servicos %}
                             <tr data-id={{ servico.id }}>
                               <td id="td-header" data-label="NOME">{{ servico.nome }}</td>
