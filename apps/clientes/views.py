@@ -1,6 +1,5 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from .models import Cliente
@@ -13,7 +12,6 @@ def listar(request):
     return render(request, template, {"clientes": clientes})
 
 @login_required
-@csrf_exempt
 def inserir(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -32,7 +30,6 @@ def inserir(request):
             return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
 @login_required
-@csrf_exempt
 def excluir(request, id):
     if request.method == 'POST':
         if id == -1:
@@ -49,7 +46,6 @@ def excluir(request, id):
                 return JsonResponse(response, status=400, safe=False)
 
 @login_required
-@csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":
         cliente = get_object_or_404(Cliente, pk=id)

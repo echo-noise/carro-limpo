@@ -13,4 +13,4 @@ class Cliente(models.Model):
     cor = models.CharField(max_length=100, default=None)
 
     def __str__(self):
-        return "{nome} {placa}".format(nome=self.nome, placa=self.placa)
+        return "{nome} ({placa})".format(nome=self.nome, placa=self.placa)

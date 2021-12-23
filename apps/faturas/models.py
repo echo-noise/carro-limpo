@@ -7,8 +7,8 @@ from apps.servicos.models import Servico
 
 # Create your models here.
 class Fatura(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cliente = models.OneToOneField(Cliente, on_delete=models.PROTECT)
-    servico = models.OneToOneField(Servico, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
     data = models.DateField(default=date.today)
-    gerado = models.BooleanField(default=False)
+    pago = models.BooleanField(default=False)

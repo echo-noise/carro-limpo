@@ -142,21 +142,26 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="POST" action="{% url "salvar" %}">
+              {% csrf_token %}
               <div class="border-box mb-2 p-2">
                 <div class="mb-2 active">
                   <b>Selecione um cliente e o serviço desejado.</b>
                 </div>
                 <div class=" p-1 mb-1">
-                  <select id="listar-clientes" class="form-select" required>
+                  <select name="cliente" id="listar-clientes" class="form-select" required>
                     <option selected>Selecione o cliente</option>
-                    <option>Nome do Cliente</option>
+                    {% for cliente in clientes %}
+                    <option value={{ cliente.id }}>{{ cliente }}</option>
+                    {% endfor %}
                   </select>
                 </div>
                 <div class="p-1 mb-3">
-                  <select id="listar-clientes" class="form-select" required>
+                  <select name="servico" id="listar-clientes" class="form-select" required>
                     <option selected>Selecione o serviço</option>
-                    <option>Limpeza ecológica</option>
+                    {% for servico in servicos %}
+                    <option value={{ servico.id }}>{{ servico }}</option>
+                    {% endfor %}
                   </select>
                 </div>
               </div>
@@ -223,37 +228,23 @@
                               </tr>
                             </thead>
                             <tbody class="tbody">
+                              {% for fatura in faturas %}
                               <tr>
                                 <td id="td-header" data-label="FATURA">
                                   <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
                                 </td>
-                                <td data-label="Nº"> 001</td>
+                                <td data-label="Nº"> {{ fatura.id }}</td>
                                 <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
-                                <td data-label="NOME"> Nome do Cliente</td>
-                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
-                                <td data-label="PLACA"> KYH-2658</td>
-                                <td data-label="MARCA"> Honda</td>
-                                <td data-label="MODELO"> Fit</td>
-                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
-                                <td data-label="VENCIMENTO"> 09/12/2021</td>
-                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
+                                <td data-label="NOME"> {{ fatura.cliente.nome }}</td>
+                                <td data-label="CPF/CNPJ"> {{ fatura.cliente.documento }}</td>
+                                <td data-label="PLACA"> {{ fatura.cliente.placa }} </td>
+                                <td data-label="MARCA"> {{ fatura.cliente.marca }}</td>
+                                <td data-label="MODELO"> {{ fatura.cliente.modelo}} </td>
+                                <td data-label="SERVIÇO"> {{ fatura.servico.nome }}</td>
+                                <td data-label="VENCIMENTO"> {{ fatura.data|date:"d/m/Y" }}</td>
+                                <td id="valor" data-label="VALOR"> R$ {{ fatura.servico.valor}} </td>
                               </tr>
-                              <tr>
-                                <td id="td-header" data-label="FATURA">
-                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-bs-toggle="modal" data-toggle="tooltip" title="Gerar Fatura" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
-                                </td>
-                                <td data-label="Nº"> 001</td>
-                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
-                                <td data-label="NOME"> Nome do Cliente</td>
-                                <td data-label="CPF/CNPJ"> 000.000.000-00</td>
-                                <td data-label="PLACA"> KYH-2658</td>
-                                <td data-label="MARCA"> Honda</td>
-                                <td data-label="MODELO"> Fit</td>
-                                <td data-label="SERVIÇO"> Limpeza ecológica</td>
-                                <td data-label="VENCIMENTO"> 09/12/2021</td>
-                                <td id="valor" data-label="VALOR"> R$ 60,00</td>
-                              </tr>
-
+                              {% endfor %}
 
                             </tbody>
 

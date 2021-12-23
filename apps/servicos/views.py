@@ -15,7 +15,6 @@ def listar(request):
     return render(request, template, {"servicos": servicos})
 
 @login_required
-@csrf_exempt
 def inserir(request):
     if request.method == 'POST':
         form = ServicoForm(request.POST)
@@ -37,7 +36,6 @@ def inserir(request):
         return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
 
 @login_required
-@csrf_exempt
 def excluir(request, id):
     if request.method == 'POST':
         if id == -1:
@@ -54,7 +52,6 @@ def excluir(request, id):
             return JsonResponse(response, status=400, safe=False)
 
 @login_required
-@csrf_exempt
 def atualizar(request, id):
     if request.method == "POST":
         servico = get_object_or_404(Servico, pk=id)

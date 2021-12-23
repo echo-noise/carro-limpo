@@ -40,6 +40,7 @@ $(document).ready(function(){
 			        	type: 'POST',
 			        	url: _url,
 			        	dataType: 'json',
+						headers: {'X-CSRFToken': getToken() },
 			        	data: { 
 			        		"nome": $("td[data-label='NOME']").children().first().val(),
 			        		"valor": $("td[data-label='VALOR']").children().first().val(),
@@ -83,6 +84,7 @@ $(document).ready(function(){
 				if(!($("tr#edit").attr("data-id") == -1)) {
 				    $.ajax({
 				    	type: "POST",
+						headers: {'X-CSRFToken': getToken() },
 				    	url: "delete/" + $(this).parents("tr").attr("data-id"),
 				    	success: function(response) { console.log(response['message']); },
 				    	error: function(response) { console.log(response['message']);}

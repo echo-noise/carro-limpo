@@ -63,6 +63,7 @@ $(document).ready(function(){
 				        	type: 'POST',
 				        	url: _url,
 				        	dataType: 'json',
+							headers: {'X-CSRFToken': getToken() },
 				        	data: formData,
 				        	success: function (response) {
 				        		if(!response['error']) {
@@ -94,9 +95,11 @@ $(document).ready(function(){
 				});
 			// Botao Deletar
 			$(document).on("click", ".delete", function(){
+				
 				if(!($("tr#edit").attr("data-id") == -1)) {
 				    $.ajax({
 				    	type: "POST",
+						headers: {'X-CSRFToken': getToken() },
 				    	url: "delete/" + $(this).parents("tr").attr("data-id"),
 				    	success: function(response) { console.log(response['message']); },
 				    	error: function(response) { console.log(response['message']);}
