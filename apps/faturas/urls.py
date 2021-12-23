@@ -5,4 +5,6 @@ from .views import *
 urlpatterns = [
     path("", listar, name="faturas"),
     path("salvar/", salvar, name="salvar"),
+    path("gerar/<int:id>", gerar, name="gerar"),
+
 ]

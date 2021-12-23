@@ -1,6 +1,6 @@
 import django.forms as forms
 from django.contrib.auth.hashers import check_password
-from .models import Perfil
+from .models import Endereco, Perfil, Loja
 
 class UserProfileForm(forms.Form):
     user_name = forms.CharField(max_length=100, label="Nome")
@@ -28,18 +28,15 @@ class UserProfileForm(forms.Form):
         if _new_password != _confirm_password:
             self.add_error('new_password', forms.ValidationError('Senhas não coincidem'))
 
-class EstabelecimentoForm(forms.Form):
-    name = forms.CharField(max_length=100, label="Nome")
-    cnpj = forms.CharField(max_length=100, label="CNPJ")
-    telefone = forms.CharField(max_length=100, label="Telefone")
-    email = forms.EmailField(max_length=100, label="E-mail")
-    cep = forms.CharField(max_length=100, label="CEP")
-    endereco = forms.CharField(max_length=100, label="Endereço")
-    numero = forms.CharField(max_length=100, label="Número")
-    complemento = forms.CharField(max_length=100, label="Complemento", required=False)
-    bairro = forms.CharField(max_length=100, label="Bairro")
-    cidade = forms.CharField(max_length=100, label="Cidade")
-    estado = forms.CharField(max_length=2, label="UF")
+class LojaForm(forms.ModelForm):
+    class Meta:
+        model = Loja
+        exclude = ('user', )
+
+class EnderecoForm(forms.ModelForm):
+    class Meta:
+        model = Endereco
+        exclude = ('user',)
 
 class ImageForm(forms.ModelForm):
     class Meta:

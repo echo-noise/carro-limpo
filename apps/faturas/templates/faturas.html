@@ -20,6 +20,8 @@
   <script src="{% static "js/search.js" %}"></script>
   <!-- Javascript do projeto tabela -->
   <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+  <!-- ajax fatura -->
+  <script type="text/javascript" src="{% static "js/fatura/gerar.js" %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -42,7 +44,7 @@
           <div class="page">
             <div class="modal-header">
               <h2 class="modal-title" id="faturaModalLabel">
-                <span style="float:left;">Fatura: 001</span>
+                <span style="float:left;">Fatura: <span id="fatura_id"></span>
               </h2>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -51,33 +53,32 @@
               <div class="row">
                 <div class="mb-2 col-sm-7">
                   <h5>Dados do estabelecimento:</h5>
-                  <strong>Nome:</strong> Nome do estabelecimento
-                  <br><strong> CNPJ:</strong> 000.000.000-00
-                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
-
+                  <strong>Nome:</strong> <span id="loja_rs"></span>
+                  <br><strong> CNPJ:</strong> <span id="loja_cnpj"></span>
+                  <p><strong>Endereço:</strong> <span id="loja_endereco"></span></p>
                 </div>
                 <div class="mb-2 col-sm-5">
                   <h5>Contato:</h5>
-                  <strong>Telefone:</strong> (00) 00000-0000
-                  <br><strong>Email:</strong> exemplo@email.com
+                  <strong>Telefone:</strong> <span id="loja_tel"></span> 
+                  <br><strong>Email:</strong> <span id="loja_email"></span>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="mb-2 col-sm-7">
                   <h5>Dados do Cliente:</h5>
-                  <strong>Nome:</strong> Nome do Cliente
-                  <br><strong> CPF/CNPJ:</strong> 000.000.000-00
-                  <br><strong> Placa:</strong> KYG-0000
-                  <br><strong> Marca:</strong> Honda
-                  <br><strong> Modelo:</strong> Fit
-                  <p><strong>Endereço:</strong> Exemplo de estabelecimento, Rua de Exemplo, 000 - Bairro, 00000-000</p>
+                  <strong>Nome:</strong> <span id="cliente_nome"></span>
+                  <br><strong> CPF/CNPJ:</strong> <span id="cliente_documento"></span>
+                  <br><strong> Placa:</strong> <span id="cliente_placa"></span>
+                  <br><strong> Marca:</strong> <span id="cliente_marca"></span>
+                  <br><strong> Modelo:</strong> <span id="cliente_modelo"></span>
 
                 </div>
+
                 <div class="mb-2 col-sm-5">
                   <h5>Contato:</h5>
-                  <strong>Telefone:</strong> (00) 00000-0000
-                  <br><strong>Email:</strong> exemplo@email.com
+                  <strong>Telefone:</strong> <span id="cliente_tel"></span>
+                  <br><strong>Email:</strong> <span id="cliente_email"></span>
 
                 </div>
               </div>
@@ -102,10 +103,10 @@
                       </thead>
                       <tbody class="tbody">
                         <tr>
-                          <td>Limpeza ecológica</td>
-                          <td id="status"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
-                          <td id="valor">R$60,00</td>
-                          <td>09/12/2021</td>
+                          <td><span id="servico_nome"></span></td>
+                          <td id="status"><span class="badge badge-boxed badge-soft-warning" id="fatura_status"></span></td>
+                          <td id="valor">R$ <span id="servico_valor"></span></td>
+                          <td><span id="fatura_data"></span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -117,7 +118,7 @@
                 <p>
                 <h5>Forma de Pagamento:</h5>
                 <span>Dinheiro</span>
-                <span style="float:right;"><b style="font-size: 24px;">Total: R$ 60,00</b></span>
+                <span style="float:right;"><b style="font-size: 24px;">Total: R$ <span id="fatura_valor"></span></b></span>
                 </p>
                 <div class="row">
                 </div>
@@ -231,10 +232,14 @@
                               {% for fatura in faturas %}
                               <tr>
                                 <td id="td-header" data-label="FATURA">
-                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo"></i>
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo" onclick=gerarFatura({{ fatura.id }})></i>
                                 </td>
                                 <td data-label="Nº"> {{ fatura.id }}</td>
-                                <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pendente</span></td>
+                                {% if fatura.pago %}
+                                  <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pago</span></td>
+                                {% else %}
+                                  <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning" id="status_tabela">Pendente</span></td>
+                                {% endif %}
                                 <td data-label="NOME"> {{ fatura.cliente.nome }}</td>
                                 <td data-label="CPF/CNPJ"> {{ fatura.cliente.documento }}</td>
                                 <td data-label="PLACA"> {{ fatura.cliente.placa }} </td>

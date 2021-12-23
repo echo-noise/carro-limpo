@@ -1,7 +1,5 @@
-from django.contrib.auth import login
 from django.http.response import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from .models import Servico

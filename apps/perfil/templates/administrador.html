@@ -114,8 +114,8 @@
                             <div class="mx-auto " style="width: 140px;">
                               <!-- foto de perfil -->
                               <div id="profile-container" class=" justify-content-center align-items-center rounded" data-toggle="tooltip" title="Editar a foto do perfil">
-                                {% if perfil.imagem %}
-                                <image id="profileImage" src="{{ perfil.imagem.url }}" alt="perfil">
+                                {% if user.profile.imagem %}
+                                <image id="profileImage" src="{{ user.profile.imagem.url }}" alt="perfil">
                                 {% else %}
                                 <image id="profileImage" src="{% static "img/perfil.svg" %}" alt="perfil">
                                 {% endif %}
@@ -177,7 +177,7 @@
                                         <div class="col col mb-2">
                                           <div class="form-group">
                                             <label>Telefone</label>
-                                            <input class="form-control" name="user_fone" type="number" name="telefone" placeholder="(00) 0000-0000" value="{{ perfil.telefone_usuario }}">
+                                            <input class="form-control" name="user_fone" type="text" name="telefone" placeholder="(00) 0000-0000" value="{{ user.profile.telefone }}">
                                           </div>
                                         </div>
                                       </div>
@@ -248,13 +248,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Razão Social</label>
-                                            <input class="form-control" type="text" name="name" placeholder="Razão Social do Negócio" value="{{ perfil.razao_social }}">
+                                            <input class="form-control" type="text" name="nome" placeholder="Razão Social do Negócio" value="{{ user.loja.nome }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>CNPJ</label>
-                                            <input class="form-control" type="text" name="cnpj" placeholder="00.000.000/0000-00" value="{{ perfil.cnpj }}">
+                                            <input class="form-control" type="text" name="cnpj" placeholder="00.000.000/0000-00" value="{{ user.loja.cnpj }}">
                                           </div>
                                         </div>
                                       </div>
@@ -263,13 +263,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Telefone</label>
-                                            <input class="form-control" type="text" name="telefone" placeholder="" value="{{ perfil.telefone }}">
+                                            <input class="form-control" type="text" name="telefone" placeholder="" value="{{ user.loja.telefone }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Email</label>
-                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="{{ perfil.email_negocio }}">
+                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="{{ user.loja.email }}">
                                           </div>
                                         </div>
                                       </div>
@@ -278,13 +278,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>CEP</label>
-                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="{{ perfil.cep }}">
+                                            <input class="form-control" type="text" name="cep" placeholder="00000-000" value="{{ user.endereco.cep }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Endereço</label>
-                                            <input class="form-control" type="text" name="endereco" placeholder="Endereço" value="{{ perfil.endereco }}">
+                                            <input class="form-control" type="text" name="rua" placeholder="Endereço" value="{{ user.endereco.rua }}">
                                           </div>
                                         </div>
                                       </div>
@@ -293,13 +293,13 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Número</label>
-                                            <input class="form-control" type="text" name="numero" placeholder="00" value="{{ perfil.numero }}">
+                                            <input class="form-control" type="text" name="numero" placeholder="00" value="{{ user.endereco.numero }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Complemento</label>
-                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="{{ perfil.complemento }}">
+                                            <input class="form-control" type="text" name="complemento" placeholder="Ex.: 3˚ andar" value="{{ user.endereco.complemento }}">
                                           </div>
                                         </div>
                                       </div>
@@ -308,19 +308,19 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Bairro</label>
-                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="{{ perfil.bairro }}">
+                                            <input class="form-control" type="text" name="bairro" placeholder="Bairro" value="{{ user.endereco.bairro }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Cidade</label>
-                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="{{ perfil.cidade }}">
+                                            <input class="form-control" type="text" name="cidade" placeholder="Cidade" value="{{ user.endereco.cidade }}">
                                           </div>
                                         </div>
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>UF</label>
-                                            <input class="form-control" type="text" name="estado" placeholder="UF" value="{{ perfil.uf }}">
+                                            <input class="form-control" type="text" name="uf" placeholder="UF" value="{{ user.endereco.uf }}">
                                           </div>
                                         </div>
                                       </div>
@@ -379,6 +379,7 @@
     $.ajax({
       url: "{% url 'salvar_imagem' %}",
       type: "POST",
+      headers: {'X-CSRFToken': getToken() },
       data: formdata,
       processData: false,
       contentType: false,

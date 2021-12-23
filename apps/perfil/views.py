@@ -4,16 +4,14 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import UserProfileForm, EstabelecimentoForm, ImageForm
+from .forms import UserProfileForm, LojaForm, ImageForm, EnderecoForm
 
 # Create your views here.
 @login_required
 def perfil(request):
     template = "administrador.html"
 
-    perfil = request.user.profile
-
-    return render(request, template, {"perfil": perfil})
+    return render(request, template)
 
 @login_required
 def salvar_perfil(request):
@@ -27,7 +25,7 @@ def salvar_perfil(request):
 
             request.user.first_name = _name
             request.user.email = _email
-            request.user.profile.telefone_usuario = (_fone) 
+            request.user.profile.telefone = (_fone) 
 
             _new_password = form.cleaned_data.get("new_password")
             
@@ -43,46 +41,22 @@ def salvar_perfil(request):
 @login_required
 def salvar_estabelecimento(request):
     if request.method == "POST":
-        form = EstabelecimentoForm(request.POST)
+        form = LojaForm(request.POST, instance=request.user.loja)
+        form_endereco = EnderecoForm(request.POST, instance=request.user.endereco)
 
-        if form.is_valid():
-            _razao = form.cleaned_data.get(("name"))
-            _cnpj = form.cleaned_data.get(("cnpj"))
-            _telefone = form.cleaned_data.get(("telefone"))
-            _email = form.cleaned_data.get(("email"))
-            _cep = form.cleaned_data.get(("cep"))
-            _endereco = form.cleaned_data.get(("endereco"))
-            _numero = form.cleaned_data.get(("numero"))
-            _complemento = form.cleaned_data.get(("complemento"))
-            _bairro = form.cleaned_data.get(("bairro"))
-            _cidade = form.cleaned_data.get(("cidade"))
-            _estado = form.cleaned_data.get(("estado"))
-
-            request.user.profile.razao_social = _razao
-            request.user.profile.cnpj = _cnpj
-            request.user.profile.telefone = _telefone
-            request.user.profile.email_negocio = _email
-            request.user.profile.cep = _cep
-            request.user.profile.endereco = _endereco
-            request.user.profile.complemento = _complemento
-            request.user.profile.numero = _numero
-            request.user.profile.bairro = _bairro
-            request.user.profile.cidade = _cidade
-            request.user.profile.uf = _estado
-
-            request.user.save()
+        if form.is_valid() and form_endereco.is_valid():
+            form.save()
+            form_endereco.save()
 
         return HttpResponseRedirect(reverse("perfil"), {"form": form, "active": "#profile"})
 
 @login_required
-@csrf_exempt
 def salvar_imagem(request):
     if request.method == "POST":
-        form = ImageForm(request.POST, request.FILES, instance=request.user)
+        form = ImageForm(request.POST, request.FILES, instance=request.user.profile)
 
         if form.is_valid():
-            request.user.profile.imagem = form.cleaned_data.get("imagem")
-            request.user.save()
+            form.save()
             return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
 
         return JsonResponse({'error': True, 'errors': form.errors, 'message':'form inválida'}, status=400)
