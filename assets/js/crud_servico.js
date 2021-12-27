@@ -30,31 +30,8 @@ $(document).ready(function(){
 				});
 				$(this).parents("tr").find(".error").first().focus();
 				if(!empty){
-					var item = $("tr#edit");
-					var item_id = $("tr#edit").attr("data-id");
+					ajaxPost(servicoSerialize());
 
-	     			if($("tr#edit").attr("data-id") == -1) { var _url = "insert";  } 
-					else { var _url = "update/" + item_id; }
-
-			        $.ajax({
-			        	type: 'POST',
-			        	url: _url,
-			        	dataType: 'json',
-						headers: {'X-CSRFToken': getToken() },
-			        	data: { 
-			        		"nome": $("td[data-label='NOME']").children().first().val(),
-			        		"valor": $("td[data-label='VALOR']").children().first().val(),
-			        	},
-			        	success: function (response) {
-			        		if(!response['error']) {
-			        		    console.log(response['message']);
-
-			        			item.attr("data-id", response['id']);
-			        			item.removeAttr("id");
-			        		}
-			        	},
-			        	error: function(response) { console.log(response['message']); } 
-			        });
 					input.each(function(){
 						$(this).parent("td").html($(this).val());
 					});			
@@ -81,16 +58,11 @@ $(document).ready(function(){
 				});
 			// Botao Deletar
 			$(document).on("click", ".delete", function(){
-				if(!($("tr#edit").attr("data-id") == -1)) {
-				    $.ajax({
-				    	type: "POST",
-						headers: {'X-CSRFToken': getToken() },
-				    	url: "delete/" + $(this).parents("tr").attr("data-id"),
-				    	success: function(response) { console.log(response['message']); },
-				    	error: function(response) { console.log(response['message']);}
-				    });
+				var id = $(this).parents("tr").attr("data-id");
+				if(!(id == -1)) {
+					ajaxDelete(id);
 			    }
-						$(this).parents("tr").remove();
+				$(this).parents("tr").remove();
 				$(".add-new-servico").removeAttr("disabled");
 				});
 		});

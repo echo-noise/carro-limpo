@@ -41,47 +41,14 @@ $(document).ready(function(){
 				    }
 				});
 				$(this).parents("tr").find(".error").first().focus();
-	     	    if(!empty){
-						var item = $("tr#edit");
-						var item_id = $("tr#edit").attr("data-id");
+	     	    if(!empty) {
+					ajaxPost(clienteSerialize());
 
-	     				if($("tr#edit").attr("data-id") == -1) { var _url = "insert";  } 
-						else { var _url = "update/" + item_id; }
-
-						var formData = 	{
-							"nome": $("td[data-label='NOME']").children().first().val(),
-							"telefone": $("td[data-label='TELEFONE']").children().first().val(),
-							"email": $("td[data-label='E-MAIL']").children().first().val(),
-							"documento": $("td[data-label='CPF/CNPJ']").children().first().val(),
-							"placa": $("td[data-label='PLACA']").children().first().val(), 
-							"marca": $("td[data-label='MARCA']").children().first().val(),
-							"modelo": $("td[data-label='MODELO']").children().first().val(),
-							"cor": $("td[data-label='COR']").children().first().val(),
-						};
-
-				        $.ajax({
-				        	type: 'POST',
-				        	url: _url,
-				        	dataType: 'json',
-							headers: {'X-CSRFToken': getToken() },
-				        	data: formData,
-				        	success: function (response) {
-				        		if(!response['error']) {
-				        		    console.log(response['message']);
-				        		    console.log(response['user']);
-				                    input.each(function(){
-				                    	$(this).parent("td").html($(this).val());
-				                    });			
-				                    $(this).parents("tr").find(".add, .edit").toggle();
-
-				        			item.attr("data-id", response['id']);
-				        			item.removeAttr("id");
-
-				                    $(".add-new").removeAttr("disabled");
-				        		}
-				        	},
-				        	error: function(response) { console.log(response['message']); } 
-				        });
+					input.each(function(){
+				                    $(this).parent("td").html($(this).val());
+				                });			
+				    $(this).parents("tr").find(".add, .edit").toggle();
+					$(".add-new").removeAttr("disabled");
 			    }
 				});
 			// Botao Editar
@@ -95,15 +62,9 @@ $(document).ready(function(){
 				});
 			// Botao Deletar
 			$(document).on("click", ".delete", function(){
-				
-				if(!($("tr#edit").attr("data-id") == -1)) {
-				    $.ajax({
-				    	type: "POST",
-						headers: {'X-CSRFToken': getToken() },
-				    	url: "delete/" + $(this).parents("tr").attr("data-id"),
-				    	success: function(response) { console.log(response['message']); },
-				    	error: function(response) { console.log(response['message']);}
-				    });
+				var id = $(this).parents("tr").attr("data-id");
+				if(!(id == -1)) {
+					ajaxDelete(id);
 			    }
 			    $(this).parents("tr").remove();
 				$(".add-new").removeAttr("disabled");
