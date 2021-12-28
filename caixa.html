@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height,
+      initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
+      Caldellas David">
+  <title>Carro Limpo</title>
+
+  <!-- CSS Bootstrap-->
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+  <!-- CSS Projeto -->
+  <link rel="stylesheet" href="assets/css/css_crud_cliente.css">
+  <link rel="stylesheet" href="assets/css/estatisticas.css">
+  <!-- <link rel="stylesheet" href="assets/css/login_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
+  <link rel="stylesheet" href="assets/css/caixa.css">
+  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tooltip.css">
+  <link rel="stylesheet" href="assets/css/dataTables.css">
+  <link rel="stylesheet" href="assets/css/dataRangetables.css">
+
+
+
+
+
+
+
+  <!-- JavaScript Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript do tooltip -->
+  <script src="assets/js/tooltip.js"></script>
+  <!-- JavaScript do projeto clientes-->
+  <script src="assets/js/crud_cliente.js"></script>
+  <!-- JavaScript do projeto sidebar-->
+  <script src="assets/js/sidebar_menu.js"></script>
+  <!-- Javascript do projeto search -->
+  <script src="assets/js/search.js"></script>
+  <!-- Javascript do projeto tabela -->
+  <script src='/assets/js/tabela.js'></script>
+  <!-- Javascript do projeto tabela Filtro por data -->
+  <script type="text/javascript" src="assets/js/tabela-listar-data.js"></script>
+
+
+
+
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+
+    <div class="search-bar mt-7">
+
+      <div class="input-field"> <input class="form-control search" /> <button class="btn-search"><i class="icone-search fa fa-search"></i></button> </div>
+
+    </div>
+
+    <!-- <div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
+  </header>
+  <!-- nav menu esquerdo -->
+  <div>
+    <div>
+      <div class="l-navbar" id="nav-bar">
+        <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
+        <nav class="nav sidebar-nav">
+
+          <div>
+            <div class="nav_list">
+
+              <a href="./index.html" class="nav_link">
+                <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
+                <span class="nav_name">Principal</span>
+              </a>
+
+              <a href="./clientes.html" class="nav_link">
+                <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
+                <span class="nav_name">Clientes</span>
+              </a>
+
+              <a href="caixa.html" class="nav_link active">
+                <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
+                <span class="nav_name">Caixa</span>
+              </a>
+
+              <a href="./administrador.html" class="nav_link">
+                <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
+                <span class="admin nav_name">Administrador</span>
+              </a>
+
+              <a href="./login.html" class="nav_link">
+                <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
+                <span class="nav_name">Sair</span>
+              </a>
+            </div>
+        </nav>
+      </div>
+    </div>
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="termosModalLabel">Termos de uso</h5>
+          </div>
+          <div class="modal-body">
+            <div class="active mb-3"><b>Regras:</b></div>
+            <div class="border-box p-3 mb-2">
+              <ul>
+                <li>O uso do software Carro Limpo é destinado somente para fins de estudo.</li>
+                <li>Não autorizamos o uso desse software para fins comerciais. Proibimos totalmente qualquer tipo de conduta relacionada.</li>
+                <li>Não nos responsabilizamos por perdas de dados devido ao uso desse sistema.</li>
+              </ul>
+            </div>
+            <div class="active mb-3"><b>Autores:</b></div>
+            <div class="termosmodal border-box p-3 mb-2">
+              <div>
+                <div><b> Thiago Rocha Gomes </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/trgomes92/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521979569389"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=trgomes92@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/trgomes92"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <b> Samara Caldellas David </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/samara-david/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5524998444394"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=sam.caldellas@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/echo-noise"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
+                <br>
+                <div>
+                  <b> Bruno Gomes De Sousa </b>
+                  <div>
+                    <a target="_blank" href="https://www.linkedin.com/in/bruf1/"><img width="30px" src="https://github.com/devicons/devicon/raw/master/icons/linkedin/linkedin-original.svg" /></a>
+                    <a target="_blank" href="https://wa.me/+5521968294095"><img width="29px" src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png" /></a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=brunogomestw@gmail.com&su=&body=&bcc="><img src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px"></a>
+                    <a target="_blank" href="https://github.com/bgomestw"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU" /></a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Concordo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Abrir o Caixa -->
+    <div class="modal fade " id="Abrir-Caixa-Modal" tabindex="-1" aria-labelledby="Abrir-caixa-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Abrir-caixa-ModalLabel"><i class="fas fa-cash-register"></i> Abrir o Caixa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2 active">
+                  <b>Saldo Inicial</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <input class="form-control" type="number" placeholder="Ex: R$200,00" requeired>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Abrir o Caixa</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Abrir o Caixa -->
+
+    <!-- Modal Fechar o Caixa -->
+    <div class="modal fade " id="Fechar-Caixa-Modal" tabindex="-1" aria-labelledby="Fechar-Caixa-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Fechar-Caixa-ModalLabel"><i class="fas fa-cash-register"></i> Fechar o Caixa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="card mb-1 p-2">
+                <div class="mb-2 active">
+                  <b>Informe o saldo final do caixa fisicamente</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <input type="number" class="form-control" placeholder="Ex: R$200,00" required>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Valor total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalcaixa link p-2"></div>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Receita Total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalreceitacaixa  p-2"></div>
+                </div>
+                <div class="p-1 mb-1 active d-block">
+                  <b>Gasto total do sistema:</b>
+                </div>
+                <div class="mb-3">
+                  <div class="totalgastocaixa  p-2"></div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Fechar o Caixa</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Fechar o Caixa -->
+
+
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3">
+              <div class="border-box p-1 mb-3">
+                <div class="e-navlist e-navlist--active-bg">
+                  <ul class="nav">
+                    <li class="nav-item"><a class=" nav-link px-2 active" href="./caixa.html"><i class=" bi bi-cart-fill nav_icon"></i><span> Caixa</span></a></li>
+                    <li class="nav-item"><a class="link nav-link px-2" href="./faturas.html"><i class="bi bi-receipt-cutoff nav_icon mr-1"></i><span> Faturas</span></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="menu-content-responsivo">
+                <div class="limpar-atribuir">
+                  <div class="border-btn separar w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico"><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
+                    </div>
+                  </div>
+                  <div class="border-btn w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar"><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="abrir-fechar-caixa">
+                  <div class="border-btn separar w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
+                    </div>
+                  </div>
+                  <div class="border-btn w-100 p-2 mb-3">
+                    <div class="e-navlist e-navlist--active-bg">
+                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="card p-3">
+                    <!-- Tab Menu -->
+                    <nav>
+                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Caixa</button>
+                        <button class="nav-link" id="nav-fluxo-tab" data-bs-toggle="tab" data-bs-target="#nav-fluxo" type="button" role="tab" aria-controls="nav-fluxo" aria-selected="false">Fluxo de Caixa</button>
+                      </div>
+                    </nav>
+                    <!-- Tab Content Caixa -->
+                    <div class="tab-content" id="nav-tabContent">
+                      <div class="tab-pane animate__animated animate__fadeIn active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="card-body">
+                          <div>
+                            <div class="row">
+
+
+                              <div class="link text-center text-sm-left mb-2 mb-sm-0">
+                                <!-- caixa -->
+                                <div class="atributos__grid budget__container">
+                                  <div class="border-box container clearfix">
+                                    <div class="income">
+                                      <!-- <i class="fas fa-money-check-alt mb-3"  style="color: green; font-size: 1.8em"></i> -->
+                                      <img class="caixa_estatisticas_icons" src="assets/img/money_up.svg">
+                                      <h2 class="atribuicao_icome__title">Receitas</h2>
+                                      <div class="income__list">
+                                        <!-- Lista de receitas -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="top">
+                                    <div class="top__design">
+                                      <div class="top__design--element"></div>
+                                    </div>
+
+                                    <div class=" top__main">
+                                      <div class=" budget">
+                                        <!-- <i class="fas fa-cash-register mb-3"  style="color: #0d6efd; font-size: 3.6em"></i> -->
+                                        <img class="caixa_balance_estatisticas_icons" src="assets/img/balance.svg">
+                                        <div class="budget__title">
+                                          <span class="budget__title--month">%Month%</span>
+                                        </div>
+
+                                        <div class="budget__value" data-toggle="tooltip" title="Saldo Total">0</div>
+                                      </div>
+                                    </div>
+                                    <div class="border-box chart mb-2" data-toggle="tooltip" title="Gráfico"></div>
+
+                                    <div class="top__data">
+                                      <div class="budget__data">
+                                        <div class="budget__income clearfix">                                          
+                                          <div class="budget__income--text">
+                                            <i class="fas fa-arrow-circle-up"  style="color: green; font-size: 1.2em"></i> Receita</div>
+                                          <div class="">
+                                            <div class="icome__title budget__income--value">0</div>
+                                            <div class="budget__income--percentage">&nbsp;</div>
+                                          </div>
+                                        </div>
+
+                                        <div class="budget__expenses clearfix">                             
+                                          <div class="budget__expenses--text">
+                                            <i class="fas fa-arrow-circle-down"  style="color: red; font-size: 1.2em"></i> Gasto</div>
+                                          <div class=" gasto_e_percentual clearfix">
+                                            <div class="expenses__title budget__expenses--value">R$ 0</div>
+                                            <div class="budget__expenses--percentage" data-toggle="tooltip" title="Percentual">0%</div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="add mb-3">
+
+                                      <div class="parent add__container" requeired>
+                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto">
+                                          <option value="inc">Receita</option>
+                                          <option value="exp">Gasto</option>
+                                        </select>
+                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição">
+                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="border-box container clearfix">
+                                    <div class="expenses">     
+                                      <img class="caixa_estatisticas_icons" src="assets/img/money_down.svg">                                          
+                                      <h2 class="atribuicao_expenses__title">Gastos</h2>
+                                      <div class="expenses__list">
+                                        <!-- lista de gastos -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane link animate__animated animate__fadeIn" id="nav-fluxo" role="tabpanel" aria-labelledby="nav-fluxo-tab">
+
+                        <div class="col">
+                          <div class="row">
+                            <div class="col mb-3">
+                              <div class=" p-3">
+
+                                <!-- Fluxo de Caixa -->
+
+                                <!-- <table border="0" cellspacing="5" cellpadding="5">
+                                  <tbody>
+                                    <tr>
+                                      <td>Data minima:</td>
+                                      <td><input class="form-control min" type="text" name="min"></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Data maxima:</td>
+                                      <td><input class="form-control max" type="text" name="max"></td>
+                                    </tr>
+                                  </tbody>
+                                </table> -->
+
+                                <table id="tabfluxo" class="border-box p-2 exportar form-data display nowrap crud table   animate__animated animate__fadeIn table-bordered table-hover table-striped  table-responsive  dataTable no-footer">
+
+                                  <thead class="thead">
+                                    <tr>
+                                      <th scope="col">Data</th>
+                                      <th scope="col">Serviços</th>
+                                      <th scope="col">Clientes</th>
+                                      <th scope="col">Receita</th>
+                                      <th scope="col">Gasto</th>
+                                      <th scope="col">Saldo</th>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody class="tbody">
+                                    <tr>
+                                      <td id="td-header" data-label="DATA">14/12/2021</td>
+                                      <td data-label="SERVIÇOS">1</td>
+                                      <td data-label="CLIENTES">1</td>
+                                      <td data-label="RECEITA">R$ 50,00</td>
+                                      <td data-label="GASTO">R$ 00,00</td>
+                                      <td data-label="SALDO">R$ 50,00</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div class="border-btn-pdf  mt-3 p-2">
+                                  <button id="pdf" class="btn-pdf btn btn-secondary">
+                                    <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabfluxo').DataTable();
+                          });
+                        </script>
+
+                        <!-- Exportar pdf -->
+                        <script src="assets/js/export_pdf.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+
+                        <!-- fim Fluxo de Caixa  -->
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- Javascript do fluxo de caixa -->
+  <script src="assets/js/moment.js"></script>
+  <script src="assets/js/tabela-data.js"></script>
+
+
+
+  <!-- Javascript do projeto caixa -->
+  <script src='/assets/js/caixa/chart.js'></script>
+  <script src="/assets/js/caixa/app.js"></script>
+
+
+</body>
+<footer id="footer" class="border-top">
+  <div class="align-items-center animate__animated animate__fadeIn">
+    <span>
+      <a class="github bi-github" href="https://github.com/echo-noise/carro-limpo">
+      </a> Sistema administrativo para lava rápido - Carro Limpo | 2021
+    </span>
+    <div>
+      <span type="button" class="desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#termosModal" data-bs-whatever="@mdo">Termos de uso</span>
+    </div>
+</footer>
+</div>
+</div>
+
+</html>
