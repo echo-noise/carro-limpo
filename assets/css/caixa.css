@@ -368,7 +368,7 @@ h2 {
 
 .budget__value {
   font-family: bold;
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
 }
 
 .budget__income--percentage {
@@ -457,7 +457,7 @@ h2 {
 .budget__income--value,
 .budget__expenses--value {
   /* color: #3a3a3a00; */
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
 }
 
 .budget__data {

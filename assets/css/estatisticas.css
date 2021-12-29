@@ -45,7 +45,7 @@
   width: 100%;
   height: auto;
   text-align: center;
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
   text-transform: uppercase;
   font-weight: 400px;
   color: #008cff;
@@ -95,7 +95,7 @@
 
 .estatisticas_titulo {
   font-size: 30px;
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
   color: rgb(87, 87, 87);
   background: hsla(0, 0%, 100%, 0.9);
   border-radius: 10px;

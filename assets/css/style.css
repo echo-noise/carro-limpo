@@ -1,8 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face{
+  font-family: BebasNeue;
+  src: url(/assets/fonts/BebasNeue.ttf);
+}
+
+@font-face{
+  font-family: Lato;
+  src: url(/assets/fonts/Lato.ttf);
+}
+
 body {
   align-items: center;
   background: #f5f7fa;
   font-size: 0.875rem;
-  font-family: lato, sans-serif;
+  font-family: lato, sans-serif; 
   position: relative;
   background-image: url("../img/bg.png");
   background-repeat: repeat-x;
