@@ -1,4 +1,4 @@
-import django.forms as forms
+from django import forms
 from django.contrib.auth.hashers import check_password
 from .models import Endereco, Perfil, Loja
 

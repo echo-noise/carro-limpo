@@ -125,11 +125,13 @@ var budgetController = (function () {
     // Setting data into local storage
     storeData: function () {
       localStorage.setItem("data", JSON.stringify(data));
+      console.log(data);
     },
 
     // Getting data from local storage
     getStoredData: function () {
-      var localData = JSON.parse(localStorage.getItem("data"));
+      //var localData = JSON.parse(localStorage.getItem("data"));
+      var localData = getCaixa();
       return localData;
     },
 

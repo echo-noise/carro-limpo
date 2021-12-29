@@ -1,4 +1,4 @@
-import django.forms as forms
+from django import forms
 
 from .models import Servico
 

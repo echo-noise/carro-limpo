@@ -98,3 +98,16 @@ function ajaxDelete(id){
         error: function(response) { console.log(response['message']);}
     });
 }
+
+function getCaixa() {
+    var data = [];
+    $.ajax({
+        type: "GET",
+        url: "get/",
+        async: false,
+        success: function(response) { data = response; },
+        error: function(response) { console.log("erro ao recuperar dados do caixa"); }
+
+    });
+    return data;
+}

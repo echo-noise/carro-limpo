@@ -5,11 +5,13 @@
   <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
   <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
   <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
-  <link rel="stylesheet" href="{% static "css/dataRangeTables.css" %}">
+  <link rel="stylesheet" href="{% static "css/dataRangetables.css" %}">
   <link rel="stylesheet" href="{% static "css/caixa.css" %}">
   {% include "includes/datatables_media.html" %}
 {% endblock %}
 {% block page_js %}
+  <!-- ajax -->
+  <script src="{% static "js/ajax.js" %}"></script>
   <!-- JavaScript do tooltip -->
   <script src="{% static "js/tooltip.js" %}"></script>
   <!-- JavaScript do projeto clientes-->
@@ -43,13 +45,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="post" action="{% url 'abrir_caixa' %}">
+              {% csrf_token %}
               <div class="border-box mb-2 p-2">
                 <div class="mb-2 active">
                   <b>Saldo Inicial</b>
                 </div>
                 <div class=" p-1 mb-1">
-                  <input class="form-control" type="number" placeholder="Ex: R$200,00" requeired>
+                  <input class="form-control" name="value" type="number" placeholder="Ex: R$200,00" required>
                 </div>
               </div>
           </div>
@@ -123,12 +126,12 @@
                 <div class="limpar-atribuir">
                   <div class="border-btn separar w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico"><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
+                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
                     </div>
                   </div>
                   <div class="border-btn w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar"><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
+                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
                     </div>
                   </div>
                 </div>
@@ -136,12 +139,12 @@
                 <div class="abrir-fechar-caixa">
                   <div class="border-btn separar w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
+                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo" {% if caixa %}disabled{% endif %}><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
                     </div>
                   </div>
                   <div class="border-btn w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
+                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
                     </div>
                   </div>
                 </div>
@@ -176,7 +179,7 @@
                                   <div class="border-box container clearfix">
                                     <div class="income">
                                       <!-- <i class="fas fa-money-check-alt mb-3"  style="color: green; font-size: 1.8em"></i> -->
-                                      <img class="caixa_estatisticas_icons" src="assets/img/money_up.svg">
+                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_up.svg' %}">
                                       <h2 class="atribuicao_icome__title">Receitas</h2>
                                       <div class="income__list">
                                         <!-- Lista de receitas -->
@@ -191,7 +194,7 @@
                                     <div class=" top__main">
                                       <div class=" budget">
                                         <!-- <i class="fas fa-cash-register mb-3"  style="color: #0d6efd; font-size: 3.6em"></i> -->
-                                        <img class="caixa_balance_estatisticas_icons" src="assets/img/balance.svg">
+                                        <img class="caixa_balance_estatisticas_icons" src="{% static 'img/balance.svg' %}">
                                         <div class="budget__title">
                                           <span class="budget__title--month">%Month%</span>
                                         </div>
@@ -226,18 +229,18 @@
                                     <div class="add mb-3">
 
                                       <div class="parent add__container" requeired>
-                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto">
+                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto" {% if not caixa %} disabled {% endif %}>
                                           <option value="inc">Receita</option>
                                           <option value="exp">Gasto</option>
                                         </select>
-                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição">
-                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required>
+                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição" {% if not caixa %} disabled {% endif %}>
+                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required {% if not caixa %} disabled {% endif %}>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="border-box container clearfix">
                                     <div class="expenses">     
-                                      <img class="caixa_estatisticas_icons" src="assets/img/money_down.svg">                                          
+                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_down.svg' %}">                                          
                                       <h2 class="atribuicao_expenses__title">Gastos</h2>
                                       <div class="expenses__list">
                                         <!-- lista de gastos -->
@@ -250,6 +253,7 @@
                           </div>
                         </div>
                       </div>
+                      <!-- fluxo de caixa -->
                       <div class="tab-pane link animate__animated animate__fadeIn" id="nav-fluxo" role="tabpanel" aria-labelledby="nav-fluxo-tab">
 
                         <div class="col">
