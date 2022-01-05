@@ -34,48 +34,55 @@ def abrir_caixa(request):
 
         return HttpResponseRedirect(reverse("caixa"), {"form": form})
 
+@login_required
 def get_caixa(request):
-    caixa = Caixa.objects.filter(aberto=True).first()
     if request.method == "GET":
-        inc = []
-        exp = []
+        _caixa = Caixa.objects.filter(aberto=True).first()
 
-        receitas = Transacao.objects.filter(caixa=caixa)
+        if _caixa:
+            inc = []
+            exp = []
+
+            receitas = Transacao.objects.filter(caixa=_caixa)
         
-        if receitas:
-            for receita in receitas:
-                inc.append({"id": receita.applet_id, "value": receita.value, "description": receita.description})
+            if receitas:
+                for receita in receitas:
+                    inc.append({"id": receita.applet_id, "value": receita.value, "description": receita.description})
         
-        despesas = Despesa.objects.filter(caixa = caixa)
+            despesas = Despesa.objects.filter(caixa=_caixa)
         
-        if despesas:
-            for despesa in despesas:
-                exp.append({"id": despesa.applet_id, 
-                            "value": despesa.value, 
-                            "description": despesa.description, 
-                            "percentage": despesa.percentage}
-                            )
-            despesas_total = despesas.aggregate(Sum('value'))
-            despesas_total = float(despesas_total['value__sum'])
-            percentage = despesas.aggregate(Sum('percentage'))
-            percentage = int(percentage['percentage__sum'])
-        else: 
-            despesas_total = 0
-            percentage = 0
+            if despesas.exists():
+                for despesa in despesas:
+                    exp.append({"id": despesa.applet_id, 
+                                "value": despesa.value, 
+                                "description": despesa.description, 
+                                "percentage": despesa.percentage}
+                                )
+                despesas_total = despesas.aggregate(Sum('value'))
+                despesas_total = float(despesas_total['value__sum'])
+                percentage = despesas.aggregate(Sum('percentage'))
+                percentage = int(percentage['percentage__sum'])
+            else: 
+                despesas_total = 0
+                percentage = 0
         
-        receitas_total = receitas.aggregate(Sum('value'))
-        receitas_total = float(receitas_total['value__sum'])
+            receitas_total = receitas.aggregate(Sum('value'))
+            receitas_total = float(receitas_total['value__sum'])
 
-        budget = receitas_total - despesas_total
+            budget = receitas_total - despesas_total
 
-        data = {
-            "allItems": {"exp": exp, "inc": inc},
-            "totals": {"exp": despesas_total, "inc": receitas_total},
-            "budget": budget,
-            "percentage": percentage
-        }
+            data = {
+                "allItems": {"exp": exp, "inc": inc},
+                "totals": {"exp": despesas_total, "inc": receitas_total},
+                "budget": budget,
+                "percentage": percentage
+            }
 
-        return JsonResponse(data, status=200)
+            return JsonResponse(data, status=200)
+        return JsonResponse({}, status=404)
 
+@login_required
+def post_caixa(request):
+    pass
 
 

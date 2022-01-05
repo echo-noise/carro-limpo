@@ -15,7 +15,7 @@
   <!-- JavaScript do tooltip -->
   <script src="{% static "js/tooltip.js" %}"></script>
   <!-- JavaScript do projeto clientes-->
-  <script src="{% static "js/crud_servico.js" %}"></script>
+  <script src="{% static "js/crud_cliente.js" %}"></script>
   <!-- JavaScript do projeto sidebar-->
   <script src="{% static "js/sidebar_menu.js" %}"></script>
   <!-- Javascript do projeto search -->
@@ -261,26 +261,13 @@
                             <div class="col mb-3">
                               <div class=" p-3">
 
-                                <!-- Fluxo de Caixa -->
-
-                                <!-- <table border="0" cellspacing="5" cellpadding="5">
-                                  <tbody>
-                                    <tr>
-                                      <td>Data minima:</td>
-                                      <td><input class="form-control min" type="text" name="min"></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Data maxima:</td>
-                                      <td><input class="form-control max" type="text" name="max"></td>
-                                    </tr>
-                                  </tbody>
-                                </table> -->
-
                                 <table id="tabfluxo" class="border-box p-2 exportar form-data display nowrap crud table   animate__animated animate__fadeIn table-bordered table-hover table-striped  table-responsive  dataTable no-footer">
 
                                   <thead class="thead">
                                     <tr>
                                       <th scope="col">Data</th>
+                                      <th scope="col">Serviços</th>
+                                      <th scope="col">Clientes</th>
                                       <th scope="col">Receita</th>
                                       <th scope="col">Gasto</th>
                                       <th scope="col">Saldo</th>
@@ -289,22 +276,12 @@
                                   </thead>
                                   <tbody class="tbody">
                                     <tr>
-                                      <td id="td-header" data-label="DATA">01/01/2021</td>
-                                      <td data-label="RECEITA">R$ 2.500,00</td>
-                                      <td data-label="GASTO">R$ 210,00</td>
-                                      <td data-label="SALDO">R$ 2.290,00</td>
-                                    </tr>
-                                    <tr>
-                                      <td id="td-header" data-label="DATA">01/02/2021</td>
-                                      <td data-label="RECEITA">R$ 2.500,00</td>
-                                      <td data-label="GASTO">R$ 210,00</td>
-                                      <td data-label="SALDO">R$ 2.290,00</td>
-                                    </tr>
-                                    <tr>
-                                      <td id="td-header" data-label="DATA">01/03/2021</td>
-                                      <td data-label="RECEITA">R$ 2.500,00</td>
-                                      <td data-label="GASTO">R$ 210,00</td>
-                                      <td data-label="SALDO">R$ 2.290,00</td>
+                                      <td id="td-header" data-label="DATA">14/12/2021</td>
+                                      <td data-label="SERVIÇOS">1</td>
+                                      <td data-label="CLIENTES">1</td>
+                                      <td data-label="RECEITA">R$ 50,00</td>
+                                      <td data-label="GASTO">R$ 00,00</td>
+                                      <td data-label="SALDO">R$ 50,00</td>
                                     </tr>
                                   </tbody>
                                 </table>

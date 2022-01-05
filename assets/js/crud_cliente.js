@@ -42,7 +42,7 @@ $(document).ready(function(){
 				});
 				$(this).parents("tr").find(".error").first().focus();
 	     	    if(!empty) {
-					ajaxPost(clienteSerialize());
+					ajaxPost(clienteSerialize(), getUrl());
 
 					input.each(function(){
 				                    $(this).parent("td").html($(this).val());

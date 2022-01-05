@@ -13,7 +13,7 @@
   <!-- JavaScript do tooltip -->
   <script src="{% static "js/tooltip.js" %}"></script>
   <!-- JavaScript do projeto clientes-->
-  <script src="{% static "js/crud_servico.js" %}"></script>
+  <script src="{% static "js/crud_fatura.js" %}"></script>
   <!-- JavaScript do projeto sidebar-->
   <script src="{% static "js/sidebar_menu.js" %}"></script>
   <!-- Javascript do projeto search -->
@@ -21,7 +21,7 @@
   <!-- Javascript do projeto tabela -->
   <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
   <!-- ajax fatura -->
-  <script type="text/javascript" src="{% static "js/fatura/gerar.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -226,19 +226,20 @@
                                 <th scope="col">Serviço</th>
                                 <th scope="col">Vencimento</th>
                                 <th scope="col">Valor</th>
+                                <th class="acoes">Ações</th>
                               </tr>
                             </thead>
                             <tbody class="tbody">
                               {% for fatura in faturas %}
-                              <tr>
+                              <tr data-id={{ fatura.id }}>
                                 <td id="td-header" data-label="FATURA">
                                   <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo" onclick=gerarFatura({{ fatura.id }})></i>
                                 </td>
                                 <td data-label="Nº"> {{ fatura.id }}</td>
                                 {% if fatura.pago %}
-                                  <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning">Pago</span></td>
+                                  <td id="status" data-label="STATUS"><span class="status badge badge-boxed badge-soft-primary">PAGO</span></td>
                                 {% else %}
-                                  <td id="status" data-label="STATUS"><span class="badge badge-boxed badge-soft-warning" id="status_tabela">Pendente</span></td>
+                                  <td id="status" data-label="STATUS"><span class="status badge badge-boxed badge-soft-warning" id="status_tabela">PENDENTE</span></td>
                                 {% endif %}
                                 <td data-label="NOME"> {{ fatura.cliente.nome }}</td>
                                 <td data-label="CPF/CNPJ"> {{ fatura.cliente.documento }}</td>
@@ -248,13 +249,29 @@
                                 <td data-label="SERVIÇO"> {{ fatura.servico.nome }}</td>
                                 <td data-label="VENCIMENTO"> {{ fatura.data|date:"d/m/Y" }}</td>
                                 <td id="valor" data-label="VALOR"> R$ {{ fatura.servico.valor}} </td>
+                                <td data-label="AÇOES">
+                                  <div class="acoes-align">
+                                    <a type="button" class="add" title="Salvar" data-toggle="tooltip" ;><i class="material-icons">&#xE03B;</i></a>
+                                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                    <a class="delete" title="Apagar" data-toggle="tooltip" onclick=ajaxDelete({{ fatura.id }});><i class="material-icons">&#xE872;</i></a>
+                                  </div>
+                                </td>
                               </tr>
                               {% endfor %}
 
                             </tbody>
 
                           </table>
-
+                          <script>
+                            function change_text() {
+                              var x, i;
+                              x = document.querySelectorAll("#status_pagamento");
+                              for (i = 0; i < x.length; i++) {
+                                x[i].classList.add("badge-soft-primary");
+                                x[i].innerHTML = "Pago";
+                              }
+                            }
+                          </script>
 
                         </div>
 

@@ -7,3 +7,5 @@ uploads/
 .env
 run
 db.*
+carro_limpo/
+sent_emails/

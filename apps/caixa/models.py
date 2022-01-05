@@ -11,7 +11,7 @@ class Caixa(models.Model):
 
 class Transacao(models.Model):
     caixa = models.ForeignKey(Caixa, on_delete=models.CASCADE)
-    applet_id = models.IntegerField()
+    applet_id = models.IntegerField(default=0)
     value = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length=100, blank=True)
 

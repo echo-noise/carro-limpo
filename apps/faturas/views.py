@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from apps.clientes.models import Cliente
 from apps.servicos.models import Servico
 from .models import Fatura
-from .forms import FaturaForm
+from .forms import FaturaEditForm, FaturaForm
 
 # Create your views here.
 @login_required
@@ -72,3 +72,30 @@ def gerar(request, id):
             return JsonResponse(response, status=200)
         else: 
             return JsonResponse(status=400)
+
+@login_required
+def excluir(request, id):
+    if request.method == 'POST':
+        try:
+            fatura = get_object_or_404(Fatura, pk=id) 
+            fatura.delete()
+            response = {"error": False, "message": "Deletar: sucesso"}
+            return JsonResponse(response, status=200, safe=False)
+        except:
+            response = {"error": True, "message": "Deletar: erro"}
+            return JsonResponse(response, status=400, safe=False)
+
+@login_required
+def atualizar(request, id):
+    if request.method == "POST":
+        fatura = get_object_or_404(Fatura, pk=id)
+        form = FaturaEditForm(request.POST, instance=fatura)
+
+        if form.is_valid():
+            form.save()
+            response = {"error": False, "message": "Atualizar: sucesso"}
+            
+            return JsonResponse(response, status=200, safe=False)
+        else:
+            response = {"error": True, "message": "Atualizar: erro"}
+            return JsonResponse(response, status=400, safe=False) 

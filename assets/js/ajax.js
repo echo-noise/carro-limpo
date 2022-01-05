@@ -14,6 +14,99 @@ function getToken() {
     return csrfToken;
 }
 
+// serializadores
+function servicoSerialize() {
+    var servico = {
+    "nome": $("td[data-label='NOME']").children().first().val(),
+    "valor": $("td[data-label='VALOR']").children().first().val()
+    };
+    return servico;
+}
+
+function clienteSerialize() {
+    var cliente = {
+							"nome": $("td[data-label='NOME']").children().first().val(),
+							"telefone": $("td[data-label='TELEFONE']").children().first().val(),
+							"email": $("td[data-label='E-MAIL']").children().first().val(),
+							"documento": $("td[data-label='CPF/CNPJ']").children().first().val(),
+							"placa": $("td[data-label='PLACA']").children().first().val(), 
+							"marca": $("td[data-label='MARCA']").children().first().val(),
+							"modelo": $("td[data-label='MODELO']").children().first().val(),
+							"cor": $("td[data-label='COR']").children().first().val(),
+						};
+    return cliente;
+}
+
+function transacaoSerialize(item, type) { 
+    var transacao = {
+        "applet_id": item.id,
+        "value": item.value,
+        "description": item.description,
+        "type": type
+    }
+    console.log("serialized:");
+    console.log(transacao);
+}
+
+function faturaSerialize(select) {
+    var flag;
+    if (select.val() == "PAGO") { flag = true; console.log(flag);} 
+    else { flag = false; }
+
+    console.log(flag);
+
+    var fatura = { "pago": flag };
+
+    return fatura;
+
+}
+
+// posts
+function ajaxPost(data, url) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        dataType: 'json',
+        headers: {'X-CSRFToken': getToken() },
+        data: data,
+        success: function (response) {
+            if(!response['error']) {
+                console.log(response['message']);
+                
+                if($("tr#edit")) {
+                  $("tr#edit").attr("data-id", response['id']);
+                  $("tr#edit").removeAttr("id");
+                }
+            }
+        },
+        error: function(response) { console.log(response['message']); } 
+    });
+}
+
+function ajaxDelete(id){
+    $.ajax({
+        type: "POST",
+        url: "delete/" + id,
+        headers: {'X-CSRFToken': getToken() },
+        success: function(response) { console.log(response['message']); },
+        error: function(response) { console.log(response['message']);}
+    });
+}
+
+// gets
+function getCaixa() {
+    var data = [];
+    $.ajax({
+        type: "GET",
+        url: "get/",
+        async: false,
+        success: function(response) { data = response; },
+        error: function(response) { console.log("erro ao recuperar dados do caixa"); }
+
+    });
+    return data;
+}
+
 function gerarFatura(id) {
     $.ajax({
         type: "GET",
@@ -46,68 +139,4 @@ function gerarFatura(id) {
                     alert("Erro ao gerar fatura");
                 }
     });
-}
-
-function servicoSerialize() {
-    var servico = {
-    "nome": $("td[data-label='NOME']").children().first().val(),
-    "valor": $("td[data-label='VALOR']").children().first().val()
-    };
-    return servico;
-}
-
-function clienteSerialize() {
-    var cliente = {
-							"nome": $("td[data-label='NOME']").children().first().val(),
-							"telefone": $("td[data-label='TELEFONE']").children().first().val(),
-							"email": $("td[data-label='E-MAIL']").children().first().val(),
-							"documento": $("td[data-label='CPF/CNPJ']").children().first().val(),
-							"placa": $("td[data-label='PLACA']").children().first().val(), 
-							"marca": $("td[data-label='MARCA']").children().first().val(),
-							"modelo": $("td[data-label='MODELO']").children().first().val(),
-							"cor": $("td[data-label='COR']").children().first().val(),
-						};
-    return cliente;
-}
-
-function ajaxPost(data) {
-    $.ajax({
-        type: 'POST',
-        url: getUrl(),
-        dataType: 'json',
-        headers: {'X-CSRFToken': getToken() },
-        data: data,
-        success: function (response) {
-            if(!response['error']) {
-                console.log(response['message']);
-
-                $("tr#edit").attr("data-id", response['id']);
-                $("tr#edit").removeAttr("id");
-            }
-        },
-        error: function(response) { console.log(response['message']); } 
-    });
-}
-
-function ajaxDelete(id){
-    $.ajax({
-        type: "POST",
-        url: "delete/" + id,
-        headers: {'X-CSRFToken': getToken() },
-        success: function(response) { console.log(response['message']); },
-        error: function(response) { console.log(response['message']);}
-    });
-}
-
-function getCaixa() {
-    var data = [];
-    $.ajax({
-        type: "GET",
-        url: "get/",
-        async: false,
-        success: function(response) { data = response; },
-        error: function(response) { console.log("erro ao recuperar dados do caixa"); }
-
-    });
-    return data;
 }

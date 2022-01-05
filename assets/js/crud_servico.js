@@ -30,7 +30,7 @@ $(document).ready(function(){
 				});
 				$(this).parents("tr").find(".error").first().focus();
 				if(!empty){
-					ajaxPost(servicoSerialize());
+					ajaxPost(servicoSerialize(), getUrl());
 
 					input.each(function(){
 						$(this).parent("td").html($(this).val());
