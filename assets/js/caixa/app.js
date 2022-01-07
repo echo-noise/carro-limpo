@@ -46,7 +46,7 @@ var budgetController = (function () {
   };
 
   return {
-    addItem: function (type, des, val) {
+    addItem: function (type, des, val, id) {
       var newItem, ID;
 
       // Create new ID
@@ -58,9 +58,9 @@ var budgetController = (function () {
 
       // Create new item based on 'inc' or 'exp' type
       if (type === "exp") {
-        newItem = new Expense(ID, des, val);
+        newItem = new Expense(id, des, val);
       } else if (type === "inc") {
-        newItem = new Income(ID, des, val);
+        newItem = new Income(id, des, val);
       }
 
       // Push it to our data structure
@@ -123,10 +123,10 @@ var budgetController = (function () {
     },
 
     // Setting data into local storage
-    storeData: function () {
-      localStorage.setItem("data", JSON.stringify(data));
-      console.log(data);
-    },
+    //storeData: function () {
+    //  localStorage.setItem("data", JSON.stringify(data));
+    //  console.log(data);
+    //},
 
     // Getting data from local storage
     getStoredData: function () {
@@ -426,13 +426,13 @@ var controller = (function (budgetCtrl, UICtrl) {
 
       // 3. create income items
       storedData.allItems.inc.forEach(function (cur) {
-        var newIncItem = budgetCtrl.addItem("inc", cur.description, cur.value);
+        var newIncItem = budgetCtrl.addItem("inc", cur.description, cur.value, cur.id);
         UICtrl.addListItem(newIncItem, "inc");
       });
 
       // 4. Creating  expense items
       storedData.allItems.exp.forEach(function (cur) {
-        var newExpItem = budgetCtrl.addItem("exp", cur.description, cur.value);
+        var newExpItem = budgetCtrl.addItem("exp", cur.description, cur.value, cur.id);
         UICtrl.addListItem(newExpItem, "exp");
       });
 
@@ -479,26 +479,32 @@ var controller = (function (budgetCtrl, UICtrl) {
     input = UIController.getInput();
 
     if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
-      // 2. Add the item to the budget controller
-      newItem = budgetController.addItem(
-        input.type,
-        input.description,
-        input.value
-      );
-      // 3. Add the item to the UI
-      UICtrl.addListItem(newItem, input.type);
+      
+      // push to db
+      ajaxPost(transacaoSerialize(input), "insert/");
+      loadData();
+      ///// 2. Add the item to the budget controller
+      ///newItem = budgetController.addItem(
+      ///  input.type,
+      ///  input.description,
+      ///  input.value
+      ///);
+      ///// 3. Add the item to the UI
+      ///UICtrl.addListItem(newItem, input.type);
 
-      // 4. Clear the fields
+      ///// 4. Clear the fields
       UICtrl.clearFields();
 
-      // 5. Calculate and update budget
-      updateBudget();
+      ///// 5. Calculate and update budget
+      ///updateBudget();
 
-      // 6. calculate and update percentages
-      updatePercentages();
+      ///// 6. calculate and update percentages
+      ///updatePercentages();
+
+      
 
       // 7. save to localstorage
-      budgetCtrl.storeData();
+      // budgetCtrl.storeData();
     }
   };
 
@@ -560,8 +566,10 @@ var controller = (function (budgetCtrl, UICtrl) {
       splitID = itemID.split("-");
       type = splitID[0];
       ID = parseInt(splitID[1]);
+      // deletar item
       // 1. Delete the item from the data structure
       budgetCtrl.controlDelete(type, ID);
+      ajaxDelete(ID);
 
       // 2. Delete the item from UI
       UICtrl.deleteListItem(itemID);
@@ -573,7 +581,7 @@ var controller = (function (budgetCtrl, UICtrl) {
       updatePercentages();
 
       // 5. save to localstorage
-      budgetCtrl.storeData();
+      //budgetCtrl.storeData();
     }
   };
 
@@ -599,6 +607,7 @@ var controller = (function (budgetCtrl, UICtrl) {
 
     //6. delete local storage
     budgetCtrl.deleteDataFromStorage();
+    // deletar todos os items
   };
 
   return {

@@ -37,15 +37,13 @@ function clienteSerialize() {
     return cliente;
 }
 
-function transacaoSerialize(item, type) { 
+function transacaoSerialize(item) { 
     var transacao = {
-        "applet_id": item.id,
         "value": item.value,
         "description": item.description,
-        "type": type
+        "type": item.type
     }
-    console.log("serialized:");
-    console.log(transacao);
+    return transacao;
 }
 
 function faturaSerialize(select) {
@@ -71,8 +69,6 @@ function ajaxPost(data, url) {
         data: data,
         success: function (response) {
             if(!response['error']) {
-                console.log(response['message']);
-                
                 if($("tr#edit")) {
                   $("tr#edit").attr("data-id", response['id']);
                   $("tr#edit").removeAttr("id");
