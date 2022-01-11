@@ -61,13 +61,16 @@ function faturaSerialize(select) {
 
 // posts
 function ajaxPost(data, url) {
+    var objID;
     $.ajax({
         type: 'POST',
         url: url,
+        async: false,
         dataType: 'json',
         headers: {'X-CSRFToken': getToken() },
         data: data,
         success: function (response) {
+            objID = response['object'];
             if(!response['error']) {
                 if($("tr#edit")) {
                   $("tr#edit").attr("data-id", response['id']);
@@ -77,6 +80,7 @@ function ajaxPost(data, url) {
         },
         error: function(response) { console.log(response['message']); } 
     });
+    return objID;
 }
 
 function ajaxDelete(id){
@@ -97,7 +101,7 @@ function getCaixa() {
         url: "get/",
         async: false,
         success: function(response) { data = response; },
-        error: function(response) { console.log("erro ao recuperar dados do caixa"); }
+        error: function(response) { console.log("Erro ao recuperar dados do caixa"); }
 
     });
     return data;
@@ -128,7 +132,8 @@ function gerarFatura(id) {
                     $("#fatura_valor").html(response['fatura_valor']);
                     $("#fatura_data").html(response['fatura_data']);
                     $("#fatura_status").html(response['fatura_status']);
-                    $("#status_tabela").html("Pago");
+                    $("#status_tabela").html("PAGO");
+                    $("#status_tabela").toggleClass("badge-soft-warning badge-soft-primary");
                 },
         error: function(response) { 
                     console.log(response['message']); 

@@ -1,95 +1,77 @@
-from django.shortcuts import render
 from django.urls import reverse
 from django.http.response import HttpResponseRedirect, JsonResponse
-from django.db.models import Sum
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import FormView, View
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import DeleteView
+from django.views.generic import FormView, View, TemplateView, DeleteView
+from django.db.models import Count
 
-
+from apps.faturas.models import Fatura
 from .models import Caixa, Transacao
-from .forms import TransacaoForm, TransacaoBaseForm
-from .helper import buscar_caixa_atual
+from .forms import TransacaoForm, CaixaFecharForm
+from .helper import buscar_caixa_atual, caixa_as_dict
 
 # Create your views here.
-@login_required
-def caixa(request):
-    template = "caixa.html"
-    caixa = Caixa.objects.filter(aberto=True).first()
 
-    return render(request, template, {"caixa": caixa})
+# caixa
+class CaixaView(LoginRequiredMixin, TemplateView):
+    template_name = "caixa.html"
 
-@login_required
-def abrir_caixa(request):
-    if request.method == "POST":
-        form = TransacaoBaseForm(request.POST)
+    def get_context_data(self, **kwargs):
+        context = super(CaixaView, self).get_context_data(**kwargs)
+        _cache = Caixa.objects.filter(user=self.request.user)
+        context['fluxo_caixa'] = _cache.filter(aberto=False)
+        context['caixa'] = _cache.filter(aberto=True).first()
+        return context
 
-        if form.is_valid():
-            caixa = Caixa(user=request.user)
-            caixa.save()
+class CaixaAbrirView(LoginRequiredMixin, FormView):
+    form_class = TransacaoForm
 
-            entrada = form.save(commit=False)
-            entrada.caixa = caixa
-            entrada.description = "Valor Inicial"
-            entrada.type = 'inc'
-            entrada.save()
-        else: 
-            print("form invalida.")
-            print(form.errors)
+    def form_valid(self, form):
+        caixa = Caixa(user=self.request.user)
+        caixa.save()
+        form.save(caixa=caixa)
 
         return HttpResponseRedirect(reverse("caixa"), {"form": form})
 
 class CaixaGetDataView(LoginRequiredMixin, View):
     def get(self, request):
-        _caixa = buscar_caixa_atual(request.user) 
+        caixa = buscar_caixa_atual(request.user)
+        return JsonResponse(caixa_as_dict(caixa), status=200)
 
-        if _caixa:
-            inc = []
-            exp = []
+class CaixaFecharView(LoginRequiredMixin, FormView):
+    form_class = CaixaFecharForm
+    template_name = "blank.html"
 
-            _cache = Transacao.objects.filter(caixa=_caixa)
-            receitas = _cache.filter(type='inc')
+    def form_valid(self, form):
+        caixa = buscar_caixa_atual(self.request.user)
+        caixa_dict = caixa_as_dict(caixa)
         
-            if receitas.exists():
-                for receita in receitas:
-                    inc.append({"id": int(receita.id), 
-                                "value": float(receita.value), 
-                                "description": receita.description})            
-                receitas_total = receitas.aggregate(Sum('value'))
-                receitas_total = float(receitas_total['value__sum'])
-            else:
-                receitas_total = 0
-
-            despesas = _cache.filter(type='exp')
+        # contar numero de clientes e servicos
+        faturas = Fatura.objects.filter(transacao__caixa=caixa)
+        if faturas.exists():
+            numero_clientes = faturas.values('cliente').distinct().count()
+            numero_servicos = faturas.count()
+        else:
+            numero_clientes = 0
+            numero_servicos = 0
         
-            if despesas.exists():
-                for despesa in despesas:
-                    exp.append({"id": int(despesa.id),
-                                "value": float(despesa.value), 
-                                "description": despesa.description, 
-                                 }
-                                )
-                despesas_total = despesas.aggregate(Sum('value'))
-                despesas_total = float(despesas_total['value__sum'])
-                percentage = round(despesas_total / receitas_total * 100)
-            else: 
-                despesas_total = 0
-                percentage = 0
+        # diferenca do saldo fisico para o saldo total do caixa
+        saldo_fisico = float(form.cleaned_data.get("saldo_fisico"))
+        dif =  saldo_fisico - caixa_dict["budget"]
 
-            budget = receitas_total - despesas_total
+        # atualizar objeto caixa
+        caixa.aberto = False
+        caixa.diferenca = dif
+        caixa.clientes = numero_clientes
+        caixa.servicos = numero_servicos
+        caixa.saldo = caixa_dict["budget"]
+        caixa.receita = caixa_dict["totals"]["inc"]
+        caixa.despesa = caixa_dict["totals"]["exp"]
+        caixa.save()
 
-            data = {
-                "allItems": {"exp": exp, "inc": inc},
-                "totals": {"exp": despesas_total, "inc": receitas_total},
-                "budget": budget,
-                "percentage": percentage
-            }
+        return HttpResponseRedirect(reverse("caixa"), {"form": form})
 
-            return JsonResponse(data, status=200)
-        return JsonResponse({}, status=404)
 
+# transações
 class TransacaoFormView(LoginRequiredMixin, FormView):
     form_class = TransacaoForm
     template_name = 'blank.html'
@@ -97,10 +79,10 @@ class TransacaoFormView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         _caixa = buscar_caixa_atual(self.request.user)
         if _caixa:
-            form.save(caixa=_caixa)
+            obj = form.save(caixa=_caixa)
             
-            return JsonResponse(form.cleaned_data, status=200)
-        return JsonResponse(form.cleaned_data, status=404)
+            return JsonResponse({"object": int(obj.id)}, status=200)
+        return JsonResponse({"message": "erro: o caixa não encontrado"}, status=404)
 
     def form_invalid(self, form):
         return JsonResponse(form.errors.as_json(), status=400, safe=False)
@@ -108,3 +90,4 @@ class TransacaoFormView(LoginRequiredMixin, FormView):
 class TransacaoDeleteView(LoginRequiredMixin, DeleteView):
     model = Transacao
     success_url = "/"
+

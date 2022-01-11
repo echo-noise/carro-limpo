@@ -1,39 +1,49 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import FormView, ListView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import UpdateView
 
 from apps.clientes.models import Cliente
 from apps.servicos.models import Servico
 from .models import Fatura
-from .forms import FaturaEditForm, FaturaForm
+from .forms import FaturaForm
 
 # Create your views here.
-@login_required
-def listar(request):
-    template = "faturas.html"
+class FaturaListarView(LoginRequiredMixin, ListView):
+    template_name = "faturas.html"
+    context_object_name = "faturas"
 
-    clientes = Cliente.objects.filter(user=request.user)
-    servicos = Servico.objects.filter(user=request.user)
-    faturas = Fatura.objects.filter(user=request.user)
+    def get_queryset(self):
+        return Fatura.objects.filter(user=self.request.user)
 
-    return render(request, template, {"clientes": clientes, "servicos": servicos, "faturas": faturas})
+    def get_context_data(self, **kwargs):
+        context = super(FaturaListarView, self).get_context_data(**kwargs)
+        context['servicos'] = Servico.objects.filter(user=self.request.user)
+        context['clientes'] = Cliente.objects.filter(user=self.request.user)
+        return context
 
-@login_required
-def salvar(request):
-    if request.method == "POST":
-        form = FaturaForm(request.POST)
+class FaturaFormView(LoginRequiredMixin, FormView):
+    form_class = FaturaForm
 
-        if form.is_valid():
-            fatura = form.save(commit=False)
-            fatura.user = request.user
-            fatura.save()
-            print("fatura salva")
+    def form_valid(self, form):
+        form.save(self.request.user)
+        return HttpResponseRedirect(reverse("faturas"), {"form": form})
 
-            return HttpResponseRedirect(reverse("faturas"), {"form": form})
-        else: 
-            print("form invalida")
-            return HttpResponseRedirect(reverse("faturas"), {"form": form})
+class FaturaDeleteView(LoginRequiredMixin, DeleteView):
+    model = Fatura
+    success_url = "/"
+
+class FaturaUpdateView(LoginRequiredMixin, UpdateView):
+    model = Fatura
+    fields = ['pago']
+    success_url = "/"
+    
+    def form_valid(self, form):
+        super().form_valid(form)
+        return JsonResponse({"error": False, "message": "Atualizar: sucesso"})
 
 @login_required
 def gerar(request, id):
@@ -72,30 +82,3 @@ def gerar(request, id):
             return JsonResponse(response, status=200)
         else: 
             return JsonResponse(status=400)
-
-@login_required
-def excluir(request, id):
-    if request.method == 'POST':
-        try:
-            fatura = get_object_or_404(Fatura, pk=id) 
-            fatura.delete()
-            response = {"error": False, "message": "Deletar: sucesso"}
-            return JsonResponse(response, status=200, safe=False)
-        except:
-            response = {"error": True, "message": "Deletar: erro"}
-            return JsonResponse(response, status=400, safe=False)
-
-@login_required
-def atualizar(request, id):
-    if request.method == "POST":
-        fatura = get_object_or_404(Fatura, pk=id)
-        form = FaturaEditForm(request.POST, instance=fatura)
-
-        if form.is_valid():
-            form.save()
-            response = {"error": False, "message": "Atualizar: sucesso"}
-            
-            return JsonResponse(response, status=200, safe=False)
-        else:
-            response = {"error": True, "message": "Atualizar: erro"}
-            return JsonResponse(response, status=400, safe=False) 

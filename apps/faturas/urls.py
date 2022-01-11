@@ -3,10 +3,10 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("", listar, name="faturas"),
-    path("salvar/", salvar, name="salvar"),
+    path("", FaturaListarView.as_view(), name="faturas"),
+    path("salvar/", FaturaFormView.as_view(), name="salvar"),
     path("gerar/<int:id>", gerar, name="gerar"),
-    path("delete/<int:id>", excluir, name="delete"),
-    path("edit/<int:id>", atualizar, name="edit"),
+    path("delete/<int:pk>", FaturaDeleteView.as_view(), name="delete"),
+    path("edit/<int:pk>", FaturaUpdateView.as_view(), name="edit"),
 
 ]

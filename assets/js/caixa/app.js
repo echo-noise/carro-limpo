@@ -50,11 +50,11 @@ var budgetController = (function () {
       var newItem, ID;
 
       // Create new ID
-      if (data.allItems[type].length > 0) {
-        ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
-      } else {
-        ID = 0;
-      }
+      //if (data.allItems[type].length > 0) {
+      //  ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+      //} else {
+      //  ID = 0;
+      //}
 
       // Create new item based on 'inc' or 'exp' type
       if (type === "exp") {
@@ -481,27 +481,26 @@ var controller = (function (budgetCtrl, UICtrl) {
     if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
       
       // push to db
-      ajaxPost(transacaoSerialize(input), "insert/");
-      loadData();
+      var id = ajaxPost(transacaoSerialize(input), "insert/");
+      //loadData();
       ///// 2. Add the item to the budget controller
-      ///newItem = budgetController.addItem(
-      ///  input.type,
-      ///  input.description,
-      ///  input.value
-      ///);
+      newItem = budgetController.addItem(
+        input.type,
+        input.description,
+        input.value,
+        id
+      );
       ///// 3. Add the item to the UI
-      ///UICtrl.addListItem(newItem, input.type);
+      UICtrl.addListItem(newItem, input.type);
 
       ///// 4. Clear the fields
       UICtrl.clearFields();
 
       ///// 5. Calculate and update budget
-      ///updateBudget();
+      updateBudget();
 
       ///// 6. calculate and update percentages
-      ///updatePercentages();
-
-      
+      updatePercentages();
 
       // 7. save to localstorage
       // budgetCtrl.storeData();

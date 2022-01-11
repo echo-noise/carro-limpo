@@ -1,15 +1,15 @@
 from django import forms
 
-from .models import Transacao
+from .models import Transacao, Caixa
+from .helper import caixa_as_dict
 
-class TransacaoBaseForm(forms.ModelForm):
-
+class TransacaoForm(forms.ModelForm):
     class Meta:
         model = Transacao
-        fields = ('value',)
+        fields = ('value', 'description', 'type')
 
     def save(self, caixa, commit=True):
-        _obj = super(TransacaoBaseForm, self).save(commit=False)
+        _obj = super(TransacaoForm, self).save(commit=False)
         _obj.caixa = caixa
 
         if commit:
@@ -17,6 +17,5 @@ class TransacaoBaseForm(forms.ModelForm):
 
         return _obj
 
-class TransacaoForm(TransacaoBaseForm):
-    class Meta(TransacaoBaseForm.Meta):
-        fields = TransacaoBaseForm.Meta.fields + ('description', 'type')
+class CaixaFecharForm(forms.Form):
+    saldo_fisico = forms.DecimalField(max_digits=10, decimal_places=2)

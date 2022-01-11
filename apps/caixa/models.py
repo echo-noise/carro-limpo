@@ -7,6 +7,12 @@ from datetime import date
 class Caixa(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     data = models.DateField(default=date.today, unique=True)
+    receita = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    despesa = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    saldo = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    diferenca = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    clientes = models.IntegerField(blank=True)
+    servicos = models.IntegerField(blank=True)
     aberto = models.BooleanField(default=True)
 
 class Transacao(models.Model):
