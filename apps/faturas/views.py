@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView, ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import UpdateView
 
+from carro_limpo.views import UserRequiredUpdateView
 from apps.clientes.models import Cliente
 from apps.servicos.models import Servico
 from .models import Fatura
@@ -36,20 +36,15 @@ class FaturaDeleteView(LoginRequiredMixin, DeleteView):
     model = Fatura
     success_url = "/"
 
-class FaturaUpdateView(LoginRequiredMixin, UpdateView):
+class FaturaUpdateView(LoginRequiredMixin, UserRequiredUpdateView):
     model = Fatura
     fields = ['pago']
     success_url = "/"
-    
-    def form_valid(self, form):
-        super().form_valid(form)
-        return JsonResponse({"error": False, "message": "Atualizar: sucesso"})
 
 @login_required
 def gerar(request, id):
     if request.method == "GET":
         fatura = get_object_or_404(Fatura, pk=id)
-        print (fatura.pago)
 
         if fatura:
             if not fatura.pago:

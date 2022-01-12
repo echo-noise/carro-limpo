@@ -1,4 +1,4 @@
-from django.db.models import Sum, F, FloatField
+from django.db.models import Sum 
 
 from .models import Caixa, Transacao
 
@@ -39,13 +39,13 @@ def caixa_as_dict(caixa):
 
         if querysets[0].exists():
             inc = transacao_make_dict(querysets[0])
+            inc_total = transacao_get_total(querysets[0])
         if querysets[1].exists():
             exp = transacao_make_dict(querysets[1])
+            exp_total = transacao_get_total(querysets[1])
 
-        inc_total = transacao_get_total(querysets[0])
-        exp_total = transacao_get_total(querysets[1])
 
-        if (inc_total > 0) and (exp_total > 0):
+        if inc_total and exp_total:
             percentage = round((exp_total / inc_total) * 100)
 
         budget = inc_total - exp_total

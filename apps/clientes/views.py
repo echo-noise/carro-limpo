@@ -1,61 +1,25 @@
-from django.http.response import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from carro_limpo.views import UserRequiredCreateView, UserRequiredUpdateView
 
 from .models import Cliente
-from .forms import ClienteForm
+from .forms import ClienteForm, ClienteCreateForm
 
-@login_required
-def listar(request):
-    template = "clientes.html"
-    clientes = Cliente.objects.filter(user = request.user)
-    return render(request, template, {"clientes": clientes})
+class ClienteListarView(LoginRequiredMixin, ListView):
+    template_name = "clientes.html"
+    context_object_name = "clientes"
 
-@login_required
-def inserir(request):
-    if request.method == 'POST':
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            cliente = form.save(commit=False)
-            cliente.user = request.user
-            cliente.save()
+    def get_queryset(self):
+        return Cliente.objects.filter(user=self.request.user)
 
-            response = { 
-                "id": cliente.id,
-                "error": False,
-                "message": "Adicionar: sucesso"
-            }
-            return JsonResponse(response, status=200, safe=False)
-        else:
-            return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
+class ClienteCreateView(LoginRequiredMixin, UserRequiredCreateView):
+    form_class = ClienteCreateForm
 
-@login_required
-def excluir(request, id):
-    if request.method == 'POST':
-        if id == -1:
-            response = {"error": False, "message": "Deletar: vazio"}
-            return JsonResponse(response, status=200, safe=False)
-        else:
-            try:
-                cliente = get_object_or_404(Cliente, pk=id) 
-                cliente.delete()
-                response = {"error": False, "message": "Deletar: sucesso"}
-                return JsonResponse(response, status=200, safe=False)
-            except:
-                response = {"error": True, "message": "Deletar: erro"}
-                return JsonResponse(response, status=400, safe=False)
-
-@login_required
-def atualizar(request, id):
-    if request.method == "POST":
-        cliente = get_object_or_404(Cliente, pk=id)
-        form = ClienteForm(request.POST, instance=cliente)
-
-        if form.is_valid():
-            form.save()
-            response = {"error": False, "message": "Atualizar: sucesso"}
-            
-            return JsonResponse(response, status=200, safe=False)
-        else:
-            response = {"error": True, "message": "Atualizar: erro"}
-            return JsonResponse(response, status=400, safe=False) 
+class ClienteUpdateView(LoginRequiredMixin, UserRequiredUpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    
+class ClienteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Cliente
+    success_url = "/"

@@ -78,7 +78,10 @@ function ajaxPost(data, url) {
                 }
             }
         },
-        error: function(response) { console.log(response['message']); } 
+        error: function(response) { 
+            console.log(response['responseJSON']['message']); 
+            alert(response['responseJSON']['user_alert']);
+        } 
     });
     return objID;
 }

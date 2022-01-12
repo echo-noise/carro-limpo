@@ -2,9 +2,10 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView, View, TemplateView, DeleteView
-from django.db.models import Count
 
 from apps.faturas.models import Fatura
+from carro_limpo.helper import default_response, error_response, ADD
+
 from .models import Caixa, Transacao
 from .forms import TransacaoForm, CaixaFecharForm
 from .helper import buscar_caixa_atual, caixa_as_dict
@@ -81,11 +82,11 @@ class TransacaoFormView(LoginRequiredMixin, FormView):
         if _caixa:
             obj = form.save(caixa=_caixa)
             
-            return JsonResponse({"object": int(obj.id)}, status=200)
+            return JsonResponse({"object": int(obj.id)}, status=201)
         return JsonResponse({"message": "erro: o caixa não encontrado"}, status=404)
 
     def form_invalid(self, form):
-        return JsonResponse(form.errors.as_json(), status=400, safe=False)
+        return JsonResponse(error_response(form.errors, ADD), status=400)
 
 class TransacaoDeleteView(LoginRequiredMixin, DeleteView):
     model = Transacao

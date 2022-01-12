@@ -1,65 +1,25 @@
-from django.http.response import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from carro_limpo.views import UserRequiredCreateView, UserRequiredUpdateView
 
 from .models import Servico
-from .forms import ServicoForm
+from .forms import ServicoForm, ServicoCreateForm
 
-# Create your views here.
-@login_required
-def listar(request):
-    template = "servicos.html"
-    servicos = Servico.objects.filter(user = request.user)
-    return render(request, template, {"servicos": servicos})
+class ServicoListarView(LoginRequiredMixin, ListView):
+    template_name = "servicos.html"
+    context_object_name = "servicos"
 
-@login_required
-def inserir(request):
-    if request.method == 'POST':
-        form = ServicoForm(request.POST)
+    def get_queryset(self):
+        return Servico.objects.filter(user=self.request.user)
 
-        if form.is_valid():
-            servico = form.save(commit=False)
-            servico.user = request.user
-            servico.save()
+class ServicoCreateView(LoginRequiredMixin, UserRequiredCreateView):
+    form_class = ServicoCreateForm
 
-            response = { 
-                "id": servico.id,
-                "nome": servico.nome,
-                "valor": servico.valor,
-                "error": False,
-                "message": "Adicionar: sucesso"
-            }
-            return JsonResponse(response, status=200, safe=False)
-
-        return JsonResponse({"error": True, "message": "Adicionar: erro"}, status=400)
-
-@login_required
-def excluir(request, id):
-    if request.method == 'POST':
-        if id == -1:
-            response = {"error": False, "message": "Deletar: vazio"}
-            return JsonResponse(response, status=200, safe=False)
-
-        try:
-            servico = get_object_or_404(Servico, pk=id) 
-            servico.delete()
-            response = {"error": False, "message": "Deletar: sucesso"}
-            return JsonResponse(response, status=200, safe=False)
-        except:
-            response = {"error": True, "message": "Deletar: erro"}
-            return JsonResponse(response, status=400, safe=False)
-
-@login_required
-def atualizar(request, id):
-    if request.method == "POST":
-        servico = get_object_or_404(Servico, pk=id)
-        form = ServicoForm(request.POST, instance=servico)
-
-        if form.is_valid():
-            form.save()
-            response = {"error": False, "message": "Atualizar: sucesso"}
-            
-            return JsonResponse(response, status=200, safe=False)
-
-        response = {"error": True, "message": "Atualizar: erro"}
-        return JsonResponse(response, status=400, safe=False) 
+class ServicoUpdateView(LoginRequiredMixin, UserRequiredUpdateView):
+    model = Servico
+    form_class = ServicoForm
+    
+class ServicoDeleteView(LoginRequiredMixin, DeleteView):
+    model = Servico
+    success_url = "/"

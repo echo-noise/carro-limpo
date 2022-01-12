@@ -3,8 +3,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path("", listar, name="clientes"),
-    path("insert", inserir, name="inserir"),
-    path("delete/<int:id>", excluir, name="excluir"),
-    path("update/<int:id>", atualizar, name="atualizar"),
+    path("", ClienteListarView.as_view(), name="clientes"),
+    path("insert", ClienteCreateView.as_view(), name="inserir"),
+    path("delete/<int:pk>", ClienteDeleteView.as_view(), name="excluir"),
+    path("update/<int:pk>", ClienteUpdateView.as_view(), name="atualizar"),
 ]

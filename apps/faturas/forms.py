@@ -1,17 +1,8 @@
-from django import forms
-
 from .models import Fatura
+from carro_limpo.forms import UserRequiredForm
 
-class FaturaForm(forms.ModelForm):
+class FaturaForm(UserRequiredForm):
     class Meta:
         model = Fatura
         exclude = ('user', 'data', 'pago')
     
-    def save(self, user, commit=True):
-        _obj = super(FaturaForm, self).save(commit=False)
-        _obj.user = user
-
-        if commit:
-            _obj.save()
-
-        return _obj
