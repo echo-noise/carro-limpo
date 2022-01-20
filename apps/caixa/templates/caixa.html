@@ -2,26 +2,17 @@
 {% load static %}
 {% block title %} | Caixa {% endblock %}
 {% block page_css %}  
-  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
-  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
-  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
+  {% include 'includes/cssdefault.html' %}
   <link rel="stylesheet" href="{% static "css/dataRangetables.css" %}">
   <link rel="stylesheet" href="{% static "css/caixa.css" %}">
-  {% include "includes/datatables_media.html" %}
 {% endblock %}
 {% block page_js %}
-  <!-- ajax -->
-  <script src="{% static "js/ajax.js" %}"></script>
-  <!-- JavaScript do tooltip -->
-  <script src="{% static "js/tooltip.js" %}"></script>
+  {% include 'includes/jsdefault.html' %}
   <!-- JavaScript do projeto clientes-->
   <script src="{% static "js/crud_cliente.js" %}"></script>
-  <!-- JavaScript do projeto sidebar-->
-  <script src="{% static "js/sidebar_menu.js" %}"></script>
-  <!-- Javascript do projeto search -->
-  <script src="{% static "js/search.js" %}"></script>
-  <!-- Javascript do projeto tabela -->
-  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+  <!-- ajax -->
+  <script src="{% static "js/ajax.js" %}"></script>
+  <!-- tabela -->
   <script type="text/javascript" src="{% static "js/tabela-listar-data.js" %}"></script>
 {% endblock %}
 {% block body %}
@@ -274,7 +265,7 @@
                                       <th scope="col">Receita</th>
                                       <th scope="col">Gasto</th>
                                       <th scope="col">Saldo</th>
-                                      <th scope="col">Diferença do saldo final</th>
+                                      <th scope="col">Falta/Sobra</th>
 
                                     </tr>
                                   </thead>
@@ -287,7 +278,7 @@
                                       <td data-label="RECEITA">R$ {{ obj.receita }}</td>
                                       <td data-label="GASTO">R$ {{ obj.despesa }}</td>
                                       <td data-label="SALDO">R$ {{ obj.saldo}} </td>
-                                      <td data-label="DIFERENÇA">R$ {{ obj.diferenca }} </td>
+                                      <td data-label="DIFERENÇA"><span class="badge badge-boxed {% if obj.diferenca >= 0 %} badge-soft-primary {% else %} badge-soft-alert {% endif %}">R$ {{ obj.diferenca }}</span> </td>
                                     </tr>
                                     {% endfor %}
                                   </tbody>
@@ -311,9 +302,7 @@
                         </script>
 
                         <!-- Exportar pdf -->
-                        <script src="{% static "js/export_pdf.js" %}"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                        {% include 'includes/export_pdf.html' %} 
 
                         <!-- fim Fluxo de Caixa  -->
 

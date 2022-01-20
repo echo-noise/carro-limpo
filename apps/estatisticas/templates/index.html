@@ -1,41 +1,31 @@
-{% extends "base_head.html" %} 
+{% extends 'base_head.html' %}
 {% load static %}
 
-{% block title %} | Estatísticas {% endblock %}
 {% block page_css %}
-  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
-  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
-  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
-  {% include "includes/datatables_media.html" %}
-{% endblock %}
+  <!-- CSS Projeto -->
+  {% include "includes/cssdefault.html" %}
+{% endblock%}
 {% block page_js %}
-  <!-- JavaScript do tooltip -->
-  <script src="{% static "js/tooltip.js" %}"></script>
+  {% include 'includes/jsdefault.html' %}
   <!-- JavaScript do projeto clientes-->
   <script src="{% static "js/crud_cliente.js" %}"></script>
-  <!-- JavaScript do projeto sidebar-->
-  <script src="{% static "js/sidebar_menu.js" %}"></script>
-  <!-- Javascript do projeto search -->
-  <script src="{% static "js/search.js" %}"></script>
-  <!-- Javascript do projeto tabela -->
-  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+  <!-- Javascript do projeto Chart estatisticas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 {% endblock %}
 
 {% block body %}
-<body id="body-pd" class="body-pd2">
+{% include 'includes/header.html' %}
 
-  <!-- header -->
-  {% include "includes/header.html" %}
 
+  <!-- nav menu esquerdo -->
   <div>
     <div>
-      <!-- nav menu esquerdo -->
-      {% include "includes/nav.html" %}
+      {% include 'includes/nav.html' %}
+
       <!--Container Main-->
 
       <!-- modal Termos -->
-      {% include "includes/tos.html" %}
-
+      {% include 'includes/tos.html' %}
 
       <!-- Conteudo -->
       <main class="ms-sm-auto col-lg-12">
@@ -46,95 +36,61 @@
 
             <div id="box">
               <div class="box_border_top animate__animated animate__fadeInDown">
-                <img class="estatisticas_icons" src="{% static "img/servicos.svg" %}">
+                <img class="estatisticas_icons" src="assets/img/servicos.svg">
                 <p class="box_border_bottom box_titulo">serviços realizados</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">75</p>
+                  <p id="box_border_bottom" class="box_border_top">1</p>
                 </div>
               </div>
             </div>
 
             <div id="box">
               <div class="box_border_top animate__animated animate__fadeInDown">
-                <img class="estatisticas_icons" src="{% static "img/lucro.svg" %}">
+                <img class="estatisticas_icons" src="assets/img/lucro.svg">
                 <p class="box_border_bottom box_titulo">faturamento mensal</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">R$ 690,00</p>
+                  <p id="box_border_bottom" class="box_border_top">R$ 50,00</p>
                 </div>
               </div>
             </div>
 
             <div id="box-clientes">
               <div class="box_border_top animate__animated animate__fadeInDown">
-                <img class="estatisticas_icons" src="{% static "img/clientes.svg" %}">
+                <img class="estatisticas_icons" src="assets/img/clientes.svg">
                 <p class="box_border_bottom box_titulo">clientes cadastrados</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">45</p>
+                  <p id="box_border_bottom" class="box_border_top">1</p>
                 </div>
               </div>
             </div>
 
-
           </div>
-          <div class="table-estatisticas">
-            <div class="animate__animated animate__fadeIn">
-              <div class="table-title">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="h5">Estatísticas:</p>
-                  </div>
-                </div>
-              </div>
 
-              <table id="tabestatisticas" class="border-box table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped  table-responsive">
-                <thead class="thead">
-                  <tr>
-                    <th scope="col">Data</th>
-                    <th scope="col">Clientes</th>
-                    <th scope="col">Receita</th>
-                    <th scope="col">Gasto</th>
-                    <th scope="col">Saldo</th>
-                  </tr>
-                </thead>
-                <tbody class="tbody">
-                  <tr>
-                    <td data-label="DATA">27/09/2021</td>
-                    <td data-label="CLIENTES">50</td>
-                    <td data-label="RECEITA" class="budget__value">R$ 0</td>
-                    <td data-label="GASTO" class="totalgastocaixa">R$ 0</td>
-                    <td data-label="SALDO" class="totalreceitacaixa">R$ 0</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="border-btn-pdf mt-3 p-2">
-              <button id="pdf" class="btn btn-pdf btn-secondary">
-                <i class="icone fas fa-file-pdf" style="font-size: 1.4em"></i> PDF</button>
+          <div class="content-central">
+
+            <div class="content">
+              <p class="h5 mb-3">Estatísticas mensais:</p>
+              <div class="p-3">
+                <canvas id="estatisticasChart"></canvas>
               </div>
             </div>
 
-            <script>
-              $(document).ready(function () {
-                $('#tabestatisticas').DataTable();
-              });
-            </script>
+              <!-- chart-estatisticas -->
+              <script type="text/javascript" src="{% static 'js/estatisticas/chart-estatisticas.js' %}"></script>
 
-            <!-- Exportar pdf -->
-            <script src="{% static "js/export_pdf.js" %}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+            </div>
 
 
-            <!-- Javascript do projeto caixa -->
-            <script src="{% static "js/caixa/chart.js" %}"></script>
-            <script src="{% static "js/caixa/app.js" %}"></script>
           </div>
+
       </main>
     </div>
   </div>
 </body>
-{% include "includes/footer.html" %}
+{% include 'includes/footer.html' %}
+</div>
 </div>
 {% endblock %}

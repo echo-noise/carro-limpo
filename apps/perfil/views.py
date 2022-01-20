@@ -1,41 +1,64 @@
+from ast import Pass
 from django.http.response import HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView, UpdateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 
-from .forms import UserProfileForm, LojaForm, ImageForm, EnderecoForm
+
+from .forms import UserEditForm, LojaForm, ImageForm, EnderecoForm, UserProfileForm
+from carro_limpo.helper import error_response, EDIT 
 
 # Create your views here.
-@login_required
-def perfil(request):
-    template = "administrador.html"
+class PerfilView(LoginRequiredMixin, TemplateView):
+    template_name = "administrador.html"
 
-    return render(request, template)
+    def user_profile_forms(self, request):
+        forms = []
+        user_form = UserEditForm(request.POST, instance=self.request.user)
+        user_form_extended = UserProfileForm(request.POST, instance=self.request.user.profile)
+        password_form = PasswordChangeForm(self.request.user)
 
-@login_required
-def salvar_perfil(request):
-    if request.method == "POST":
-        form = UserProfileForm(data=request.POST, request=request)
+        forms.append(user_form)
+        forms.append(user_form_extended)
 
-        if form.is_valid():
-            _name = form.cleaned_data.get("user_name")
-            _email = form.cleaned_data.get("user_email")
-            _fone = form.cleaned_data.get("user_fone")
+        if(request.POST.get("old_password")):
+            password_form = PasswordChangeForm(self.request.user, request.POST)
+            forms.append(password_form)
 
-            request.user.first_name = _name
-            request.user.email = _email
-            request.user.profile.telefone = (_fone) 
-
-            _new_password = form.cleaned_data.get("new_password")
-            
-            if _new_password:
-                request.user.set_password(_new_password)
-
-            request.user.save()
-        else:
-            print(form.errors)
+        for form in forms:
+            if form.is_valid():
+                form.save()
         
-        return HttpResponseRedirect(reverse("perfil"), {"form": form})
+        response = { 
+            "user_form": user_form,
+            "user_form_extended": user_form_extended,
+            "password_form": password_form
+        }
+
+        return response
+
+    def loja_forms(self, request):
+        form = LojaForm(request.POST, instance=request.user.loja)
+        form_endereco = EnderecoForm(request.POST, instance=request.user.endereco)
+
+        if form.is_valid() and form_endereco.is_valid():
+            form.save()
+            form_endereco.save()
+        
+        response = { "loja_form": form,
+                     "endereco_form": form_endereco
+                   }
+        return response
+
+    def post(self, request, *args, **kwargs):
+        if int(request.POST.get("form-id")) == 0:
+            return self.render_to_response(self.user_profile_forms(request))
+        elif int(request.POST.get("form-id")) == 1:
+            print(1)
+            return self.render_to_response(self.loja_forms(request))
+        
 
 @login_required
 def salvar_estabelecimento(request):

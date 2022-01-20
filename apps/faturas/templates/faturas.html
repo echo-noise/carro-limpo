@@ -3,23 +3,13 @@
 
 {% block title %} | Faturas {% endblock %}
 {% block page_css %}  
-  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
-  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
-  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
-  {% include "includes/datatables_media.html" %}
+  {% include "includes/cssdefault.html" %}
 {% endblock %}
 
 {% block page_js %}
-  <!-- JavaScript do tooltip -->
-  <script src="{% static "js/tooltip.js" %}"></script>
-  <!-- JavaScript do projeto clientes-->
+  {% include 'includes/jsdefault.html' %}
+  <!-- JavaScript do projeto faturas-->
   <script src="{% static "js/crud_fatura.js" %}"></script>
-  <!-- JavaScript do projeto sidebar-->
-  <script src="{% static "js/sidebar_menu.js" %}"></script>
-  <!-- Javascript do projeto search -->
-  <script src="{% static "js/search.js" %}"></script>
-  <!-- Javascript do projeto tabela -->
-  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
   <!-- ajax fatura -->
   <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
 {% endblock %}
@@ -283,11 +273,8 @@
 
 
                         <!-- Exportar pdf -->
-                        <script src="{% static "js/export_pdf.js" %}"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
-
-
+                        {% include 'includes/export_pdf.html' %} 
+  ''
                         <!-- Javascript Imprimir div-->
                         <script src="{% static "js/fatura/imprimir.js" %}" ></script>
 

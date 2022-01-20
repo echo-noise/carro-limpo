@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView, View, TemplateView, DeleteView
 
 from apps.faturas.models import Fatura
-from carro_limpo.helper import default_response, error_response, ADD
+from carro_limpo.helper import error_response, ADD
 
 from .models import Caixa, Transacao
 from .forms import TransacaoForm, CaixaFecharForm

@@ -162,9 +162,9 @@
                             <div class="tab-content pt-4" id="myTabContent">
                               <!-- Dados Cadastrais -->
                               <div class="tab-pane animate__animated animate__fadeIn active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <form class="form" novalidate="" method="post" action="{% url "salvar_perfil" %}">
-                                  {{ form.errors }} 
+                                <form class="form" id="profileform" method="post" >
                                   {% csrf_token %}
+                                  <input type="hidden" name="form-id" value=0>
                                   <div class="row">
                                     <div class="col mb-2">
                                       <div class="row">
@@ -174,13 +174,17 @@
                                           <div class="form-group">
 
                                             <label>Seu nome</label>
-                                            <input class="form-control" type="text" name="user_name" placeholder="Nome" value="{{ user.first_name }}" required>
+                                            <input class="form-control" type="text" name="first_name" placeholder="Nome" value="{{ user.first_name }}" required>
+                                            {{ user_form.first_name.errors }}
                                           </div>
                                         </div>
                                         <div class="col col mb-2">
                                           <div class="form-group">
                                             <label>Telefone</label>
-                                            <input class="form-control" name="user_fone" type="text" name="telefone" placeholder="(00) 0000-0000" value="{{ user.profile.telefone }}">
+                                            <input class="form-control" name="telefone" type="text" name="telefone" placeholder="(00) 0000-0000" value="{{ user.profile.telefone }}">
+                                            {% if user_form_extended.telefone.errors %}
+                                            <p class="form-error">{{ user_form_extended.telefone.errors }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>
@@ -188,7 +192,10 @@
                                         <div class="col mb-3">
                                           <div class="form-group">
                                             <label>E-mail</label>
-                                            <input class="form-control" name="user_email" type="email" placeholder="usuario@exemplo.com" value="{{ user.email }}" required>
+                                            <input class="form-control" name="email" type="email" placeholder="usuario@exemplo.com" value="{{ user.email }}" required>
+                                            {% if user_form.email.errors %}
+                                            <p class="form-error">{{ user_form.email.errors.as_text }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>
@@ -204,7 +211,10 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Senha Atual</label>
-                                            <input class="form-control" name="password" type="password" placeholder="••••••" required>
+                                            <input class="form-control" name="old_password" type="password" placeholder="••••••" required>
+                                            {% if password_form.old_password.errors %}
+                                            <p class="form-error">{{ password_form.old_password.errors.as_text }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>
@@ -212,7 +222,10 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Nova Senha</label>
-                                            <input class="form-control" name="new_password" type="password" placeholder="••••••">
+                                            <input class="form-control" name="new_password1" type="password" placeholder="••••••">
+                                            {% if password_form.new_password1.errors %}
+                                            <p class="form-error">{{ password_form.new_password1.errors.as_text }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>
@@ -220,7 +233,10 @@
                                         <div class="col">
                                           <div class="form-group">
                                             <label>Confirmar <span class="d-none d-xl-inline">Senha</span></label>
-                                            <input class="form-control" name="confirm_password" type="password" placeholder="••••••">
+                                            <input class="form-control" name="new_password2" type="password" placeholder="••••••">
+                                            {% if password_form.new_password2.errors %}
+                                            <p class="form-error">{{ password_form.new_password2.errors.as_text }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>
@@ -238,8 +254,9 @@
 
                               <!-- Estabelecimento-->
                               <div class="tab-pane animate__animated animate__fadeIn" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <form class="form" novalidate="" method="post" action="{% url "salvar_estabelecimento" %}">
+                                <form class="form" method="post">
                                   {% csrf_token %}
+                                  <input type="hidden" name="form-id" value=1>
                                   <div class="row">
                                     <div class="col mb-2">
                                       <!-- nome / cnpj -->
@@ -252,6 +269,7 @@
                                           <div class="form-group">
                                             <label>Razão Social</label>
                                             <input class="form-control" type="text" name="nome" placeholder="Razão Social do Negócio" value="{{ user.loja.nome }}">
+
                                           </div>
                                         </div>
                                         <div class="col mb-2">
@@ -272,7 +290,10 @@
                                         <div class="col mb-2">
                                           <div class="form-group">
                                             <label>Email</label>
-                                            <input class="form-control" type="text" name="email" placeholder="exemplo@email.com" value="{{ user.loja.email }}">
+                                            <input class="form-control" type="email" name="email" placeholder="exemplo@email.com" value="{{ user.loja.email }}">
+                                            {% if loja_form.email.errors %}
+                                            <p class="form-error">{{ loja_form.email.errors.as_text }}</p>
+                                            {% endif %}
                                           </div>
                                         </div>
                                       </div>

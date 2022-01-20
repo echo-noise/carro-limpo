@@ -13,7 +13,9 @@
   position: relative;
 }
 
-#box{
+
+
+#box {
   background: hsla(0, 0%, 100%, 0.7);
   border-top: 1px solid #dee2e6;
   border-left: 1px solid #dee2e6;
@@ -25,7 +27,6 @@
   float: left;
   text-align: center;
 }
-
 
 #box-clientes {
   background: hsla(0, 0%, 100%, 0.7);
@@ -44,10 +45,10 @@
   width: 100%;
   height: auto;
   text-align: center;
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
   text-transform: uppercase;
   font-weight: 400px;
-  color: #008CFF;
+  color: #008cff;
   font-size: 25px;
   margin: 2px 0px 14px auto;
 }
@@ -88,12 +89,13 @@
   margin: 10px auto;
   width: auto;
   height: 73px;
-  filter: invert(15%) sepia(71%) saturate(1224%) hue-rotate(176deg) brightness(93%) contrast(92%);
+  filter: invert(15%) sepia(71%) saturate(1224%) hue-rotate(176deg)
+    brightness(93%) contrast(92%);
 }
 
 .estatisticas_titulo {
   font-size: 30px;
-  font-family: Bebas Neue;
+  font-family: BebasNeue;
   color: rgb(87, 87, 87);
   background: hsla(0, 0%, 100%, 0.9);
   border-radius: 10px;
@@ -110,9 +112,39 @@
   grid-gap: 0.5em;
 }
 
+.content-central {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 22px;
+  align-items: stretch;
+}
+
+#estatisticasChart {
+  height:100% !important;
+  width: 100% !important;
+  min-height:100px !important;
+  min-width: 200px !important;
+}
+
+@media screen and (max-width: 1330px){
+  .content-central {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  #estatisticasChart {
+    max-height:400px !important;
+    max-width: 800px !important;
+  }
+
+}
 
 @media screen and (max-width: 920px) {
-  .estatisticas_titulo { 
+
+  .estatisticas_titulo {
     margin: -30px auto;
   }
   .box_titulo {
@@ -127,6 +159,9 @@
 }
 
 @media screen and (max-width: 872px) {
+
+
+
   .content_estatisticas {
     text-align: center;
     padding: 0px 0px 20px;
@@ -135,13 +170,13 @@
   #box {
     float: left;
     height: 150px;
-    text-align: center
+    text-align: center;
   }
 
   #box-clientes {
     float: left;
     height: 150px;
-    text-align: center
+    text-align: center;
   }
   .estatisticas_titulo {
     font-size: 22px;
@@ -156,7 +191,8 @@
     margin: 8px auto;
     width: auto;
     height: 50px;
-    filter: invert(15%) sepia(71%) saturate(1224%) hue-rotate(176deg) brightness(93%) contrast(92%);
+    filter: invert(15%) sepia(71%) saturate(1224%) hue-rotate(176deg)
+      brightness(93%) contrast(92%);
   }
   .table-estatisticas {
     width: 100%;
@@ -165,6 +201,10 @@
 }
 
 @media screen and (max-width: 650px) {
+  
+
+  
+  
   .table-estatisticas {
     overflow-x: auto;
   }
@@ -184,12 +224,10 @@
     text-align: center;
   }
 
-
   .content_estatisticas {
     padding: 0px;
-    display:inherit;
+    display: inline-block;
   }
-
 }
 
 @media screen and (max-width: 535px) {

@@ -1,7 +1,6 @@
 from django import forms
 
-from .models import Transacao, Caixa
-from .helper import caixa_as_dict
+from .models import Transacao
 
 class TransacaoForm(forms.ModelForm):
     class Meta:
