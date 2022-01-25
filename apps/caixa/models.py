@@ -1,12 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date
 
 
 # Create your models here.
 class Caixa(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    data = models.DateField(default=date.today, unique=True)
+    data = models.DateField(auto_now=True, unique=True)
     receita = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     despesa = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     saldo = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)

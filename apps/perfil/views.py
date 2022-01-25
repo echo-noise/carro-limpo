@@ -1,14 +1,11 @@
-from ast import Pass
-from django.http.response import HttpResponseRedirect, JsonResponse
-from django.urls import reverse
+from django.http.response import JsonResponse
+from django.views.generic import TemplateView
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 
-
 from .forms import UserEditForm, LojaForm, ImageForm, EnderecoForm, UserProfileForm
-from carro_limpo.helper import error_response, EDIT 
 
 # Create your views here.
 class PerfilView(LoginRequiredMixin, TemplateView):
@@ -25,7 +22,9 @@ class PerfilView(LoginRequiredMixin, TemplateView):
 
         if(request.POST.get("old_password")):
             password_form = PasswordChangeForm(self.request.user, request.POST)
-            forms.append(password_form)
+            if password_form.is_valid():
+                password_form.save()
+                messages.add_message(request, messages.INFO, "Senha alterada.")
 
         for form in forms:
             if form.is_valid():
@@ -56,21 +55,7 @@ class PerfilView(LoginRequiredMixin, TemplateView):
         if int(request.POST.get("form-id")) == 0:
             return self.render_to_response(self.user_profile_forms(request))
         elif int(request.POST.get("form-id")) == 1:
-            print(1)
             return self.render_to_response(self.loja_forms(request))
-        
-
-@login_required
-def salvar_estabelecimento(request):
-    if request.method == "POST":
-        form = LojaForm(request.POST, instance=request.user.loja)
-        form_endereco = EnderecoForm(request.POST, instance=request.user.endereco)
-
-        if form.is_valid() and form_endereco.is_valid():
-            form.save()
-            form_endereco.save()
-
-        return HttpResponseRedirect(reverse("perfil"), {"form": form, "active": "#profile"})
 
 @login_required
 def salvar_imagem(request):

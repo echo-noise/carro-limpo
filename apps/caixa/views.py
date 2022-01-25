@@ -71,6 +71,15 @@ class CaixaFecharView(LoginRequiredMixin, FormView):
 
         return HttpResponseRedirect(reverse("caixa"), {"form": form})
 
+class CaixaDeleteAllView(LoginRequiredMixin, View):
+    def post(self, request):
+        caixa = buscar_caixa_atual(request.user)
+        transacoes = Transacao.objects.filter(caixa=caixa)
+        if transacoes.exists():
+            transacoes.delete()
+            return JsonResponse({ "message": "Todas as transações do caixa atual foram deletadas." }, status=200)
+        else:
+            return JsonResponse({ "message": "O caixa já está vazio!"})
 
 # transações
 class TransacaoFormView(LoginRequiredMixin, FormView):

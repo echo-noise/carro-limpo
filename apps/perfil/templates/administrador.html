@@ -83,7 +83,7 @@
               <div class="border-box card-perfil p-3 mb-3">
                 <div class="text-center text-sm-right">
                   <span class="mb-2 font-admin-color badge badge-secondary">{{ user.first_name }}</span>
-                  <div class="text-muted"><small>Entrou {{ user.date_joined }}</small></div>
+                  <div class="text-muted"><small>Entrou <span class="date">{{ user.date_joined|date:"U" }}</span></small></div>
                 </div>
               </div>
               <div class="text-center border-box mb-3">
@@ -135,7 +135,7 @@
                             <div class="text-center text-sm-left mb-2 mb-sm-0">
                               <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ user.first_name }}</h4>
                               <p class="mb-0">{{ user.email }}</p>
-                              <div class="text-muted"><small>Último login: {{ user.last_login }}.</small></div>
+                              <div class="text-muted"><small>Último login: <span class="date">{{ user.last_login|date:"U" }}</span>.</small></div>
 
                             </div>
 
@@ -162,6 +162,13 @@
                             <div class="tab-content pt-4" id="myTabContent">
                               <!-- Dados Cadastrais -->
                               <div class="tab-pane animate__animated animate__fadeIn active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                {% if messages %}
+                                <div class="messages">
+                                  {% for message in messages %}
+                                  <p class="form-error"> {{ message }}</p>
+                                  {% endfor %}
+                                </div>
+                                {% endif %}
                                 <form class="form" id="profileform" method="post" >
                                   {% csrf_token %}
                                   <input type="hidden" name="form-id" value=0>
@@ -378,6 +385,7 @@
 
 </body>
 {% include "includes/footer.html" %}
+<!-- upload imagem -->
 <script>
   $("#profileImage").click(function (e) {
     $("#imageUpload").click();
@@ -415,6 +423,18 @@
       }
     });
 
+  });
+</script>
+<!-- converter utc para local -->
+<script>
+  $(document).ready(function(){
+    var dates = $(".date");
+    dates.each(function(){
+      var dateStr = $(this).html();
+      var dateObj = new Date(parseInt(dateStr) * 1000);
+      var formatted = dateObj.toLocaleString();
+      $(this).html(formatted);
+    });
   });
 </script>
 </div>

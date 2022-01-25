@@ -104,10 +104,20 @@ function getCaixa() {
         url: "get/",
         async: false,
         success: function(response) { data = response; },
-        error: function(response) { console.log("Erro ao recuperar dados do caixa"); }
+        error: function(response) { alert("Erro ao recuperar dados do caixa"); }
 
     });
     return data;
+}
+
+function caixaDeleteAll() {
+        $.ajax({
+        type: "POST",
+        url: "deleteall/",
+        headers: {'X-CSRFToken': getToken() },
+        success: function(response) { alert(response['message']); },
+        error: function(response) { alert(response['message']);}
+    });
 }
 
 function gerarFatura(id) {

@@ -164,7 +164,7 @@ var budgetController = (function () {
     },
 
     deleteDataFromStorage: function () {
-      localStorage.clear();
+      caixaDeleteAll();
     },
 
     testing: function () {
