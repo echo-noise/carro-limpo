@@ -1,6 +1,9 @@
 from django.db import models
+from django.forms import ValidationError
 from django.contrib.auth.models import User
-from datetime import date
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.utils.translation import gettext_lazy as _
 
 from apps.clientes.models import Cliente
 from apps.servicos.models import Servico
@@ -13,7 +16,7 @@ class Fatura(models.Model):
     transacao = models.OneToOneField(Transacao, on_delete=models.SET_NULL, blank=True, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
-    data = models.DateField(default=date.today)
+    data = models.DateField(auto_now=True)
     pago = models.BooleanField(default=False)
 
     def __str__(self):
@@ -31,15 +34,20 @@ class Fatura(models.Model):
             )
             self.transacao.save()
             return True
+        return False
+    
+    def clean(self):
+        super().clean()
 
+        if self.pago:
+            transacao = self.criar_transacao()
+            if not transacao:
+                raise ValidationError(_('Não foi possível alterar o status pois não foi possivel criar uma transação associada à fatura. Note que é necessário ter um caixa aberto para criar a transação.'))
+        else:
+            if self.transacao:
+                self.transacao.delete()
+                self.transacao = None
 
-    def save(self, *args, **kwargs):
-        if getattr(self, 'pago_changed', True):
-            if self.pago:
-                if self.criar_transacao():
-                    super(Fatura, self).save(*args, **kwargs)
-            else:
-                if self.transacao:
-                    self.transacao.delete()
-                    self.transacao = None
-                super(Fatura, self).save(*args, **kwargs)
+    @receiver(pre_save)
+    def pre_save_handler(sender, instance, *args, **kwargs):
+        instance.full_clean()
