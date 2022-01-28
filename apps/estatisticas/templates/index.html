@@ -1,6 +1,7 @@
 {% extends 'base_head.html' %}
 {% load static %}
 
+{% block title %} | Estatísticas mensais {% endblock %}
 {% block page_css %}
   <!-- CSS Projeto -->
   {% include "includes/cssdefault.html" %}
@@ -40,7 +41,7 @@
                 <p class="box_border_bottom box_titulo">serviços realizados</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">1</p>
+                  <p id="box_border_bottom" class="box_border_top">{{ servicos }}</p>
                 </div>
               </div>
             </div>
@@ -51,7 +52,8 @@
                 <p class="box_border_bottom box_titulo">faturamento mensal</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">R$ 50,00</p>
+                  <p id="box_border_bottom" class="box_border_top">R$ {{ receita|stringformat:".2f" }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -59,10 +61,10 @@
             <div id="box-clientes">
               <div class="box_border_top animate__animated animate__fadeInDown">
                 <img class="estatisticas_icons" src="assets/img/clientes.svg">
-                <p class="box_border_bottom box_titulo">clientes cadastrados</p>
+                <p class="box_border_bottom box_titulo">clientes atendidos</p>
                 <div class="box_border_meio"></div>
                 <div id="box_border_bottom" class="estatisticas_titulo">
-                  <p id="box_border_bottom" class="box_border_top">1</p>
+                  <p id="box_border_bottom" class="box_border_top">{{ clientes }}</p>
                 </div>
               </div>
             </div>
@@ -80,6 +82,9 @@
 
               <!-- chart-estatisticas -->
               <script type="text/javascript" src="{% static 'js/estatisticas/chart-estatisticas.js' %}"></script>
+              <script>
+              chart({{ servicos }}, {{ clientes }}, {{ receita }}, {{ despesa }});
+              </script>
 
             </div>
 

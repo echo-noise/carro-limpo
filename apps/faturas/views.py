@@ -5,11 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView, ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from carro_limpo.views import UserRequiredUpdateView
+from carro_limpo.views import UpdateViewJson
 from apps.clientes.models import Cliente
 from apps.servicos.models import Servico
 from .models import Fatura
 from .forms import FaturaForm
+
 
 # Create your views here.
 class FaturaListarView(LoginRequiredMixin, ListView):
@@ -25,6 +26,7 @@ class FaturaListarView(LoginRequiredMixin, ListView):
         context['clientes'] = Cliente.objects.filter(user=self.request.user)
         return context
 
+
 class FaturaFormView(LoginRequiredMixin, FormView):
     form_class = FaturaForm
 
@@ -32,14 +34,17 @@ class FaturaFormView(LoginRequiredMixin, FormView):
         form.save(self.request.user)
         return HttpResponseRedirect(reverse("faturas"), {"form": form})
 
+
 class FaturaDeleteView(LoginRequiredMixin, DeleteView):
     model = Fatura
     success_url = "/"
 
-class FaturaUpdateView(LoginRequiredMixin, UserRequiredUpdateView):
+
+class FaturaUpdateView(LoginRequiredMixin, UpdateViewJson):
     model = Fatura
     fields = ['pago']
     success_url = "/"
+
 
 @login_required
 def gerar(request, id):
@@ -54,7 +59,7 @@ def gerar(request, id):
             else:
                 _status = "Pago"
 
-            response = { 
+            response = {
                 "cliente_nome": fatura.cliente.nome,
                 "cliente_tel": fatura.cliente.telefone,
                 "cliente_email": fatura.cliente.email,
@@ -75,5 +80,5 @@ def gerar(request, id):
             }
 
             return JsonResponse(response, status=200)
-        else: 
+        else:
             return JsonResponse(status=400)

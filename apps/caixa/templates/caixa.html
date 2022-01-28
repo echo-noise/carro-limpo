@@ -1,7 +1,7 @@
 {% extends "base_head.html" %}
 {% load static %}
 {% block title %} | Caixa {% endblock %}
-{% block page_css %}  
+{% block page_css %}
   {% include 'includes/cssdefault.html' %}
   <link rel="stylesheet" href="{% static "css/dataRangetables.css" %}">
   <link rel="stylesheet" href="{% static "css/caixa.css" %}">
@@ -14,6 +14,7 @@
   <script src="{% static "js/ajax.js" %}"></script>
   <!-- tabela -->
   <script type="text/javascript" src="{% static "js/tabela-listar-data.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
 {% endblock %}
 {% block body %}
 <body id="body-pd" class="body-pd2">
@@ -50,7 +51,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Abrir o Caixa</button>
+            <button type="submit" class="btn btn-primary" >Abrir o Caixa</button>
           </div>
           </form>
         </div>
@@ -97,7 +98,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Fechar o Caixa</button>
+            <button type="submit" class="btn btn-primary" >Fechar o Caixa</button>
           </div>
           </form>
         </div>
@@ -200,7 +201,7 @@
 
                                     <div class="top__data">
                                       <div class="budget__data">
-                                        <div class="budget__income clearfix">                                          
+                                        <div class="budget__income clearfix">
                                           <div class="budget__income--text">
                                             <i class="fas fa-arrow-circle-up"  style="color: green; font-size: 1.2em"></i> Receita</div>
                                           <div class="">
@@ -209,7 +210,7 @@
                                           </div>
                                         </div>
 
-                                        <div class="budget__expenses clearfix">                             
+                                        <div class="budget__expenses clearfix">
                                           <div class="budget__expenses--text">
                                             <i class="fas fa-arrow-circle-down"  style="color: red; font-size: 1.2em"></i> Gasto</div>
                                           <div class=" gasto_e_percentual clearfix">
@@ -233,8 +234,8 @@
                                     </div>
                                   </div>
                                   <div class="border-box container clearfix">
-                                    <div class="expenses">     
-                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_down.svg' %}">                                          
+                                    <div class="expenses">
+                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_down.svg' %}">
                                       <h2 class="atribuicao_expenses__title">Gastos</h2>
                                       <div class="expenses__list">
                                         <!-- lista de gastos -->
@@ -272,7 +273,7 @@
                                   <tbody class="tbody">
                                     {% for obj in fluxo_caixa %}
                                     <tr>
-                                      <td id="td-header" data-label="DATA">{{ obj.data|date:"d/m/y" }}</td>
+                                      <td id="td-header" data-label="DATA" class="date">{{ obj.data|date:"U" }}</td>
                                       <td data-label="SERVIÇOS">{{ obj.servicos }}</td>
                                       <td data-label="CLIENTES">{{ obj.clientes }}</td>
                                       <td data-label="RECEITA">R$ {{ obj.receita }}</td>
@@ -302,7 +303,7 @@
                         </script>
 
                         <!-- Exportar pdf -->
-                        {% include 'includes/export_pdf.html' %} 
+                        {% include 'includes/export_pdf.html' %}
 
                         <!-- fim Fluxo de Caixa  -->
 

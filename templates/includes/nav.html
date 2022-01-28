@@ -10,7 +10,13 @@
 
 <div>
   <div class="l-navbar" id="nav-bar">
-    <p><img class="nav_logo" src="{% static "img/carrolimpo_versao_compacta.png" %}"></p>
+    <p>
+      {% if user.profile.imagem %}
+      <img class="nav_logo" src="{{ user.profile.imagem.url }}">
+      {% else %}
+      <img class="nav_logo" src="{% static "img/carrolimpo_versao_compacta.png" %}">
+      {% endif %}
+    </p>
     <nav class="nav sidebar-nav">
 
       <div>

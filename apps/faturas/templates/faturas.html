@@ -12,6 +12,7 @@
   <script src="{% static "js/crud_fatura.js" %}"></script>
   <!-- ajax fatura -->
   <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -237,7 +238,7 @@
                                 <td data-label="MARCA"> {{ fatura.cliente.marca }}</td>
                                 <td data-label="MODELO"> {{ fatura.cliente.modelo}} </td>
                                 <td data-label="SERVIÇO"> {{ fatura.servico.nome }}</td>
-                                <td data-label="VENCIMENTO"> {{ fatura.data|date:"d/m/Y" }}</td>
+                                <td data-label="VENCIMENTO" class="date"> {{ fatura.data|date:"U" }}</td>
                                 <td id="valor" data-label="VALOR"> R$ {{ fatura.servico.valor}} </td>
                                 <td data-label="AÇOES">
                                   <div class="acoes-align">
@@ -274,7 +275,6 @@
 
                         <!-- Exportar pdf -->
                         {% include 'includes/export_pdf.html' %} 
-  ''
                         <!-- Javascript Imprimir div-->
                         <script src="{% static "js/fatura/imprimir.js" %}" ></script>
 

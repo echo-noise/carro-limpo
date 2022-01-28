@@ -1,30 +1,34 @@
-from django.db.models import Sum 
+from django.db.models import Sum
 
 from .models import Caixa, Transacao
 
 INC = 'inc'
 EXP = 'exp'
 
+
 def buscar_caixa_atual(user):
     return Caixa.objects.filter(user=user, aberto=True).first()
+
 
 def transacao_get_total(queryset):
     return queryset.aggregate(Sum('value')).get("value__sum", 0.00)
 
-# gets queryset filtered by type
+
 def transacao_make_dict(queryset):
     transacoes = []
 
     for transacao in queryset:
-        transacoes.append({"id": int(transacao.id), 
-                           "value": float(transacao.value), 
-                           "description": transacao.description}) 
-    
+        transacoes.append({"id": int(transacao.id),
+                           "value": float(transacao.value),
+                           "description": transacao.description})
+
     return transacoes
+
 
 def get_querysets(caixa):
     _cache = Transacao.objects.filter(caixa=caixa)
     return [_cache.filter(type=INC), _cache.filter(type=EXP)]
+
 
 def caixa_as_dict(caixa):
     inc = []
@@ -43,7 +47,6 @@ def caixa_as_dict(caixa):
         if querysets[1].exists():
             exp = transacao_make_dict(querysets[1])
             exp_total = transacao_get_total(querysets[1])
-
 
         if inc_total and exp_total:
             percentage = round((exp_total / inc_total) * 100)

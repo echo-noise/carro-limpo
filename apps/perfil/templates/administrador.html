@@ -9,6 +9,7 @@
 {% block page_js %}
   <!-- ajax -->
   <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
 {% endblock %}
 {% block body %} 
 <body id="body-pd" class="body-pd2">
@@ -83,7 +84,7 @@
               <div class="border-box card-perfil p-3 mb-3">
                 <div class="text-center text-sm-right">
                   <span class="mb-2 font-admin-color badge badge-secondary">{{ user.first_name }}</span>
-                  <div class="text-muted"><small>Entrou <span class="date">{{ user.date_joined|date:"U" }}</span></small></div>
+                  <div class="text-muted"><small>Entrou <span class="datetime">{{ user.date_joined|date:"U" }}</span></small></div>
                 </div>
               </div>
               <div class="text-center border-box mb-3">
@@ -135,7 +136,7 @@
                             <div class="text-center text-sm-left mb-2 mb-sm-0">
                               <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ user.first_name }}</h4>
                               <p class="mb-0">{{ user.email }}</p>
-                              <div class="text-muted"><small>Último login: <span class="date">{{ user.last_login|date:"U" }}</span>.</small></div>
+                              <div class="text-muted"><small>Último login: <span class="datetime">{{ user.last_login|date:"U" }}</span>.</small></div>
 
                             </div>
 
@@ -409,7 +410,7 @@
     }
 
     $.ajax({
-      url: "{% url 'salvar_imagem' %}",
+      url: "{% url 'salvar_imagem' pk=user.profile.pk %}",
       type: "POST",
       headers: {'X-CSRFToken': getToken() },
       data: formdata,
@@ -425,17 +426,9 @@
 
   });
 </script>
-<!-- converter utc para local -->
+<!-- converter data do sistema para fuso horario local -->
 <script>
-  $(document).ready(function(){
-    var dates = $(".date");
-    dates.each(function(){
-      var dateStr = $(this).html();
-      var dateObj = new Date(parseInt(dateStr) * 1000);
-      var formatted = dateObj.toLocaleString();
-      $(this).html(formatted);
-    });
-  });
+
 </script>
 </div>
 {% endblock %}

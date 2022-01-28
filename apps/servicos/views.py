@@ -1,10 +1,11 @@
 from django.views.generic import ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from carro_limpo.views import UserRequiredCreateView, UserRequiredUpdateView
+from carro_limpo.views import UserRequiredCreateView, UpdateViewJson
 
 from .models import Servico
-from .forms import ServicoForm, ServicoCreateForm
+from .forms import ServicoCreateForm
+
 
 class ServicoListarView(LoginRequiredMixin, ListView):
     template_name = "servicos.html"
@@ -13,13 +14,16 @@ class ServicoListarView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Servico.objects.filter(user=self.request.user)
 
+
 class ServicoCreateView(LoginRequiredMixin, UserRequiredCreateView):
     form_class = ServicoCreateForm
 
-class ServicoUpdateView(LoginRequiredMixin, UserRequiredUpdateView):
+
+class ServicoUpdateView(LoginRequiredMixin, UpdateViewJson):
     model = Servico
-    form_class = ServicoForm
-    
+    fields = ("nome", "valor")
+
+
 class ServicoDeleteView(LoginRequiredMixin, DeleteView):
     model = Servico
     success_url = "/"

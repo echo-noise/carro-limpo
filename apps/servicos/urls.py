@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import *
+from .views import (ServicoListarView, ServicoCreateView, ServicoDeleteView,
+                    ServicoUpdateView)
 
 urlpatterns = [
     path("", ServicoListarView.as_view(), name="servicos"),

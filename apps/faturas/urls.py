@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import *
+from .views import (FaturaListarView, FaturaFormView, FaturaDeleteView,
+                    FaturaUpdateView, gerar)
 
 urlpatterns = [
     path("", FaturaListarView.as_view(), name="faturas"),

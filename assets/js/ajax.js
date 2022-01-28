@@ -150,7 +150,7 @@ function gerarFatura(id) {
                 },
         error: function(response) { 
                     console.log(response['message']); 
-                    alert("Erro ao gerar fatura");
+                    alert("Erro ao gerar fatura. O caixa está aberto?");
                 }
     });
 }
