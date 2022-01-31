@@ -29,23 +29,34 @@ SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEBUG", False)
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = [
     getenv("APP_HOST")
 ]
+=======
+ALLOWED_HOSTS = [getenv("APP_HOST")]
+>>>>>>> testing
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.accounts',
-    'apps.estatisticas',
-    'apps.clientes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.accounts',
+    'apps.estatisticas',
+    'apps.clientes',
+    'apps.perfil',
+    'apps.faturas',
+    'apps.caixa',
+    'apps.servicos',
+    'apps.pesquisar',
+    'whoosh',
+    'haystack'
 ]
 
 MIDDLEWARE = [
@@ -63,7 +74,7 @@ ROOT_URLCONF = 'carro_limpo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / "templates" ],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +103,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -132,7 +142,7 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/assets/'
-STATICFILES_DIRS = [ BASE_DIR / "assets"]
+STATICFILES_DIRS = [BASE_DIR / "assets"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -142,3 +152,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # login e logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
+<<<<<<< HEAD
+=======
+
+# uploads usuario
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = '/uploaded/'
+
+# emails recuperaçao senha
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+# pesquisa
+WHOOSH_INDEX = BASE_DIR / 'whoosh/'
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX
+    }
+}
+HAYSTACK_DOCUMENT_FIELD = 'text'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+>>>>>>> testing

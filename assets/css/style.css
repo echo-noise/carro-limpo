@@ -177,6 +177,12 @@ body {
   /* margin: 0px 0px 0px 0px; */
 }
 
+.badge-soft-alert {
+  background-color: rgb(255 71 71) !important;
+  color: #000000;
+  z-index: 999;
+}
+
 .badge-soft-warning {
   background-color: rgb(248, 202, 85) !important;
   color: #000000;

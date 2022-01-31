@@ -1,9 +1,16 @@
 from django import forms
 
 from .models import Cliente
+from carro_limpo.forms import UserRequiredForm
 
-class ClienteForm(forms.ModelForm):
-    
+
+class ClienteCreateForm(UserRequiredForm):
     class Meta:
         model = Cliente
-        fields = '__all__'
+        exclude = ('user',)
+
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        exclude = ('user',)

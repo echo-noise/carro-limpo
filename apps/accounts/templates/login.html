@@ -9,7 +9,7 @@
 {% block body %}
 <body>
    <!-- modal Termos -->
-   {% include "includes/modal_termos.html" %}
+   {% include "includes/tos.html" %}
   <main class="formulario">
     <div class="content_rec">
       <form class="needs-validation" novalidate method="post">
@@ -52,7 +52,7 @@
 
         </div>
         <div class="recuperar mt-1 mb-1">
-          <a href="./recuperar_senha.html" class="recuperar">Esqueci a senha</a>
+          <a href="{% url "recovery" %}" class="recuperar">Esqueci a senha</a>
         </div>
       </form>
       <footer id="footer" class="mt-5 border-top">

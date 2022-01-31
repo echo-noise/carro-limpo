@@ -1,116 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, height=device-height,
-      initial-scale=1.0, user-scalable=yes">
-  <meta name="author" content="Thiago Rocha Gomes, Bruno Gomes de Sousa, Samara
-      Caldellas David">
-  <title>Carro Limpo</title>
-
-  <!-- CSS Bootstrap-->
-  <link rel="stylesheet" href="assets/css/bootstrap.css">
-
-  <!-- CSS Projeto -->
-  <link rel="stylesheet" href="assets/css/css_crud_cliente.css">
-  <link rel="stylesheet" href="assets/css/estatisticas.css">
-  <!-- <link rel="stylesheet" href="assets/css/login_page.css"> -->
-  <!-- <link rel="stylesheet" href="assets/css/recovery_page.css"> -->
-  <!-- <link rel="stylesheet" href="assets/css/perfil.css"> -->
-  <link rel="stylesheet" href="assets/css/caixa.css">
-  <link rel="stylesheet" href="assets/css/sidebar_menu.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/tooltip.css">
-  <link rel="stylesheet" href="assets/css/dataTables.css">
-  <link rel="stylesheet" href="assets/css/dataRangetables.css">
-
-
-
-
-
-
-
-  <!-- JavaScript Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- JavaScript do tooltip -->
-  <script src="assets/js/tooltip.js"></script>
+{% extends "base_head.html" %}
+{% load static %}
+{% block title %} | Caixa {% endblock %}
+{% block page_css %}
+  {% include 'includes/cssdefault.html' %}
+  <link rel="stylesheet" href="{% static "css/dataRangetables.css" %}">
+  <link rel="stylesheet" href="{% static "css/caixa.css" %}">
+{% endblock %}
+{% block page_js %}
+  {% include 'includes/jsdefault.html' %}
   <!-- JavaScript do projeto clientes-->
-  <script src="assets/js/crud_cliente.js"></script>
-  <!-- JavaScript do projeto sidebar-->
-  <script src="assets/js/sidebar_menu.js"></script>
-  <!-- Javascript do projeto search -->
-  <script src="assets/js/search.js"></script>
-  <!-- Javascript do projeto tabela -->
-  <script src='/assets/js/tabela.js'></script>
-  <!-- Javascript do projeto tabela Filtro por data -->
-  <script type="text/javascript" src="assets/js/tabela-listar-data.js"></script>
-
-
-
-
-  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
-</head>
-
+  <script src="{% static "js/crud_cliente.js" %}"></script>
+  <!-- ajax -->
+  <script src="{% static "js/ajax.js" %}"></script>
+  <!-- tabela -->
+  <script type="text/javascript" src="{% static "js/tabela-listar-data.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
+{% endblock %}
+{% block body %}
 <body id="body-pd" class="body-pd2">
 
-  <!-- header -->
-
-  <header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-
-    <div class="search-bar mt-7">
-
-      <div class="input-field"> <input class="form-control search" /> <button class="btn-search"><i class="icone-search fa fa-search"></i></button> </div>
-
-    </div>
-
-    <!-- <div class="header_img"> <img src="assets/icons/perfil_img.png" alt=""> </div> -->
-  </header>
+  {% include "includes/header.html" %}
   <!-- nav menu esquerdo -->
   <div>
-    <div>
-      <div class="l-navbar" id="nav-bar">
-        <p><img class="nav_logo" src="assets/img/carrolimpo_versao_compacta.png"></p>
-        <nav class="nav sidebar-nav">
-
-          <div>
-            <div class="nav_list">
-
-              <a href="./index.html" class="nav_link">
-                <i class='bx bi-house-door-fill nav_icon' title="Principal" data-toggle="tooltip"></i>
-                <span class="nav_name">Principal</span>
-              </a>
-
-              <a href="./clientes.html" class="nav_link">
-                <i class='bi bi-people-fill nav_icon' title="Clientes" data-toggle="tooltip"></i>
-                <span class="nav_name">Clientes</span>
-              </a>
-
-              <a href="caixa.html" class="nav_link active">
-                <i class='bx bxs-cart nav_icon' title="Caixa" data-toggle="tooltip"></i>
-                <span class="nav_name">Caixa</span>
-              </a>
-
-              <a href="./administrador.html" class="nav_link">
-                <i class=' bi bi-gear-fill nav_icon' title="Administrador" data-toggle="tooltip"></i>
-                <span class="admin nav_name">Administrador</span>
-              </a>
-
-              <a href="./login.html" class="nav_link">
-                <i class='bi bi-door-open-fill nav_icon' title="Sair" data-toggle="tooltip"></i>
-                <span class="nav_name">Sair</span>
-              </a>
-            </div>
-        </nav>
-      </div>
-    </div>
+    {% include "includes/nav.html" %}
     <!--Container Main-->
 
     <!-- modal Termos -->
+<<<<<<< HEAD:caixa.html
     <div class="modal fade " id="termosModal" tabindex="-1" aria-labelledby="termosModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -168,6 +84,9 @@
         </div>
       </div>
     </div>
+=======
+    {% include "includes/tos.html" %}
+>>>>>>> testing:apps/caixa/templates/caixa.html
 
     <!-- Modal Abrir o Caixa -->
     <div class="modal fade " id="Abrir-Caixa-Modal" tabindex="-1" aria-labelledby="Abrir-caixa-ModalLabel" aria-hidden="true">
@@ -178,18 +97,21 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="post" action="{% url 'abrir_caixa' %}">
+              {% csrf_token %}
+              <input type="hidden" name="description" value="Valor Inicial">
+              <input type="hidden" name="type" value="inc">
               <div class="border-box mb-2 p-2">
                 <div class="mb-2 active">
                   <b>Saldo Inicial</b>
                 </div>
                 <div class=" p-1 mb-1">
-                  <input class="form-control" type="number" placeholder="Ex: R$200,00" requeired>
+                  <input class="form-control" name="value" type="number" placeholder="Ex: R$200,00" required>
                 </div>
               </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Abrir o Caixa</button>
+            <button type="submit" class="btn btn-primary" >Abrir o Caixa</button>
           </div>
           </form>
         </div>
@@ -206,13 +128,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="post" {% if caixa %} action={% url "fechar_caixa" pk=caixa.id %} {% endif %}>
+              {% csrf_token %}
               <div class="card mb-1 p-2">
                 <div class="mb-2 active">
                   <b>Informe o saldo final do caixa fisicamente</b>
                 </div>
                 <div class=" p-1 mb-1">
-                  <input type="number" class="form-control" placeholder="Ex: R$200,00" required>
+                  <input type="number" name="saldo_fisico" class="form-control" placeholder="Ex: R$200,00" required>
                 </div>
                 <div class="p-1 mb-1 active d-block">
                   <b>Valor total do sistema:</b>
@@ -235,7 +158,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Fechar o Caixa</button>
+            <button type="submit" class="btn btn-primary" >Fechar o Caixa</button>
           </div>
           </form>
         </div>
@@ -253,24 +176,17 @@
 
           <div class="row flex-lg-nowrap">
             <div class="col-12 col-lg-auto mb-3">
-              <div class="border-box p-1 mb-3">
-                <div class="e-navlist e-navlist--active-bg">
-                  <ul class="nav">
-                    <li class="nav-item"><a class=" nav-link px-2 active" href="./caixa.html"><i class=" bi bi-cart-fill nav_icon"></i><span> Caixa</span></a></li>
-                    <li class="nav-item"><a class="link nav-link px-2" href="./faturas.html"><i class="bi bi-receipt-cutoff nav_icon mr-1"></i><span> Faturas</span></a></li>
-                  </ul>
-                </div>
-              </div>
+              {% include "includes/nav_faturas.html" %}
               <div class="menu-content-responsivo">
                 <div class="limpar-atribuir">
                   <div class="border-btn separar w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico"><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
+                      <button class="delete__all btn btn-danger" data-toggle="tooltip" title="Apagará todo o histórico" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-trash-alt"></i>Remover Atribuições</button>
                     </div>
                   </div>
                   <div class="border-btn w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar"><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
+                      <button class="btn add__btn" data-toggle="tooltip" title="Salvar" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-balance-scale"></i>Atribuir │ Salvar</button>
                     </div>
                   </div>
                 </div>
@@ -278,12 +194,12 @@
                 <div class="abrir-fechar-caixa">
                   <div class="border-btn separar w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
+                      <button class="abrir__caixa btn btn-primary" data-toggle="tooltip" title="Abrir o Caixa" data-bs-toggle="modal" data-bs-target="#Abrir-Caixa-Modal" data-bs-whatever="@mdo" {% if caixa %}disabled{% endif %}><i class="icone fas fa-cash-register"></i> Abrir o Caixa</button>
                     </div>
                   </div>
                   <div class="border-btn w-100 p-2 mb-3">
                     <div class="e-navlist e-navlist--active-bg">
-                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo"><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
+                      <button class="fechar__caixa btn btn-secondary" data-toggle="tooltip" title="Fechar o Caixa" data-bs-toggle="modal" data-bs-target="#Fechar-Caixa-Modal" data-bs-whatever="@mdo" {% if not caixa %} disabled {% endif %}><i class="icone fas fa-cash-register"></i> Fechar o Caixa</button>
                     </div>
                   </div>
                 </div>
@@ -318,7 +234,7 @@
                                   <div class="border-box container clearfix">
                                     <div class="income">
                                       <!-- <i class="fas fa-money-check-alt mb-3"  style="color: green; font-size: 1.8em"></i> -->
-                                      <img class="caixa_estatisticas_icons" src="assets/img/money_up.svg">
+                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_up.svg' %}">
                                       <h2 class="atribuicao_icome__title">Receitas</h2>
                                       <div class="income__list">
                                         <!-- Lista de receitas -->
@@ -333,7 +249,7 @@
                                     <div class=" top__main">
                                       <div class=" budget">
                                         <!-- <i class="fas fa-cash-register mb-3"  style="color: #0d6efd; font-size: 3.6em"></i> -->
-                                        <img class="caixa_balance_estatisticas_icons" src="assets/img/balance.svg">
+                                        <img class="caixa_balance_estatisticas_icons" src="{% static 'img/balance.svg' %}">
                                         <div class="budget__title">
                                           <span class="budget__title--month">%Month%</span>
                                         </div>
@@ -345,7 +261,7 @@
 
                                     <div class="top__data">
                                       <div class="budget__data">
-                                        <div class="budget__income clearfix">                                          
+                                        <div class="budget__income clearfix">
                                           <div class="budget__income--text">
                                             <i class="fas fa-arrow-circle-up"  style="color: green; font-size: 1.2em"></i> Receita</div>
                                           <div class="">
@@ -354,7 +270,7 @@
                                           </div>
                                         </div>
 
-                                        <div class="budget__expenses clearfix">                             
+                                        <div class="budget__expenses clearfix">
                                           <div class="budget__expenses--text">
                                             <i class="fas fa-arrow-circle-down"  style="color: red; font-size: 1.2em"></i> Gasto</div>
                                           <div class=" gasto_e_percentual clearfix">
@@ -368,18 +284,18 @@
                                     <div class="add mb-3">
 
                                       <div class="parent add__container" requeired>
-                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto">
+                                        <select class="add__type" data-toggle="tooltip" title="Selecione entre Receita ou Gasto" {% if not caixa %} disabled {% endif %}>
                                           <option value="inc">Receita</option>
                                           <option value="exp">Gasto</option>
                                         </select>
-                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição">
-                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required>
+                                        <input type="text" class="add__description" data-toggle="tooltip" title="Descreva a atribuição" requeired maxlength="20" placeholder="Descrição" {% if not caixa %} disabled {% endif %}>
+                                        <input type="number" class="add__value" placeholder="Valor" min="1" max="6" data-toggle="tooltip" title="Defina um valor para a atribuição" required {% if not caixa %} disabled {% endif %}>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="border-box container clearfix">
-                                    <div class="expenses">     
-                                      <img class="caixa_estatisticas_icons" src="assets/img/money_down.svg">                                          
+                                    <div class="expenses">
+                                      <img class="caixa_estatisticas_icons" src="{% static 'img/money_down.svg' %}">
                                       <h2 class="atribuicao_expenses__title">Gastos</h2>
                                       <div class="expenses__list">
                                         <!-- lista de gastos -->
@@ -392,27 +308,13 @@
                           </div>
                         </div>
                       </div>
+                      <!-- fluxo de caixa -->
                       <div class="tab-pane link animate__animated animate__fadeIn" id="nav-fluxo" role="tabpanel" aria-labelledby="nav-fluxo-tab">
 
                         <div class="col">
                           <div class="row">
                             <div class="col mb-3">
                               <div class=" p-3">
-
-                                <!-- Fluxo de Caixa -->
-
-                                <!-- <table border="0" cellspacing="5" cellpadding="5">
-                                  <tbody>
-                                    <tr>
-                                      <td>Data minima:</td>
-                                      <td><input class="form-control min" type="text" name="min"></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Data maxima:</td>
-                                      <td><input class="form-control max" type="text" name="max"></td>
-                                    </tr>
-                                  </tbody>
-                                </table> -->
 
                                 <table id="tabfluxo" class="border-box p-2 exportar form-data display nowrap crud table   animate__animated animate__fadeIn table-bordered table-hover table-striped  table-responsive  dataTable no-footer">
 
@@ -424,18 +326,31 @@
                                       <th scope="col">Receita</th>
                                       <th scope="col">Gasto</th>
                                       <th scope="col">Saldo</th>
+                                      <th scope="col">Falta/Sobra</th>
 
                                     </tr>
                                   </thead>
                                   <tbody class="tbody">
+                                    {% for obj in fluxo_caixa %}
                                     <tr>
+<<<<<<< HEAD:caixa.html
                                       <td id="td-header" data-label="DATA">14/12/2021</td>
                                       <td data-label="SERVIÇOS">1</td>
                                       <td data-label="CLIENTES">1</td>
                                       <td data-label="RECEITA">R$ 50,00</td>
                                       <td data-label="GASTO">R$ 00,00</td>
                                       <td data-label="SALDO">R$ 50,00</td>
+=======
+                                      <td id="td-header" data-label="DATA" class="date">{{ obj.data|date:"U" }}</td>
+                                      <td data-label="SERVIÇOS">{{ obj.servicos }}</td>
+                                      <td data-label="CLIENTES">{{ obj.clientes }}</td>
+                                      <td data-label="RECEITA">R$ {{ obj.receita }}</td>
+                                      <td data-label="GASTO">R$ {{ obj.despesa }}</td>
+                                      <td data-label="SALDO">R$ {{ obj.saldo}} </td>
+                                      <td data-label="DIFERENÇA"><span class="badge badge-boxed {% if obj.diferenca >= 0 %} badge-soft-primary {% else %} badge-soft-alert {% endif %}">R$ {{ obj.diferenca }}</span> </td>
+>>>>>>> testing:apps/caixa/templates/caixa.html
                                     </tr>
+                                    {% endfor %}
                                   </tbody>
                                 </table>
                                 <div class="border-btn-pdf  mt-3 p-2">
@@ -457,9 +372,7 @@
                         </script>
 
                         <!-- Exportar pdf -->
-                        <script src="assets/js/export_pdf.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                        {% include 'includes/export_pdf.html' %}
 
                         <!-- fim Fluxo de Caixa  -->
 
@@ -475,17 +388,16 @@
     </main>
   </div>
   <!-- Javascript do fluxo de caixa -->
-  <script src="assets/js/moment.js"></script>
-  <script src="assets/js/tabela-data.js"></script>
-
-
+  <script src="{% static "js/moment.js" %}"></script>
+  <script src="{% static "js/tabela-data.js" %}"></script>
 
   <!-- Javascript do projeto caixa -->
-  <script src='/assets/js/caixa/chart.js'></script>
-  <script src="/assets/js/caixa/app.js"></script>
+  <script src="{% static "js/caixa/chart.js" %}"></script>
+  <script src="{% static "js/caixa/app.js" %}"></script>
 
 
 </body>
+<<<<<<< HEAD:caixa.html
 <footer id="footer" class="border-top">
   <div class="align-items-center animate__animated animate__fadeIn">
     <span>
@@ -496,7 +408,8 @@
       <span type="button" class="desc_footer data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#termosModal" data-bs-whatever="@mdo">Termos de uso</span>
     </div>
 </footer>
+=======
+{% include "includes/footer.html" %}
+>>>>>>> testing:apps/caixa/templates/caixa.html
 </div>
-</div>
-
-</html>
+{% endblock %}

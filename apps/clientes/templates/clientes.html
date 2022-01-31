@@ -1,24 +1,16 @@
 {% extends "base_head.html" %}
 {% load static %}
-
+{% block title %} | Clientes {% endblock %}
 {% block page_css %}  
-  <link rel="stylesheet" href="{% static "css/css_crud_cliente.css" %}">
-  <link rel="stylesheet" href="{% static "css/tooltip.css" %}">
-  <link rel="stylesheet" href="{% static "css/dataTables.css" %}">
-  {% include "includes/datatables_media.html" %}
+  {% include 'includes/cssdefault.html' %}
 {% endblock %}
 
 {% block page_js %}
-  <!-- JavaScript do tooltip -->
-  <script src="{% static "js/tooltip.js" %}"></script>
+  {% include 'includes/jsdefault.html' %}
   <!-- JavaScript do projeto clientes-->
   <script src="{% static "js/crud_cliente.js" %}"></script>
-  <!-- JavaScript do projeto sidebar-->
-  <script src="{% static "js/sidebar_menu.js" %}"></script>
-  <!-- Javascript do projeto search -->
-  <script src="{% static "js/search.js" %}"></script>
-  <!-- Javascript do projeto tabela -->
-  <script type="text/javascript" src="{% static "js/tabela.js" %}"></script>
+  <!-- ajax -->
+  <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -88,7 +80,7 @@
                             </thead>
                             <tbody class="tbody">
                               {% for cliente in clientes %}
-                              <tr>
+                              <tr data-id={{ cliente.id }}>
                                 <td id="td-header" data-label="NOME">{{ cliente.nome }}</td>
                                 <td data-label="TELEFONE">{{ cliente.telefone }}</td>
                                 <td data-label="E-MAIL">{{ cliente.email }}</td>
@@ -101,7 +93,7 @@
                                   <div class="acoes-align">
                                     <a class="add" title="Salvar" data-toggle="tooltip"><i class="material-icons" >&#xE03B;</i></a>
                                     <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Apagar" data-toggle="tooltip" href="{{ cliente.id }}"><i class="material-icons">&#xE872;</i></a>
+                                    <a class="delete" title="Apagar" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                   </div>
                                 </td>
                               </tr>
@@ -118,9 +110,7 @@
                           </script>
 
                           <!-- Exportar pdf -->
-                          <script src="{% static "js/export_pdf.js" %}"></script>
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-                          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+                          {% include 'includes/export_pdf.html' %} 
 
                         </div>
                       </div>

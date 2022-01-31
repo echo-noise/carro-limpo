@@ -1,0 +1,301 @@
+{% extends "base_head.html" %}
+{% load static %}
+
+{% block title %} | Faturas {% endblock %}
+{% block page_css %}  
+  {% include "includes/cssdefault.html" %}
+{% endblock %}
+
+{% block page_js %}
+  {% include 'includes/jsdefault.html' %}
+  <!-- JavaScript do projeto faturas-->
+  <script src="{% static "js/crud_fatura.js" %}"></script>
+  <!-- ajax fatura -->
+  <script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+  {% include "includes/header.html" %} 
+  <!-- nav menu esquerdo -->
+  <div>
+    {% include "includes/nav.html" %} 
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Modal Fatura -->
+    <div class=" modal fade" id="faturaModal" tabindex="-1" aria-labelledby="faturaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="page">
+            <div class="modal-header">
+              <h2 class="modal-title" id="faturaModalLabel">
+                <span style="float:left;">Fatura: <span id="fatura_id"></span>
+              </h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- fatura -->
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do estabelecimento:</h5>
+                  <strong>Nome:</strong> <span id="loja_rs"></span>
+                  <br><strong> CNPJ:</strong> <span id="loja_cnpj"></span>
+                  <p><strong>Endereço:</strong> <span id="loja_endereco"></span></p>
+                </div>
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> <span id="loja_tel"></span> 
+                  <br><strong>Email:</strong> <span id="loja_email"></span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-2 col-sm-7">
+                  <h5>Dados do Cliente:</h5>
+                  <strong>Nome:</strong> <span id="cliente_nome"></span>
+                  <br><strong> CPF/CNPJ:</strong> <span id="cliente_documento"></span>
+                  <br><strong> Placa:</strong> <span id="cliente_placa"></span>
+                  <br><strong> Marca:</strong> <span id="cliente_marca"></span>
+                  <br><strong> Modelo:</strong> <span id="cliente_modelo"></span>
+
+                </div>
+
+                <div class="mb-2 col-sm-5">
+                  <h5>Contato:</h5>
+                  <strong>Telefone:</strong> <span id="cliente_tel"></span>
+                  <br><strong>Email:</strong> <span id="cliente_email"></span>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="mb-3 col-lg-6 col-md-8 col-sm-6">
+                  <h5>Descrição:</h5>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 mb-3">
+                  <div class="table-responsive">
+                    <table id="crud tab_customers" class="crud exportar table table-bordered table-hover table-striped">
+                      <thead class="thead">
+                        <tr>
+                          <th scope="col">Serviço</th>
+                          <th scope="col">status</th>
+                          <th scope="col">Valor</th>
+                          <th scope="col">Vencimento</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody">
+                        <tr>
+                          <td><span id="servico_nome"></span></td>
+                          <td id="status"><span class="badge badge-boxed badge-soft-warning" id="fatura_status"></span></td>
+                          <td id="valor">R$ <span id="servico_valor"></span></td>
+                          <td><span id="fatura_data"></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div>
+                <p>
+                <h5>Forma de Pagamento:</h5>
+                <span>Dinheiro</span>
+                <span style="float:right;"><b style="font-size: 24px;">Total: R$ <span id="fatura_valor"></span></b></span>
+                </p>
+                <div class="row">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="button-print-or-save-document btn btn-primary">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- final fatura -->
+
+    <!-- Modal Nova Fatura -->
+    <div class="modal fade " id="nova-fatura-Modal" tabindex="-1" aria-labelledby="nova-fatura-ModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nova-fatura-ModalLabel">Nova Fatura</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{% url "salvar" %}">
+              {% csrf_token %}
+              <div class="border-box mb-2 p-2">
+                <div class="mb-2 active">
+                  <b>Selecione um cliente e o serviço desejado.</b>
+                </div>
+                <div class=" p-1 mb-1">
+                  <select name="cliente" id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o cliente</option>
+                    {% for cliente in clientes %}
+                    <option value={{ cliente.id }}>{{ cliente }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="p-1 mb-3">
+                  <select name="servico" id="listar-clientes" class="form-select" required>
+                    <option selected>Selecione o serviço</option>
+                    {% for servico in servicos %}
+                    <option value={{ servico.id }}>{{ servico }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Gerar Fatura</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- final Nova Fatura -->
+
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 perfil">
+              {% include "includes/nav_faturas.html" %}
+
+              <div class="faturas">
+                <div class="w-100 border-btn p-2 mb-3 separar">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button type="button" class="btn btn-primary btn-sm data-bs-toggle=" data-bs-toggle="modal" data-bs-target="#nova-fatura-Modal" data-bs-whatever="@mdo">
+                    <i type="button" class="icone add-fatura-icone"></i> Fatura</button>
+                  </div>
+                </div>
+                <div class="w-100 border-btn p-2 mb-3">
+                  <div class="e-navlist e-navlist--active-bg">
+                    <button id="pdf" class=" btn btn-secondary btn-sm ">
+                      <i class="icone bi bi-file-pdf-fill"></i> PDF</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="border-box">
+                    <div class="card-body">
+                      <div>
+                        <div class="row">
+
+
+                          <table id="tabfatura" class="border-box p-2 table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped  table-responsive dataTable no-footer">
+
+                            <thead class="thead">
+                              <tr>
+                                <th scope="col">Fatura</th>
+                                <th scope="col">Nº</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Placa</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Serviço</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Valor</th>
+                                <th class="acoes">Ações</th>
+                              </tr>
+                            </thead>
+                            <tbody class="tbody">
+                              {% for fatura in faturas %}
+                              <tr data-id={{ fatura.id }}>
+                                <td id="td-header" data-label="FATURA">
+                                  <i type="button" class="fatura-icone desc_footer data-bs-toggle=" data-toggle="tooltip" title="Gerar Fatura" data-bs-toggle="modal" data-bs-target="#faturaModal" data-bs-whatever="@mdo" onclick=gerarFatura({{ fatura.id }})></i>
+                                </td>
+                                <td data-label="Nº"> {{ fatura.id }}</td>
+                                {% if fatura.pago %}
+                                  <td id="status" data-label="STATUS"><span class="status badge badge-boxed badge-soft-primary">PAGO</span></td>
+                                {% else %}
+                                  <td id="status" data-label="STATUS"><span class="status badge badge-boxed badge-soft-warning" id="status_tabela">PENDENTE</span></td>
+                                {% endif %}
+                                <td data-label="NOME"> {{ fatura.cliente.nome }}</td>
+                                <td data-label="CPF/CNPJ"> {{ fatura.cliente.documento }}</td>
+                                <td data-label="PLACA"> {{ fatura.cliente.placa }} </td>
+                                <td data-label="MARCA"> {{ fatura.cliente.marca }}</td>
+                                <td data-label="MODELO"> {{ fatura.cliente.modelo}} </td>
+                                <td data-label="SERVIÇO"> {{ fatura.servico.nome }}</td>
+                                <td data-label="VENCIMENTO" class="date"> {{ fatura.data|date:"U" }}</td>
+                                <td id="valor" data-label="VALOR"> R$ {{ fatura.servico.valor}} </td>
+                                <td data-label="AÇOES">
+                                  <div class="acoes-align">
+                                    <a type="button" class="add" title="Salvar" data-toggle="tooltip" ;><i class="material-icons">&#xE03B;</i></a>
+                                    <a class="edit" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                    <a class="delete" title="Apagar" data-toggle="tooltip" onclick=ajaxDelete({{ fatura.id }});><i class="material-icons">&#xE872;</i></a>
+                                  </div>
+                                </td>
+                              </tr>
+                              {% endfor %}
+
+                            </tbody>
+
+                          </table>
+                          <script>
+                            function change_text() {
+                              var x, i;
+                              x = document.querySelectorAll("#status_pagamento");
+                              for (i = 0; i < x.length; i++) {
+                                x[i].classList.add("badge-soft-primary");
+                                x[i].innerHTML = "Pago";
+                              }
+                            }
+                          </script>
+
+                        </div>
+
+                        <script>
+                          $(document).ready(function () {
+                            $('#tabfatura').DataTable();
+                          });
+                        </script>
+
+
+                        <!-- Exportar pdf -->
+                        {% include 'includes/export_pdf.html' %} 
+                        <!-- Javascript Imprimir div-->
+                        <script src="{% static "js/fatura/imprimir.js" %}" ></script>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  </main>
+  </div>
+  <!-- Javascript do projeto caixa -->
+  <script src="{% static "js/caixa/chart.js" %}"></script>
+  <script src="{% static "js/caixa/app.js" %}"></script>
+</body>
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock %}

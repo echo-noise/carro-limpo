@@ -1,0 +1,236 @@
+{% extends "base_head.html" %}
+{% load static %}
+{% block title %} | Resultados da pesquisa {% endblock %}
+{% block page_css %}
+{% include 'includes/cssdefault.html' %}
+{% endblock %}
+
+{% block page_js %}
+{% include 'includes/jsdefault.html' %}
+<!-- JavaScript do projeto clientes-->
+<script src="{% static "js/crud_cliente.js" %}"></script>
+<!-- ajax -->
+<script type="text/javascript" src="{% static "js/ajax.js" %}"></script>
+<!-- converter data para fuso horario local -->
+<script type="text/javascript" src="{% static "js/data_local.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+
+<body id="body-pd" class="body-pd2">
+
+  <!-- header -->
+  {% include "includes/header.html" %}
+
+  <div>
+    <!-- nav menu esquerdo -->
+    {% include "includes/nav.html" %}
+    <!--Container Main-->
+
+    <!-- modal Termos -->
+    {% include "includes/tos.html" %}
+
+    <!-- Conteudo -->
+    <main class="ms-sm-auto col-lg-12">
+      <div class="table-responsive animate__animated animate__fadeInDown">
+        <div class="animate__fadeInDown content">
+          <p class="h5 mb-3">Resultado da pesquisa:</p>
+          <div class="card flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 perfil">
+              <div class="p-3">
+                {% if messages %}
+                {% for message in messages %}
+                <p class="form-error"> {{ message }}</p>
+                {% endfor %}
+                {% else %}
+                <!-- table clientes -->
+                <div class="mb-3 active"><b>Clientes</b><small> (Ir para <a
+                      href="{% url "clientes" %}">Clientes</a>)</small></div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <div class="border-box">
+                      <div class="card-body">
+                        <div>
+
+
+                          <div class="p-2 row">
+                            {% if clientes %}
+                            <table id="tabcliente"
+                              class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
+                              <thead class="thead">
+                                <tr>
+                                  <th scope="col">Nome</th>
+                                  <th scope="col">Telefone</th>
+                                  <th scope="col">E-mail</th>
+                                  <th scope="col">CPF/CNPJ</th>
+                                  <th scope="col">Placa</th>
+                                  <th scope="col">Marca</th>
+                                  <th scope="col">Modelo</th>
+                                  <th scope="col">Cor</th>
+                                </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                {% for cliente in clientes %}
+                                <tr data-id={{ cliente.id }}>
+                                  <td id="td-header" data-label="NOME">{{ cliente.nome }}</td>
+                                  <td data-label="TELEFONE">{{ cliente.telefone }}</td>
+                                  <td data-label="E-MAIL">{{ cliente.email }}</td>
+                                  <td data-label="CPF/CNPJ">{{ cliente.documento }}</td>
+                                  <td data-label="PLACA">{{ cliente.placa }}</td>
+                                  <td data-label="MARCA">{{ cliente.marca }}</td>
+                                  <td data-label="MODELO">{{ cliente.modelo }}</td>
+                                  <td data-label="COR">{{ cliente.cor }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tfoot>
+                              </tbody>
+                            </table>
+                            {% else %}
+                            Nenhum resultado encontrado em clientes.
+                            {% endif %}
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- table servicos -->
+                <div class="active mb-3"><b>Serviços</b> <small> (Ir para <a
+                      href="{% url "servicos" %}">Serviços</a>)</small></div>
+                <div class="row">
+                  <div class="col mb-3">
+                    <div class="border-box">
+                      <div class="card-body">
+                        <div>
+
+
+                          <div class="p-2 row">
+                            {% if servicos %}
+                            <table id="tabservico"
+                              class="crud table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped table-responsive no-footer border-box">
+                              <thead class="thead">
+                                <tr>
+                                  <th scope="col">Nome</th>
+                                  <th scope="col">Valor</th>
+                                </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                {% for servico in servicos %}
+                                <tr>
+                                  <td id="td-header" data-label="NOME">{{ servico.nome }}</td>
+                                  <td data-label="VALOR">R$ {{ servico.valor }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                  <td>Nenhum resultado encontrado em serviços.</td>
+                                  <td>--</td>
+                                  </td>
+                                  {% endfor %}
+                                  </tfoot>
+                              </tbody>
+                            </table>
+                            {% else %}
+                            Nenhum resultado encontrado em serviços.
+                            {% endif %}
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- table faturas -->
+                <div class="mb-3 active"><b>Faturas</b><small> (Ir para <a
+                      href="{% url "faturas" %}">Faturas</a>)</small></div>
+
+                <div class="row">
+                  <div class="col mb-3">
+                    <div class="border-box">
+                      <div class="card-body">
+                        <div>
+                          <div class="row">
+
+
+                            {% if faturas %}
+                            <table id="tabfatura"
+                              class="border-box p-2 table exportar animate__animated animate__fadeInDown table-bordered table-hover table-striped  table-responsive dataTable no-footer">
+
+                              <thead class="thead">
+                                <tr>
+                                  <th scope="col">Nº</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Nome</th>
+                                  <th scope="col">CPF/CNPJ</th>
+                                  <th scope="col">Placa</th>
+                                  <th scope="col">Marca</th>
+                                  <th scope="col">Modelo</th>
+                                  <th scope="col">Serviço</th>
+                                  <th scope="col">Vencimento</th>
+                                  <th scope="col">Valor</th>
+                                </tr>
+                              </thead>
+                              <tbody class="tbody">
+                                {% for fatura in faturas %}
+                                <tr>
+                                  <td data-label="Nº"> {{ fatura.numero }}</td>
+                                  {% if fatura.object.pago %}
+                                  <td id="status" data-label="STATUS"><span
+                                      class="status badge badge-boxed badge-soft-primary">PAGO</span></td>
+                                  {% else %}
+                                  <td id="status" data-label="STATUS"><span
+                                      class="status badge badge-boxed badge-soft-warning"
+                                      id="status_tabela">PENDENTE</span></td>
+                                  {% endif %}
+                                  <td data-label="NOME"> {{ fatura.object.cliente.nome }}</td>
+                                  <td data-label="CPF/CNPJ"> {{ fatura.object.cliente.documento }}</td>
+                                  <td data-label="PLACA"> {{ fatura.object.cliente.placa }} </td>
+                                  <td data-label="MARCA"> {{ fatura.object.cliente.marca }}</td>
+                                  <td data-label="MODELO"> {{ fatura.object.cliente.modelo}} </td>
+                                  <td data-label="SERVIÇO"> {{ fatura.object.servico.nome }}</td>
+                                  <td data-label="VENCIMENTO" class="date"> {{ fatura.data_vencimento|date:"U" }}</td>
+                                  <td id="valor" data-label="VALOR"> R$ {{ fatura.object.servico.valor}} </td>
+                                </tr>
+                                {% endfor %}
+
+                              </tbody>
+                            </table>
+                            {% else %}
+                            <p>Nenhum resultado encontrado em Faturas.</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('#tabcliente').DataTable({
+        searching: false
+      });
+      $('#tabservico').DataTable({
+        searching: false
+      });
+      $('#tabfatura').DataTable({
+        searching: false
+      });
+    });
+  </script>
+</body>
+{% include "includes/footer.html" %}
+</div>
+</div>
+{% endblock %}

@@ -1,6 +1,19 @@
+<<<<<<< HEAD
 .vscode/
 ignored/
 venv/
 __pycache__/
 migrations/
 .env
+=======
+venv/
+.vscode/
+__pycache__/
+migrations/
+ignored/
+uploads/
+.env
+run
+db.*
+sent_emails/
+>>>>>>> testing

@@ -1,0 +1,8 @@
+{{ object.nome }}
+{{ object.email }}
+{{ object.telefone }}
+{{ object.documento }}
+{{ object.placa }}
+{{ object.marca }}
+{{ object.modelo }}
+{{ object.cor }}
