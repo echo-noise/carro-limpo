@@ -27,5 +27,6 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('caixa/', include('apps.caixa.urls')),
     path('faturas/', include('apps.faturas.urls')),
+    path('pesquisar/', include('apps.pesquisar.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

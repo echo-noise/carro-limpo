@@ -24,6 +24,12 @@ class Fatura(models.Model):
                 servico=self.servico, cliente=self.cliente,
                 data=self.data.strftime("%d/%m/%y"))
 
+    def get_status(self):
+        if self.pago:
+            return "PAGO"
+        else:
+            return "PENDENTE"
+
     def criar_transacao(self):
         _caixa = buscar_caixa_atual(self.user)
 

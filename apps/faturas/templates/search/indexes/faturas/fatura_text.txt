@@ -1,0 +1,13 @@
+{{ object.numero }}
+{{ object.pago }}
+{{ object.data_vencimento }}
+{{ object.cliente.nome }}
+{{ object.cliente.email }}
+{{ object.cliente.telefone }}
+{{ object.cliente.documento }}
+{{ object.cliente.placa }}
+{{ object.cliente.marca }}
+{{ object.cliente.modelo }}
+{{ object.cliente.cor }}
+{{ object.servico.nome }}
+{{ object.servico.valor }}

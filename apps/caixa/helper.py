@@ -18,9 +18,7 @@ def transacao_make_dict(queryset):
     transacoes = []
 
     for transacao in queryset:
-        transacoes.append({"id": int(transacao.id),
-                           "value": float(transacao.value),
-                           "description": transacao.description})
+        transacoes.append(transacao.get_dict())
 
     return transacoes
 

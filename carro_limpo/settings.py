@@ -29,12 +29,18 @@ SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEBUG", False)
 
-ALLOWED_HOSTS = [ getenv("APP_HOST") ]
+ALLOWED_HOSTS = [getenv("APP_HOST")]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'apps.accounts',
     'apps.estatisticas',
     'apps.clientes',
@@ -42,12 +48,9 @@ INSTALLED_APPS = [
     'apps.faturas',
     'apps.caixa',
     'apps.servicos',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'apps.pesquisar',
+    'whoosh',
+    'haystack'
 ]
 
 MIDDLEWARE = [
@@ -65,7 +68,7 @@ ROOT_URLCONF = 'carro_limpo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / "templates" ],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,16 +87,6 @@ WSGI_APPLICATION = 'carro_limpo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'carrolimpo_db',
-#        'USER': '251877',
-#        'PASSWORD': getenv("DB_PASS"),
-#        'HOST': 'mysql-carrolimpo.alwaysdata.net',
-#        'PORT': '3306'
-#    }
-#}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -139,7 +132,7 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/assets/'
-STATICFILES_DIRS = [ BASE_DIR / "assets"]
+STATICFILES_DIRS = [BASE_DIR / "assets"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -153,3 +146,18 @@ LOGOUT_REDIRECT_URL = 'login'
 # uploads usuario
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = '/uploaded/'
+
+# emails recuperaçao senha
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+# pesquisa
+WHOOSH_INDEX = BASE_DIR / 'whoosh/'
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX
+    }
+}
+HAYSTACK_DOCUMENT_FIELD = 'text'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

@@ -7,5 +7,4 @@ uploads/
 .env
 run
 db.*
-carro_limpo/settings.py
 sent_emails/

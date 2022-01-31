@@ -24,3 +24,10 @@ class Transacao(models.Model):
     type = models.CharField(max_length=3)
     value = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.CharField(max_length=100, blank=True)
+
+    def get_dict(self):
+        return {
+            "id": int(self.id),
+            "value": float(self.value),
+            "description": self.description
+            }
