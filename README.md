@@ -73,11 +73,6 @@ Uma das mais importantes características da qual nos fizeram optar por um siste
 
 <img src = "https://github.com/trgomes92/host/blob/main/tecnologia_github.png">
 
-<<<<<<< HEAD
-<!-- Informações dos Autores -->
-=======
- <!-- Informações dos Autores -->
->>>>>>> testing
 ##
 ###   🔹 Autores do Projeto 
 <img src = "https://github.com/trgomes92/host/blob/main/contato2.fw.png">
