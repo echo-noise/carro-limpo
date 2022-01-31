@@ -22,9 +22,24 @@ class EstatisticasView(LoginRequiredMixin, TemplateView):
         servicos = _cache.aggregate(Sum('servicos')).get("servicos__sum", 0)
         clientes = _cache.aggregate(Sum('clientes')).get("clientes__sum", 0)
 
-        context['receita'] = receita
-        context['despesa'] = despesa
-        context['servicos'] = servicos
-        context['clientes'] = clientes
+        if receita:
+            context['receita'] = receita
+        else:
+            context['receita'] = 0
+
+        if despesa:
+            context['despesa'] = despesa
+        else:
+            context['despesa'] = 0
+
+        if servicos:
+            context['servicos'] = servicos
+        else:
+            context['servicos'] = 0
+
+        if clientes:
+            context['clientes'] = clientes
+        else:
+            context['clientes'] = 0
 
         return context
