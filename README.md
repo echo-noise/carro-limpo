@@ -77,7 +77,9 @@ Uma das mais importantes características da qual nos fizeram optar por um siste
 
 ##
 ###   🔹 Autores do Projeto 
-<img src = "https://github.com/trgomes92/host/blob/main/contato2.fw.png">
+Thiago Rocha Gomes - FrontEnd
+Samara Caldellas David - BackEnd
+Bruno Gomes De Sousa - Documentação
 
  <!-- Informações de Contato -->
 ##
@@ -93,8 +95,8 @@ src="https://github.com/devicons/devicon/blob/master/icons/linkedin/linkedin-ori
 <div style="margin-top: -108px; margin-left: 293px;"><h6> Samara Caldellas David </h6>
 <a href="https://www.linkedin.com/in/samara-david/"><img  alt="Souarvdey777 | LinkedIn" width="30px"
 src="https://github.com/devicons/devicon/blob/master/icons/linkedin/linkedin-original.svg" /></a>
-<a href="https://wa.me/+5524998444394"><img  alt="Souarvdey777 | Whatsapp" width="29px"  src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png"/></a>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=sam.caldellas@gmail.com&su=&body=&bcc="><img  src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px" alt="mail"></a> 
+<a href="https://wa.me/+5521996842007"><img  alt="Souarvdey777 | Whatsapp" width="29px"  src="https://1.bp.blogspot.com/-m8oifiCYyqc/WvI0FdiW4gI/AAAAAAAAH1Q/DY6EpI3la1Mi4I_WgXVyURIbooY-7UfPACLcBGAs/s1600/whatsapp-icon-png-iconfinder.png"/></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=samara.david@outlook.com&su=&body=&bcc="><img  src="https://imagepng.org/wp-content/uploads/2018/03/gmail-cone-icon.png" width="40px" alt="mail"></a> 
 <a href="https://github.com/echo-noise"><img width="71px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjdc4m8CBg_kIo4Hx_eG9oKIDEJabxZlP1-nupsAz87Sq7bnSCc-ydzfo2NSP8YmOxlVk&usqp=CAU"/></a></div>
 <div><h6> Bruno Gomes De Sousa </h6>     
 <a href="https://www.linkedin.com/in/bruf1/"><img  alt="Souarvdey777 | LinkedIn" width="30px"
