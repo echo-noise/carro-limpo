@@ -25,13 +25,8 @@ urlpatterns = [
     path('clientes/', include('apps.clientes.urls')),
     path('servicos/', include('apps.servicos.urls')),
     path('accounts/', include('apps.accounts.urls')),
-<<<<<<< HEAD
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
-  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-=======
     path('caixa/', include('apps.caixa.urls')),
     path('faturas/', include('apps.faturas.urls')),
     path('pesquisar/', include('apps.pesquisar.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
->>>>>>> testing

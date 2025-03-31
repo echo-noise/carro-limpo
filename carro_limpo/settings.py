@@ -24,22 +24,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# you can replace this directly (or with an .env file) by generating a random key with 
+# python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEBUG", False)
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = [
-    getenv("APP_HOST")
-]
-=======
-ALLOWED_HOSTS = [getenv("APP_HOST")]
->>>>>>> testing
-
-
+        getenv("APP_HOST")
+    ]
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -95,12 +91,8 @@ WSGI_APPLICATION = 'carro_limpo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'carrolimpo_db',
-        'USER': '251877',
-        'PASSWORD': getenv("DB_PASS"),
-        'HOST': 'mysql-carrolimpo.alwaysdata.net',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -152,8 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # login e logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
-<<<<<<< HEAD
-=======
 
 # uploads usuario
 MEDIA_ROOT = BASE_DIR / "uploads"
@@ -173,4 +163,3 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_DOCUMENT_FIELD = 'text'
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
->>>>>>> testing

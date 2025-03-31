@@ -3,14 +3,10 @@ $(document).ready(function () {
   // Botao Adicionar
   $(document).on("click", ".add", function () {
     var empty = false;
-<<<<<<< HEAD
-    var input = $(this).parents("tr").find("select");
-=======
     var id = $(this).parents("tr").attr('data-id');
     var url = "edit/" + id;
     var input = $(this).parents("tr").find("select");
     ajaxPost(faturaSerialize(input), url); 
->>>>>>> testing
     {
       input.each(function () {
         $("select#status_pag")
